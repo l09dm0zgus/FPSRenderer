@@ -4,10 +4,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <SOIL/SOIL.h>
-#include "libs/glm/gtc/matrix_transform.hpp"
 #include "shader.h"
 #include "camera.h"
+#include "blockvertices.h"
+#include "vertexbuffers.h"
+#include "texture.h"
 using namespace  std;
+using namespace  PFE;
 class Block
 {
 public:
@@ -23,10 +26,11 @@ public:
     void collision(Camera &cam);
     glm::vec3 getPosition();
 private:
-    GLuint texture1,texture2;
+    VertexBuffers blockBuffers;
+    BlockVertices vertices;
+    Texture tex1 ,tex2;
     GLfloat *setTextureSize();
     void transform();
-    GLuint VBO,VAO;
     Shader *shaders;
     glm::mat4 SRT;
     glm::vec3 position;

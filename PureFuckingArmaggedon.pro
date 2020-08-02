@@ -2,25 +2,31 @@ TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
+CONFIG += c++17
+CONFIG += sanitizer sanitize_leak
 LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr -lXi
 SOURCES += \
         block.cpp \
+        blockvertices.cpp \
         camera.cpp \
         libs/glm/detail/glm.cpp \
         main.cpp \
-        map.cpp \
+        render.cpp \
         scene.cpp \
         shader.cpp \
         sprite.cpp \
+        spritevertices.cpp \
+        texture.cpp \
+        vertexatrribute.cpp \
+        vertexbuffers.cpp \
         window.cpp
 
-DISTFILES += \
-    ../build-PureFuckingArmaggedon-Desktop-Debug/SimplePS.glsl \
-    ../build-PureFuckingArmaggedon-Desktop-Debug/SimpleVS.glsl \
-    libs/glm/CMakeLists.txt
+
 CONFIG += <standard>
 HEADERS += \
+    IVertices.h \
     block.h \
+    blockvertices.h \
     camera.h \
     libs/glm/common.hpp \
     libs/glm/detail/_features.hpp \
@@ -413,10 +419,14 @@ HEADERS += \
     libs/glm/vec4.hpp \
     libs/glm/vector_relational.hpp \
     libs/ini.h \
-    map.h \
+    render.h \
     scene.h \
     shader.h \
     sprite.h \
+    spritevertices.h \
+    texture.h \
+    vertexatrribute.h \
+    vertexbuffers.h \
     window.h
 
-unix|win32: LIBS += -lreactphysics3d
+#unix|win32: LIBS += -lreactphysics3d

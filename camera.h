@@ -4,8 +4,8 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
-#include "libs/glm/gtc/matrix_transform.hpp"
-using namespace  reactphysics3d;
+#include <glm/gtc/matrix_transform.hpp>
+//using namespace  reactphysics3d;
 using namespace  std;
 
 

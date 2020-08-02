@@ -1,10 +1,10 @@
-#include "map.h"
-
-Level::Level()
+#include "render.h"
+Render& Render::createRender()
 {
-
+    static Render instance;
+    return instance;
 }
-void Level::load(string mapName,Camera &player)
+void Render::load(string mapName,Camera &player)
 {
      mINI::INIFile file(mapName);
      mINI::INIStructure ini;
@@ -22,7 +22,7 @@ void Level::load(string mapName,Camera &player)
      spr.setSize(glm::vec3(1.0f,1.0f,1.0f));
      spr.setShaderFile("shaders/SpriteVS.glsl","shaders/SpriteFS.glsl");
      spr.loadTextures("spr.png");
-   //  spr.setTilePosition(6,4,1,1);
+     spr.setTilePosition(6,4,1,1);
      spr.setPosition(glm::vec3(2.0f,0.5f,4.0f));
      sprites.push_back(spr);
      for(int i = 1;i<size+1;i++)
@@ -52,7 +52,7 @@ void Level::load(string mapName,Camera &player)
 
 
 }
-void Level::ceiling(int size,string texture)
+void Render::ceiling(int size,string texture)
 {
 
       Block *ceiling = new Block;
@@ -62,7 +62,7 @@ void Level::ceiling(int size,string texture)
       ceiling->setPosition(glm::vec3(1.0f,2.0f,1.0f));
       ceilingVec.push_back(ceiling);
 }
-void Level::floor(int size, string texture)
+void Render::floor(int size, string texture)
 {
 
       Block *floor = new Block;
@@ -74,7 +74,7 @@ void Level::floor(int size, string texture)
 
 
 }
-void Level::render(Camera &player)
+void Render::render(Camera &player)
 {
     for(size_t i = 0;i<floorVec.size();i++)
     {
@@ -95,12 +95,10 @@ void Level::render(Camera &player)
             sprites[i].render(player);
           //  sprites[i].setTilePosition(6,4,j,j);
 
-
-
     }
 }
 
-void Level::clear()
+void Render::clear()
 {
     for(size_t i = 0;i<blocks.size();i++)
     {

@@ -2,8 +2,8 @@
 
 Block::Block()
 {
-    this->SRT = glm::mat4(1.0f);
-    this->rotate = glm::mat4(1.0f);
+    SRT = glm::mat4(1.0f);
+    rotate = glm::mat4(1.0f);
 }
 void Block::setPosition(glm::vec3 position)
 {
@@ -23,107 +23,24 @@ void Block::setSize(glm::vec3 size)
 }
 void Block::setShaderFile(string vertexShader, string fragmentShader)
 {
-    this->shaders = new Shader(vertexShader.c_str(),fragmentShader.c_str());
+    shaders = new Shader(vertexShader.c_str(),fragmentShader.c_str());
 }
 void Block::loadTextures(string text1, string text2)
 {
-    int width,height;
-    unsigned char *image = SOIL_load_image(text1.c_str(),&width,&height,0,SOIL_LOAD_RGBA);
 
-    glGenTextures(1,&texture1);
-    glBindTexture(GL_TEXTURE_2D,texture1);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        // Set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D,0);
-    image = SOIL_load_image(text2.c_str(),&width,&height,0,SOIL_LOAD_RGBA);
-    if(!image)
-    {
-        cout<<"Failed load texture!!!"<<endl;
-    }
-    glGenTextures(1,&texture2);
-    glBindTexture(GL_TEXTURE_2D,texture2);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        // Set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D,0);
-
-    glGenBuffers(1,&VBO);
-
-    glGenVertexArrays(1,&VAO);
-
-    //bind
-    glBindVertexArray(VAO);
+    tex1.loadImageFile(text1);
+    tex2.loadImageFile(text2);
+    tex1.create();
+    tex2.create();
+    //create vertices and buffers
+    vertices.createVertices();
+    blockBuffers.create(&vertices);
 
 
-    GLfloat vertices[] = {
-              -0.5f, -0.5f, -0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-               0.5f, -0.5f, -0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-               0.5f,  0.5f, -0.5f,  size.x, size.z, 1.0f, 1.0f,
-               0.5f,  0.5f, -0.5f,  size.x, size.z, 1.0f, 1.0f,
-              -0.5f,  0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-              -0.5f, -0.5f, -0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-
-              -0.5f, -0.5f,  0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-               0.5f, -0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-               0.5f,  0.5f,  0.5f,  size.x, size.z, 1.0f, 1.0f,
-               0.5f,  0.5f,  0.5f,  size.x, size.z, 1.0f, 1.0f,
-              -0.5f,  0.5f,  0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-              -0.5f, -0.5f,  0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-
-              -0.5f,  0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-              -0.5f,  0.5f, -0.5f,  size.x, size.z, 1.0f, 1.0f,
-              -0.5f, -0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-              -0.5f, -0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-              -0.5f, -0.5f,  0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-              -0.5f,  0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-
-               0.5f,  0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-               0.5f,  0.5f, -0.5f,  size.x, size.z, 1.0f, 1.0f,
-               0.5f, -0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-               0.5f, -0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-               0.5f, -0.5f,  0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-               0.5f,  0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-
-              -0.5f, -0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-               0.5f, -0.5f, -0.5f,  size.x, size.z, 1.0f, 1.0f,
-               0.5f, -0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-               0.5f, -0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-              -0.5f, -0.5f,  0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-              -0.5f, -0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-
-              -0.5f,  0.5f, -0.5f,  0.0f,   size.z, 0.0f, 1.0f,
-               0.5f,  0.5f, -0.5f,  size.x, size.z, 1.0f, 1.0f,
-               0.5f,  0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-               0.5f,  0.5f,  0.5f,  size.x, 0.0f,   1.0f, 0.0f,
-              -0.5f,  0.5f,  0.5f,  0.0f,   0.0f,   0.0f, 0.0f,
-              -0.5f,  0.5f, -0.5f,  0.0f,   size.x, 0.0f, 1.0f
-    };
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    glBufferData(GL_ARRAY_BUFFER,sizeof (vertices),vertices,GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(GLfloat)*7,(GLvoid * )0);
-    glEnableVertexAttribArray(0);
-
-
-    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,sizeof (GLfloat)*7,(GLvoid *)(sizeof (GLfloat)*3));
-    glEnableVertexAttribArray(2);
-
-    glVertexAttribPointer(3,2,GL_FLOAT,GL_FALSE,sizeof (GLfloat)*7,(GLvoid *)(sizeof (GLfloat)*5));
-    glEnableVertexAttribArray(3);
-
-
-    glBindVertexArray(0);
+    //create arrtibutes for vertex
+    blockBuffers.addAttribute(3,7);
+    blockBuffers.addAttribute(2,7);
+    blockBuffers.addAttribute(2,7);
 
 
 
@@ -133,30 +50,28 @@ glm::vec3 Block::getPosition()
 {
     return this->position;
 }
+int a[2] = {0,1};
 void Block::render(Camera &cam)
 {
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D,texture1);
-    glUniform1i(glGetUniformLocation(shaders->program,"ourTex1"),0);
 
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D,texture2);
-    glUniform1i(glGetUniformLocation(shaders->program,"ourTex2"),1);
-   /// cout<<"Text: "<<text1<<"shader prog : "<<shaders->program<<endl;
     shaders->use();
+
+    shaders->setUniformVariable(a,2,"textures");
+    tex1.draw(shaders,0);
+    tex2.draw(shaders,1);
+
     glm::mat4 projection,view(1.0);
     view = cam.getView();
     //todo class window with persepctive
+
     projection = glm::perspective(glm::radians(65.0f),800.0f/600.0f,0.1f,100.0f);
-    GLint transformLoc = glGetUniformLocation(shaders->program, "projection");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &projection[0][0]);
-    transformLoc = glGetUniformLocation(shaders->program, "view");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &view[0][0]);
-    transformLoc = glGetUniformLocation(shaders->program, "model");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &SRT[0][0]);
-    glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES,0,36);
-    glBindVertexArray(0);
+    shaders->setUniformVariable(projection,"projection");
+    shaders->setUniformVariable(view,"view");
+    shaders->setUniformVariable(SRT,"model");
+    shaders->setUniformVariable(size.x,"sizeX");
+    shaders->setUniformVariable(size.z,"sizeY");
+
+    blockBuffers.drawVertices(36);
 }
 void Block::transform()
 {
@@ -169,8 +84,8 @@ void Block::destroy()
 {
     delete  shaders;
     shaders = nullptr;
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    blockBuffers.clear();
+    vertices.deleteVertices();
 }
 glm::vec3 Block::getSize()
 {

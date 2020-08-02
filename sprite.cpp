@@ -2,36 +2,30 @@
 
 Sprite::Sprite()
 {
-    this->SRT = glm::mat4(1.0f);
-    this->rotate = glm::mat4(1.0f);
+    SRT = glm::mat4(1.0f);
+    rotate = glm::mat4(1.0f);
 }
 void Sprite::setPosition(glm::vec3 position)
 {
     this->position = position;
-    this->transform();
+    transform();
 }
 
 void Sprite::setRotate(GLfloat angle, glm::vec3 axis)
 {
     rotate = glm::rotate(rotate,angle,axis);
-    this->transform();
+    transform();
 }
 void Sprite::setSize(glm::vec3 size)
 {
     this->size = size;
-    this->transform();
+    transform();
 }
 void Sprite::setShaderFile(string vertexShader, string fragmentShader)
 {
-    this->shaders = new Shader(vertexShader.c_str(),fragmentShader.c_str());
+    shaders = new Shader(vertexShader.c_str(),fragmentShader.c_str());
 }
-void Sprite::animation()
-{
-    for(int i = 0;i<5;i++)
-    {
-        setTilePosition(6,4,i,1);
-    }
-}
+
 void Sprite::loadTextures(string text1)
 {
     int width,height;
@@ -52,41 +46,19 @@ void Sprite::loadTextures(string text1)
     SOIL_free_image_data(image);
     glBindTexture(GL_TEXTURE_2D,0);
 
-
-    glGenBuffers(1,&VBO);
-
-    glGenVertexArrays(1,&VAO);
-
-    //bind
-    glBindVertexArray(VAO);
+    //create vertices and buffers
+    vertices.createVertices();
+    spriteBuffers.create(&vertices);
 
 
-    GLfloat vertices[] = {
-        0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
-        1.0f, 0.0f, 1.0f,  1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
+    vertices.createVertices();
 
-        0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,  1.0f, 1.0f,
-        1.0f, 0.0f, 1.0f,  1.0f, 0.0f
-    };
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    glBufferData(GL_ARRAY_BUFFER,sizeof (vertices),vertices,GL_STATIC_DRAW);
+    spriteBuffers.addAttribute(3,5);
+    spriteBuffers.addAttribute(2,5);
 
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(GLfloat)*5,(GLvoid * )0);
-    glEnableVertexAttribArray(0);
+    shaders->setUniformVariable(0,"image");
 
 
-    glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,sizeof (GLfloat)*5,(GLvoid *)(sizeof (GLfloat)*3));
-    glEnableVertexAttribArray(1);
-
-    glBindVertexArray(0);
-
-    glUniform1i(glGetUniformLocation(shaders->program,"image"),0);
-    rowsLoc = glGetUniformLocation(shaders->program,"rowsTile");
-    collLoc = glGetUniformLocation(shaders->program,"collumsTile");
-    rowPosLoc  = glGetUniformLocation(shaders->program,"rowPosition");
-    collPosLoc = glGetUniformLocation(shaders->program,"collumsPosition");
 }
 int frameCounter =1;
 float framesPerSecond = 1.0f;
@@ -97,12 +69,11 @@ void Sprite::setTilePosition(float rows, float collums, float rowPos, float colP
     {
         animationFrame = 1.0f;
     }
-    framesPerSecond = 139;
-    glUniform1f(rowsLoc,rows);
-    glUniform1f(collLoc,collums);
-    glUniform1f(rowPosLoc,animationFrame);
-    glUniform1f(collPosLoc,colPos);
-   // cout<<"Delta t:"<<dTime<<endl;
+    framesPerSecond = 5.0f;
+    shaders->setUniformVariable(rows,"rowsTile");
+    shaders->setUniformVariable(collums,"collumsTile");
+    shaders->setUniformVariable(animationFrame,"rowPosition");
+    shaders->setUniformVariable(colPos,"collumsPosition");
     if((glfwGetTime()/frameCounter)>=0.1)
     {
         animationFrame++;
@@ -112,7 +83,7 @@ void Sprite::setTilePosition(float rows, float collums, float rowPos, float colP
 }
 glm::vec3 Sprite::getPosition()
 {
-    return this->position;
+    return position;
 }
 void Sprite::render(Camera &cam)
 {
@@ -120,31 +91,21 @@ void Sprite::render(Camera &cam)
     glBindTexture(GL_TEXTURE_2D,texture1);
 
     shaders->use();
-    setTilePosition(6,4,1,1);
-   // setTilePosition(4,1,2,1);
+
+    setTilePosition(6.0f,4.0f,1.0f,1.0f);
+
     glm::mat4 projection,view(1.0);
     view = cam.getView();
     //todo class window with persepctive
     projection = glm::perspective(glm::radians(65.0f),800.0f/600.0f,0.1f,100.0f);
-    GLint transformLoc = glGetUniformLocation(shaders->program, "projection");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &projection[0][0]);
-    transformLoc = glGetUniformLocation(shaders->program, "view");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &view[0][0]);
-    transformLoc = glGetUniformLocation(shaders->program, "model");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &SRT[0][0]);
+    shaders->setUniformVariable(projection,"projection");
+    shaders->setUniformVariable(view,"view");
+    shaders->setUniformVariable(SRT,"model");
 
 
     //animation();
 
-    //calc time between frames
-    GLfloat currentFrame = glfwGetTime();
-    dTime = currentFrame - lFrame;
-    lFrame = currentFrame;
-
-    //draw vertices
-    glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES,0,6);
-    glBindVertexArray(0);
+    spriteBuffers.drawVertices(6);
 
 }
 void Sprite::transform()
@@ -158,8 +119,8 @@ void Sprite::destroy()
 {
     delete  shaders;
     shaders = nullptr;
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    spriteBuffers.clear();
+    vertices.deleteVertices();
 }
 glm::vec3 Sprite::getSize()
 {

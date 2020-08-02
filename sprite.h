@@ -1,14 +1,17 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 #include <iostream>
+#include <iterator>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <SOIL/SOIL.h>
-#include "libs/glm/gtc/matrix_transform.hpp"
+#include <glm/gtc/matrix_transform.hpp>
 #include "shader.h"
 #include "camera.h"
+#include "spritevertices.h"
+#include "vertexbuffers.h"
 using namespace  std;
-
+using namespace  PFE;
 class Sprite
 {
 public:
@@ -25,11 +28,9 @@ public:
     glm::vec3 getPosition();
 
 private:
-    float dTime=0.0f;
-    float lFrame=0.0f;
+    VertexBuffers spriteBuffers;
+    SpriteVertices vertices;
     float animationFrame = 1.0f;
-    GLint rowsLoc,collLoc,rowPosLoc,collPosLoc;
-    GLfloat *setTextureSize();
     void transform();
     void animation();
     GLuint VBO,VAO;

@@ -1,18 +1,18 @@
 #include "shader.h"
 
-Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
+PFE::Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
 {
-    string vertexCode;
-    string fragmentCode;
-    ifstream vShaderFile;
-    ifstream fShaderFile;
-    vShaderFile.exceptions(ifstream::badbit);
-    fShaderFile.exceptions(ifstream::badbit);
+    std::string vertexCode;
+    std::string fragmentCode;
+    std::ifstream vShaderFile;
+    std::ifstream fShaderFile;
+    vShaderFile.exceptions(std::ifstream::badbit);
+    fShaderFile.exceptions(std::ifstream::badbit);
     try
     {
         vShaderFile.open(vertexPath);
         fShaderFile.open(fragmentPath);
-        stringstream vShaderStream,fShaderStream;
+        std::stringstream vShaderStream,fShaderStream;
         vShaderStream<<vShaderFile.rdbuf();
         fShaderStream<<fShaderFile.rdbuf();
         vShaderFile.close();
@@ -20,9 +20,9 @@ Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
         vertexCode = vShaderStream.str();
         fragmentCode = fShaderStream.str();
     }
-    catch (ifstream::failure e)
+    catch (std::ifstream::failure e)
     {
-        cout<<"Error shader : file not load"<<endl;
+        std::cout<<"Error shader : file not load"<<std::endl;
     }
     GLuint vertexShader,fragmentShader;
 
@@ -47,7 +47,7 @@ Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
     if(!success)
     {
         glGetShaderInfoLog(vertexShader,512,NULL,log);
-        cout<<"Error compile shader : "<<log<<endl;
+        std::cout<<"Error compile shader : "<<log<<std::endl;
     }
 
 
@@ -58,27 +58,45 @@ Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
     if(!success)
     {
         glGetShaderInfoLog(fragmentShader,512,NULL,log);
-        cout<<"Error compile shader : "<<log<<endl;
+        std::cout<<"Error compile shader : "<<log<<std::endl;
     }
 
-    this->program = glCreateProgram();
+    program = glCreateProgram();
 
-    glAttachShader(this->program,vertexShader);
-    glAttachShader(this->program,fragmentShader);
+    glAttachShader(program,vertexShader);
+    glAttachShader(program,fragmentShader);
 
 
-    glLinkProgram(this->program);
-    glGetProgramiv(this->program, GL_LINK_STATUS, &success);
+    glLinkProgram(program);
+    glGetProgramiv(program, GL_LINK_STATUS, &success);
     if (!success)
     {
-        glGetProgramInfoLog(this->program, 512, NULL, log);
-        cout<<"Error link shaders  :  "<<log<<endl;
+        glGetProgramInfoLog(program, 512, NULL, log);
+        std::cout<<"Error link shaders  :  "<<log<<std::endl;
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 }
-void Shader::use()
+void PFE::Shader::use()
 {
     glUseProgram(program);
-  //  cout<<"Used : "<<program<<endl;
+}
+void PFE::Shader::setUniformVariable(glm::mat4 &value, std::string uniformName)
+{
+    glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()), 1, GL_FALSE, &value[0][0]);
+}
+void PFE::Shader::setUniformVariable(int value,std::string uniformName)
+{
+
+    glUniform1i(glGetUniformLocation(program,uniformName.c_str()),value);
+
+}
+void PFE::Shader::setUniformVariable(float value,std::string uniformName)
+{
+    glUniform1f(glGetUniformLocation(program,uniformName.c_str()),value);
+}
+void PFE::Shader::setUniformVariable(int *values, int arraySize, std::string uniformName)
+{
+    glUniform1iv(glGetUniformLocation(program,uniformName.c_str()),arraySize,values);
+
 }

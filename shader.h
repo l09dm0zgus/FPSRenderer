@@ -4,14 +4,24 @@
 #include <fstream>
 #include <sstream>
 #include <GL/glew.h>
-using namespace  std;
-class Shader
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+namespace PFE
 {
-public:
-    GLuint program;
-    void use();
-    Shader(const GLchar * vertexPath,const GLchar *fragmentPath);
+    class Shader
+    {
+        public:
+            void use();
+            Shader(const GLchar * vertexPath,const GLchar *fragmentPath);
+            void setUniformVariable(int value,std::string uniformName);
+            void setUniformVariable(glm::mat4 &value,std::string uniformName);
+            void setUniformVariable(float value,std::string uniformName);
+            void setUniformVariable(int *values,int arraySize,std::string uniformName);
+        private:
+            GLuint program;
 
-};
+    };
+
+}
 
 #endif // SHADER_H
