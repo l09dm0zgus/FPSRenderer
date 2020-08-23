@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "spritevertices.h"
 #include "vertexbuffers.h"
+#include "tilesheettexture.h"
 using namespace  std;
 using namespace  PFE;
 class Sprite
@@ -39,7 +40,7 @@ private:
     glm::vec3 position;
     glm::vec3 size;
     glm::mat4 rotate;
-    GLuint texture1;
+    TilesheetTexture tex1;
 };
 
 #endif // SPRITE_H

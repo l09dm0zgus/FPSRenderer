@@ -17,6 +17,8 @@ SOURCES += \
         sprite.cpp \
         spritevertices.cpp \
         texture.cpp \
+        tilesheettexture.cpp \
+        transform.cpp \
         vertexatrribute.cpp \
         vertexbuffers.cpp \
         window.cpp
@@ -425,6 +427,8 @@ HEADERS += \
     sprite.h \
     spritevertices.h \
     texture.h \
+    tilesheettexture.h \
+    transform.h \
     vertexatrribute.h \
     vertexbuffers.h \
     window.h

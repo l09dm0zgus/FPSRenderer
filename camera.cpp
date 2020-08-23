@@ -18,27 +18,7 @@ Camera::Camera(float x,float y,float z,GLfloat sensitivity)
 
 
 }
-//void Camera::collision(glm::vec3 objPos,glm::vec3 objSize)
-//{
 
-//    bool collisionX;
-//    bool collisionZ;
-//    collidersPosition();
-//    //check collision in right
-//    collisionX = objPos.x + objSize.x >= cameraPos.x && cameraPos.x + size.x >= objPos.x;
-//    collisionZ = objPos.z + objSize.z >= cameraPos.z && cameraPos.z + size.z >= objPos.z;
-//    if(collisionZ && collisionX)
-//    {
-
-//        speed=0;
-
-//    }
-
-
-
-
-
-//}
 void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mode,double &deltatime)
 {
 
@@ -52,8 +32,7 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
         {
             isForwardMove = true;
             isBackwardMove = false;
-           // isLeftMove = false;
-          //  isRihgtMove = false;
+
             if(this->isFrontClear)
             {
                 this->cameraPos += camSpeed * this->cameraFront;
@@ -65,8 +44,7 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
         {
             isForwardMove = false;
             isBackwardMove = true;
-           // isLeftMove = false;
-            //isRihgtMove = false;
+
             if(this->isBackClear)
             {
                 this->cameraPos -= camSpeed * this->cameraFront;

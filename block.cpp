@@ -57,8 +57,8 @@ void Block::render(Camera &cam)
     shaders->use();
 
     shaders->setUniformVariable(a,2,"textures");
-    tex1.draw(shaders,0);
-    tex2.draw(shaders,1);
+    tex1.draw(0);
+    tex2.draw(1);
 
     glm::mat4 projection,view(1.0);
     view = cam.getView();
@@ -91,34 +91,4 @@ glm::vec3 Block::getSize()
 {
     return  this->size;
 }
-void Block::collision(Camera &cam)
-{
 
-        bool collisionX = cam.getPosition().x + cam.getSize().x >= position.x && position.x + size.x >= cam.getPosition().x;
-        bool collisionZ = cam.getPosition().z + cam.getSize().z >= position.z && position.z + size.z >= cam.getPosition().z;
-
-        int dir = cam.getDirection();
-        if(collisionX && collisionZ)
-        {
-            
-            if(cam.isForwardMove)
-            {
-                cam.isFrontClear = false;
-            }
-            if(cam.isBackwardMove)
-            {
-                cam.isBackClear = false;
-            }
-            if(cam.isLeftMove)
-            {
-                cam.isLeftClear = false;
-            }
-            if(cam.isRihgtMove)
-            {
-                cam.isRightClear = false;
-            }
-          // cout<<"X: "<<cam.getFrontSizeLenght().x<<" Z: "<<cam.getFrontSizeLenght().z<<endl;
-           //cam.setPosition(playerPos);
-        }
-
-}

@@ -23,7 +23,6 @@ public:
     void setShaderFile(string vertexShader,string fragmentShader);
     glm::vec3 getSize();
     void destroy();
-    void collision(Camera &cam);
     glm::vec3 getPosition();
 private:
     VertexBuffers blockBuffers;

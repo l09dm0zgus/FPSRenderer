@@ -28,23 +28,8 @@ void Sprite::setShaderFile(string vertexShader, string fragmentShader)
 
 void Sprite::loadTextures(string text1)
 {
-    int width,height;
-    unsigned char *image = SOIL_load_image(text1.c_str(),&width,&height,0,SOIL_LOAD_RGBA);
-    if(!image)
-    {
-        cout<<"Failed load texture!!!"<<endl;
-    }
-    glGenTextures(1,&texture1);
-    glBindTexture(GL_TEXTURE_2D,texture1);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        // Set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D,0);
+    tex1.loadImageFile(text1);
+    tex1.create();
 
     //create vertices and buffers
     vertices.createVertices();
@@ -70,10 +55,9 @@ void Sprite::setTilePosition(float rows, float collums, float rowPos, float colP
         animationFrame = 1.0f;
     }
     framesPerSecond = 5.0f;
-    shaders->setUniformVariable(rows,"rowsTile");
-    shaders->setUniformVariable(collums,"collumsTile");
-    shaders->setUniformVariable(animationFrame,"rowPosition");
-    shaders->setUniformVariable(colPos,"collumsPosition");
+    tex1.setShader(shaders);
+    tex1.setTilePosition(rows,collums,animationFrame,colPos);
+
     if((glfwGetTime()/frameCounter)>=0.1)
     {
         animationFrame++;
@@ -87,9 +71,7 @@ glm::vec3 Sprite::getPosition()
 }
 void Sprite::render(Camera &cam)
 {
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D,texture1);
-
+    tex1.draw(0);
     shaders->use();
 
     setTilePosition(6.0f,4.0f,1.0f,1.0f);

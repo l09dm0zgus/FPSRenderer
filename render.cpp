@@ -83,18 +83,12 @@ void Render::render(Camera &player)
     }
     for(size_t i = 0;i<blocks.size();i++)
     {
-        // player.collision(blocks[i]->getPosition(),blocks[i]->getSize());
-         blocks[i]->collision(player);
          blocks[i]->render(player);
     }
 
     for(size_t i =0;i<sprites.size();i++)
     {
-
-
-            sprites[i].render(player);
-          //  sprites[i].setTilePosition(6,4,j,j);
-
+         sprites[i].render(player);
     }
 }
 
