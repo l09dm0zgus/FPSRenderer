@@ -3,39 +3,25 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <SOIL/SOIL.h>
-#include "shader.h"
-#include "camera.h"
+#include "renderobject.h"
 #include "blockvertices.h"
-#include "vertexbuffers.h"
 #include "texture.h"
 using namespace  std;
-using namespace  PFE;
-class Block
+namespace PFE
 {
-public:
-    Block();
-    void setPosition(glm::vec3 position);
-    void setSize(glm::vec3 size);
-    void setRotate(GLfloat angle,glm::vec3 axis);
-    void loadTextures(string text1,string text2);
-    void render(Camera &cam);
-    void setShaderFile(string vertexShader,string fragmentShader);
-    glm::vec3 getSize();
-    void destroy();
-    glm::vec3 getPosition();
-private:
-    VertexBuffers blockBuffers;
-    BlockVertices vertices;
-    Texture tex1 ,tex2;
-    GLfloat *setTextureSize();
-    void transform();
-    Shader *shaders;
-    glm::mat4 SRT;
-    glm::vec3 position;
-    glm::vec3 size;
-    glm::mat4 rotate;
+    class Block:public RenderObject
+    {
+        public:
+            void render(Camera &cam) override;
+            void destroy() override;
+            void loadTextures() override;
+            void addTexture(string textureFile);
+        private:
+            void drawTextures();
+            vector<int> textureIds;
+            vector<Texture> textures;
+     };
 
-};
+}
 
 #endif // BLOCK_H

@@ -56,7 +56,7 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
         {
             isLeftMove = true;
             isRihgtMove = false;
-            cout<<"Left :"<<isLeftMove<<endl;
+
             if(this->isLeftClear)
             {
                 this->cameraPos -= camSpeed * this->cameraRight;
@@ -67,7 +67,6 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
         {
             isLeftMove = false;
             isRihgtMove = true;
-            cout<<"Right :"<<isRihgtMove<<endl;
             if(this->isRightClear)
             {
                 this->cameraPos += camSpeed * this->cameraRight;

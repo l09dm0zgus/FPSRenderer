@@ -32,7 +32,9 @@ void Render::load(string mapName,Camera &player)
              Block *wall = new Block;
              wall->setSize(glm::vec3(1.0f,1.0f,1.0f));
              wall->setShaderFile("shaders/BlockVS.glsl","shaders/BlockFS.glsl");
-             wall->loadTextures(blockTexture,"lukas.jpg");
+             wall->addTexture(blockTexture);
+             wall->addTexture(blockTexture);
+             wall->loadTextures();
              glm::vec3 pos ;
              pos.x = stoi(ini.get(to_string(i)).get("x"));
              pos.y = stoi(ini.get(to_string(i)).get("y"));
@@ -58,7 +60,9 @@ void Render::ceiling(int size,string texture)
       Block *ceiling = new Block;
       ceiling->setSize(glm::vec3(size,1.0,size));
       ceiling->setShaderFile("shaders/BlockVS.glsl","shaders/BlockFS.glsl");
-      ceiling->loadTextures(texture,"lukas.jpg");
+      ceiling->addTexture(texture);
+      ceiling->addTexture(texture);
+      ceiling->loadTextures();
       ceiling->setPosition(glm::vec3(1.0f,2.0f,1.0f));
       ceilingVec.push_back(ceiling);
 }
@@ -68,7 +72,9 @@ void Render::floor(int size, string texture)
       Block *floor = new Block;
       floor->setSize(glm::vec3(size,1.0,size));
       floor->setShaderFile("shaders/BlockVS.glsl","shaders/BlockFS.glsl");
-      floor->loadTextures(texture,"lukas.jpg");
+      floor->addTexture(texture);
+      floor->addTexture(texture);
+      floor->loadTextures();
       floor->setPosition(glm::vec3(1.0f,0.0f,1.0f));
       floorVec.push_back(floor);
 

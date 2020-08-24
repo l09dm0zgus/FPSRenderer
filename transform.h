@@ -10,11 +10,12 @@ namespace PFE
             void setPosition(glm::vec3 position);
             void setSize(glm::vec3 size);
             void setRotate(float angle,glm::vec3 axis);
+            glm::mat4 getTransformMatrix();
             glm::vec3 getSize();
             glm::vec3 getPosition();
         private:
             void updateMatrix();
-            glm::mat4 SRT;
+            glm::mat4 transformMatrix;
             glm::vec3 position;
             glm::vec3 size;
             glm::mat4 rotate;

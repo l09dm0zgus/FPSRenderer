@@ -3,8 +3,6 @@
 
 void PFE::VertexAtrribute::create(int size,int mStride,int mId,int mPointer)
 {
-
-    cout<<"Id : "<<mId<<" Stride : "<<mStride<<" pointer: "<<mPointer<<endl;
     glVertexAttribPointer(mId,size,GL_FLOAT,GL_FALSE,sizeof(GLfloat)*mStride,(GLvoid * )(sizeof (GLfloat)*mPointer));
     glEnableVertexAttribArray(mId);
     id =mId;

@@ -12,6 +12,7 @@ SOURCES += \
         libs/glm/detail/glm.cpp \
         main.cpp \
         render.cpp \
+        renderobject.cpp \
         scene.cpp \
         shader.cpp \
         sprite.cpp \
@@ -422,6 +423,7 @@ HEADERS += \
     libs/glm/vector_relational.hpp \
     libs/ini.h \
     render.h \
+    renderobject.h \
     scene.h \
     shader.h \
     sprite.h \

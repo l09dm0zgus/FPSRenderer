@@ -81,7 +81,7 @@ void PFE::Shader::use()
 {
     glUseProgram(program);
 }
-void PFE::Shader::setUniformVariable(glm::mat4 &value, std::string uniformName)
+void PFE::Shader::setUniformVariable(glm::mat4 value, std::string uniformName)
 {
     glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()), 1, GL_FALSE, &value[0][0]);
 }
@@ -95,8 +95,8 @@ void PFE::Shader::setUniformVariable(float value,std::string uniformName)
 {
     glUniform1f(glGetUniformLocation(program,uniformName.c_str()),value);
 }
-void PFE::Shader::setUniformVariable(int *values, int arraySize, std::string uniformName)
+void PFE::Shader::setUniformVariable(std::vector<int>value, std::string uniformName)
 {
-    glUniform1iv(glGetUniformLocation(program,uniformName.c_str()),arraySize,values);
 
+    glUniform1iv(glGetUniformLocation(program,uniformName.c_str()),value.size(),value.data());
 }
