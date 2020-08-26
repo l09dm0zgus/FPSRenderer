@@ -27,3 +27,11 @@ void PFE::RenderObject::setShaderFile(string vertexShader, string fragmentShader
 {
     shaderPrograms = new Shader(vertexShader.c_str(),fragmentShader.c_str());
 }
+
+void PFE::RenderObject::drawTextures()
+{
+    for(size_t i = 0;i<textures.size();i++)
+    {
+        textures[i]->draw(i);
+    }
+}

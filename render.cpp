@@ -21,7 +21,8 @@ void Render::load(string mapName,Camera &player)
      Sprite spr;
      spr.setSize(glm::vec3(1.0f,1.0f,1.0f));
      spr.setShaderFile("shaders/SpriteVS.glsl","shaders/SpriteFS.glsl");
-     spr.loadTextures("spr.png");
+     spr.addTexture("spr.png");
+     spr.loadTextures();
      spr.setTilePosition(6,4,1,1);
      spr.setPosition(glm::vec3(2.0f,0.5f,4.0f));
      sprites.push_back(spr);

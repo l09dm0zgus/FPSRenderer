@@ -8,7 +8,7 @@
 #include "camera.h"
 #include "libs/ini.h"
 using std::vector;
-
+using namespace PFE;
 /**
  * @brief The Render class  Singleton class.We can have ONE object class.
  */

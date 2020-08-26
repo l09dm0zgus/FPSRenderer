@@ -6,41 +6,24 @@
 #include <GLFW/glfw3.h>
 #include <SOIL/SOIL.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include "shader.h"
-#include "camera.h"
+#include "renderobject.h"
 #include "spritevertices.h"
-#include "vertexbuffers.h"
 #include "tilesheettexture.h"
-using namespace  std;
-using namespace  PFE;
-class Sprite
+namespace PFE
 {
-public:
-    Sprite();
-    void setPosition(glm::vec3 position);
-    void setSize(glm::vec3 size);
-    void setRotate(GLfloat angle,glm::vec3 axis);
-    void loadTextures(string text1);
-    void render(Camera &cam);
-    void setShaderFile(string vertexShader,string fragmentShader);
-    void setTilePosition(float rows,float collums,float rowPos,float colPos);
-    glm::vec3 getSize();
-    void destroy();
-    glm::vec3 getPosition();
+    class Sprite:public RenderObject
+    {
+        public:
+            void loadTextures() override;
+            void render(Camera &cam) override;
+            void addTexture(string textureFile) override;
+            void setTilePosition(float rows,float collums,float rowPos,float colPos);
+            void destroy() override;
+        private:
+            float animationFrame = 1.0f;
+            TilesheetTexture tile;
+    };
+}
 
-private:
-    VertexBuffers spriteBuffers;
-    SpriteVertices vertices;
-    float animationFrame = 1.0f;
-    void transform();
-    void animation();
-    GLuint VBO,VAO;
-    Shader *shaders;
-    glm::mat4 SRT;
-    glm::vec3 position;
-    glm::vec3 size;
-    glm::mat4 rotate;
-    TilesheetTexture tex1;
-};
 
 #endif // SPRITE_H

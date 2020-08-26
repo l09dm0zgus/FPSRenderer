@@ -2,20 +2,13 @@
 
 void PFE::Block::addTexture(string textureFile)
 {
-    Texture texture;
-    texture.loadImageFile(textureFile);
-    texture.create();
+    Texture *texture = new Texture();
+    texture->loadImageFile(textureFile);
+    texture->create();
     textures.push_back(texture);
     textureIds.push_back(textures.size()-1);
 }
 
-void PFE::Block::drawTextures()
-{
-    for(size_t i = 0;i<textures.size();i++)
-    {
-        textures[i].draw(i);
-    }
-}
 void PFE::Block::loadTextures()
 {
 
@@ -54,4 +47,6 @@ void PFE::Block::destroy()
     shaderPrograms = nullptr;
     buffers.clear();
     vertices->deleteVertices();
+
+    textures.clear();
 }
