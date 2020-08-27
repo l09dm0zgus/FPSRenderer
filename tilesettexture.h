@@ -3,7 +3,7 @@
 #include "texture.h"
 namespace PFE
 {
-    class TilesheetTexture :public Texture
+    class TilesetTexture :public Texture
     {
         public:
            void setShader(Shader *shader);

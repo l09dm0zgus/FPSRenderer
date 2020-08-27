@@ -6,6 +6,8 @@ CONFIG += c++17
 CONFIG += sanitizer sanitize_leak
 LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr -lXi
 SOURCES += \
+        animation2d.cpp \
+        animator.cpp \
         block.cpp \
         blockvertices.cpp \
         camera.cpp \
@@ -18,7 +20,7 @@ SOURCES += \
         sprite.cpp \
         spritevertices.cpp \
         texture.cpp \
-        tilesheettexture.cpp \
+        tilesettexture.cpp \
         transform.cpp \
         vertexatrribute.cpp \
         vertexbuffers.cpp \
@@ -28,6 +30,8 @@ SOURCES += \
 CONFIG += <standard>
 HEADERS += \
     IVertices.h \
+    animation2d.h \
+    animator.h \
     block.h \
     blockvertices.h \
     camera.h \
@@ -429,7 +433,7 @@ HEADERS += \
     sprite.h \
     spritevertices.h \
     texture.h \
-    tilesheettexture.h \
+    tilesettexture.h \
     transform.h \
     vertexatrribute.h \
     vertexbuffers.h \

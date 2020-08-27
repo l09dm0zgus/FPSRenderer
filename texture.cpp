@@ -1,5 +1,11 @@
 #include "texture.h"
-
+glm::vec2 PFE::Texture::getTextureSize()
+{
+    glm::vec2 size;
+    size.x = imageWidth;
+    size.y = imageHeight;
+    return size;
+}
 void PFE::Texture::loadImageFile(std::string file)
 {
     try
@@ -11,7 +17,7 @@ void PFE::Texture::loadImageFile(std::string file)
        }
        
     }
-    catch (std::string e)
+    catch (const char* e)
     {
         std::cout<<e<<std::endl;
     }

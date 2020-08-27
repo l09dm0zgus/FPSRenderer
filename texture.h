@@ -10,6 +10,7 @@ namespace PFE
     {
         public:
             void loadImageFile(std::string  file);
+            glm::vec2 getTextureSize();
             void draw(int id);
             void create();
         protected:
