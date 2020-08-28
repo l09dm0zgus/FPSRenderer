@@ -17,9 +17,9 @@ void PFE::Sprite::loadTextures()
     buffers.addAttribute(3,5);
     buffers.addAttribute(2,5);
     shaderPrograms->setUniformVariable(0,"image");
-
-    animation.setTilesheet(tile,false,6,4);
-    animation.setStartTilesetCell(1,1);
+    anim.setTilesheet(&tile,false,6,4);
+    anim.setStartTilesetCell(1,1);
+    animator.addAnimation(&anim,"front");
 
 }
 
@@ -27,8 +27,9 @@ void PFE::Sprite::render(Camera &cam)
 {
     tile.draw(0);
     shaderPrograms->use();
-    animation.setShader(shaderPrograms);
-    animation.play(0.1);
+    animator.setShaderProgram(shaderPrograms);
+
+    animator.playAnimation("front",0.1);
     glm::mat4 projection,view(1.0);
     view = cam.getView();
     //todo class window with persepctive

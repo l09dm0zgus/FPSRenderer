@@ -13,8 +13,7 @@ namespace PFE
     class Animation2D
     {
         public:
-            ~Animation2D();
-            void setTilesheet(TilesetTexture &texture,bool isAnimationVertical,int rowsCount,int columnsCount);
+            void setTilesheet(TilesetTexture *texture,bool isAnimationVertical,int rowsCount,int columnsCount);
             void setShader(Shader *shaderPrograms);
             void setStartTilesetCell(int rowCell,int columnCell);
             void play(float speed);
@@ -25,7 +24,7 @@ namespace PFE
             bool isAnimationVertical;
             AnimationStartPosition animationStartPosition;
             int frameCounter =1;
-            TilesetTexture *texture = nullptr;
+            TilesetTexture *texture;
             int rowsCount;
             int columnCount;
     };

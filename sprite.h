@@ -9,7 +9,7 @@
 #include "renderobject.h"
 #include "spritevertices.h"
 #include "tilesettexture.h"
-#include "animation2d.h"
+#include "animator.h"
 namespace PFE
 {
     class Sprite:public RenderObject
@@ -21,7 +21,8 @@ namespace PFE
             void destroy() override;
         private:
             TilesetTexture tile;
-            Animation2D animation;
+            Animation2D anim;
+            Animator<Animation2D> animator;
     };
 }
 

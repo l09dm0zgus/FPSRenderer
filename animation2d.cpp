@@ -1,12 +1,7 @@
 #include "animation2d.h"
-PFE::Animation2D::~Animation2D()
+void PFE::Animation2D::setTilesheet(TilesetTexture *texture, bool isAnimationVertical , int rowsCount,int columnsCount)
 {
-    //delete  texture;
-   // texture = nullptr;
-}
-void PFE::Animation2D::setTilesheet(TilesetTexture &texture, bool isAnimationVertical , int rowsCount,int columnsCount)
-{
-    this->texture = &texture;
+    this->texture = texture;
     this->rowsCount = rowsCount;
     this->columnCount  = columnsCount;
     this->isAnimationVertical = isAnimationVertical;

@@ -4,11 +4,16 @@ void PFE::TilesetTexture::setShader(Shader *shader)
 
     try
     {
-        this->shader = shader;
+
+
         if(!shader)
         {
             throw "Failed get shader program";
         }
+//        if(this->shader)
+//        {
+//            this->shader = shader;
+//        }
 
     }
     catch (const char* e)

@@ -7,7 +7,6 @@ CONFIG += sanitizer sanitize_leak
 LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr -lXi
 SOURCES += \
         animation2d.cpp \
-        animator.cpp \
         block.cpp \
         blockvertices.cpp \
         camera.cpp \
