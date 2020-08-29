@@ -6,10 +6,11 @@ namespace PFE
     class TilesetTexture :public Texture
     {
         public:
+           ~TilesetTexture(){shader = nullptr;}
            void setShader(Shader *shader);
            void setTilePosition(float rows, float collums, float rowPos, float colPos);
         private:
-           Shader *shader = 0;
+           Shader *shader = nullptr;
     };
 }
 

@@ -1,20 +1,13 @@
 #include "tilesettexture.h"
 void PFE::TilesetTexture::setShader(Shader *shader)
 {
-
     try
     {
-
-
         if(!shader)
         {
-            throw "Failed get shader program";
+            throw "Failed get shader program.";
         }
-//        if(this->shader)
-//        {
-//            this->shader = shader;
-//        }
-
+        this->shader = shader;
     }
     catch (const char* e)
     {
@@ -27,10 +20,9 @@ void PFE::TilesetTexture::setTilePosition(float rows, float collums, float rowPo
 
     try
     {
-
         if(!shader)
         {
-            throw "Shader program does not exist";
+            throw "Shader program does not exist.";
         }
         else
         {
@@ -43,8 +35,8 @@ void PFE::TilesetTexture::setTilePosition(float rows, float collums, float rowPo
     }
     catch (const char* e)
     {
-        std::cout<<e<<std::endl;
-        exit(-1);
+       std::cout<<e<<std::endl;
+       exit(-1);
     }
 
 }

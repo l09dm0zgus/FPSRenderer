@@ -20,8 +20,8 @@ namespace PFE
             void addTexture(string textureFile) override;
             void destroy() override;
         private:
-            TilesetTexture tile;
-            Animation2D anim;
+            TilesetTexture *tile;
+
             Animator<Animation2D> animator;
     };
 }

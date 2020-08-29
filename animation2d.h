@@ -1,6 +1,7 @@
 #ifndef ANIMATION2D_H
 #define ANIMATION2D_H
 #include "tilesettexture.h"
+#include <memory>
 #include<GLFW/glfw3.h>
 struct AnimationStartPosition
 {
@@ -13,10 +14,12 @@ namespace PFE
     class Animation2D
     {
         public:
+            ~Animation2D(){texture = nullptr;}
             void setTilesheet(TilesetTexture *texture,bool isAnimationVertical,int rowsCount,int columnsCount);
             void setShader(Shader *shaderPrograms);
             void setStartTilesetCell(int rowCell,int columnCell);
             void play(float speed);
+            std::shared_ptr<int> ptr;
         private:
             void verticalAnimation();
             void horizontalAnimation();
@@ -24,7 +27,7 @@ namespace PFE
             bool isAnimationVertical;
             AnimationStartPosition animationStartPosition;
             int frameCounter =1;
-            TilesetTexture *texture;
+            TilesetTexture *texture = nullptr;
             int rowsCount;
             int columnCount;
     };

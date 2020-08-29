@@ -1,8 +1,9 @@
 #include "sprite.h"
 void PFE::Sprite::addTexture(string textureFile)
 {
-    tile.loadImageFile(textureFile);
-    tile.create();
+    tile = new TilesetTexture();
+    tile->loadImageFile(textureFile);
+    tile->create();
 }
 
 void PFE::Sprite::loadTextures()
@@ -17,19 +18,20 @@ void PFE::Sprite::loadTextures()
     buffers.addAttribute(3,5);
     buffers.addAttribute(2,5);
     shaderPrograms->setUniformVariable(0,"image");
-    anim.setTilesheet(&tile,false,6,4);
-    anim.setStartTilesetCell(1,1);
-    animator.addAnimation(&anim,"front");
-
+    Animation2D *anim = new Animation2D;
+    anim->setTilesheet(tile,false,6,4);
+    anim->setStartTilesetCell(1,1);
+    animator.addAnimation(anim,"front");
+    animator.addAnimation(anim,"front");
 }
 
 void PFE::Sprite::render(Camera &cam)
 {
-    tile.draw(0);
+    tile->draw(0);
     shaderPrograms->use();
-    animator.setShaderProgram(shaderPrograms);
 
-    animator.playAnimation("front",0.1);
+    animator.playAnimation("front",shaderPrograms,0.1);
+    animator.playAnimation("test",shaderPrograms,0.1);
     glm::mat4 projection,view(1.0);
     view = cam.getView();
     //todo class window with persepctive
@@ -44,6 +46,8 @@ void PFE::Sprite::destroy()
 {
     delete  shaderPrograms;
     shaderPrograms = nullptr;
+   // delete  tile;
+   // tile = nullptr;
     buffers.clear();
     vertices->deleteVertices();
 

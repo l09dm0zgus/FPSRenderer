@@ -10,7 +10,8 @@ void PFE::Animation2D::setTilesheet(TilesetTexture *texture, bool isAnimationVer
 }
 void PFE::Animation2D::setShader(Shader *shaderPrograms)
 {
-    texture->setShader(shaderPrograms);
+    if(texture != nullptr)
+        texture->setShader(shaderPrograms);
 }
 
 void PFE::Animation2D::setStartTilesetCell(int rowCell,int columnCell)
@@ -24,7 +25,8 @@ void PFE::Animation2D::verticalAnimation()
     {
         animationFrame = animationStartPosition.x;
     }
-    texture->setTilePosition(rowsCount,columnCount,animationStartPosition.y,animationFrame);
+    if(texture != nullptr)
+        texture->setTilePosition(rowsCount,columnCount,animationStartPosition.y,animationFrame);
 }
 void PFE::Animation2D::horizontalAnimation()
 {
@@ -32,7 +34,8 @@ void PFE::Animation2D::horizontalAnimation()
     {
         animationFrame = animationStartPosition.x;
     }
-    texture->setTilePosition(rowsCount,columnCount,animationFrame,animationStartPosition.y);
+    if(texture != nullptr)
+        texture->setTilePosition(rowsCount,columnCount,animationFrame,animationStartPosition.y);
 }
 void PFE::Animation2D::play(float speed)
 {
