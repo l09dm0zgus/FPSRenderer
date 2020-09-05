@@ -5,17 +5,32 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 using namespace  std;
-class Window
+namespace PFE
 {
-public:
-    Window(int w,int h,string windowTitle);
-    void render(void (*renderCallback)(),void (*mouseCallback)(GLFWwindow*,double,double),void (*keyCallback)(GLFWwindow*,int,int,int,int));
-    void destroy();
-private:
-     GLFWwindow *window;
-     void init();
-     int w,h;
-     const char *windowTitle;
-};
+    class Window
+    {
+        public:
+            Window(int w,int h,string windowTitle);
+            void render(void (*renderCallback)(),void (*mouseCallback)(GLFWwindow*,double,double),void (*keyCallback)(GLFWwindow*,int,int,int,int));
+            void destroy();
+            bool isFullscreen();
+            void setFullscreen(bool fullscreen);
+            static void resizeCallback(GLFWwindow *window ,int cx ,int cy);
+        private:
+             void GLFWInit();
+             void GLEWInit();
+             void setRenderOptions();
+             GLFWwindow *window = nullptr;
+             void init();
+             int windowWidth,windowHeight;
+             int viewportWidth,viewportHeight;
+             int windowX,windowY;
+             GLFWmonitor *monitor = nullptr;
+             void resize(int cx , int cy);
+             bool updateViewport = true;
+             const char *windowTitle;
+    };
+}
+
 
 #endif // WINDOW_H

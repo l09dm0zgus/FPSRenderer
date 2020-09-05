@@ -2,6 +2,7 @@
 #define MAP_H
 #include <iostream>
 #include <vector>
+#include "window.h"
 //#include <reactphysics3d/reactphysics3d.h>
 #include "block.h"
 #include "sprite.h"
