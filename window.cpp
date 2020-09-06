@@ -10,11 +10,6 @@ PFE::Window::Window(int w,int h,string windowTitle)
 void PFE::Window::GLFWInit()
 {
     glfwInit();
-    glfwInitHint(GLFW_VERSION_MAJOR,3);
-    glfwInitHint(GLFW_VERSION_MINOR,3);
-    glfwInitHint(GLFW_OPENGL_ANY_PROFILE,GLFW_OPENGL_CORE_PROFILE);
-    //glfwInitHint(GLFW_RESIZABLE,GL_FALSE);
-
     window = glfwCreateWindow(windowWidth,windowHeight,windowTitle,nullptr,nullptr);
     if(window == nullptr)
     {

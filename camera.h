@@ -7,8 +7,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 //using namespace  reactphysics3d;
 using namespace  std;
-
-
 class Camera
 {
 public:
