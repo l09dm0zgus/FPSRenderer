@@ -12,6 +12,7 @@ SOURCES += \
         camera.cpp \
         keyboard.cpp \
         main.cpp \
+        mouse.cpp \
         render.cpp \
         renderobject.cpp \
         scene.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     camera.h \
     keyboard.h \
     libs/ini.h \
+    mouse.h \
     render.h \
     renderobject.h \
     scene.h \

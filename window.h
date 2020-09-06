@@ -12,7 +12,7 @@ namespace PFE
     {
         public:
             Window(int w,int h,string windowTitle);
-            void render(void (*renderCallback)(),void (*mouseCallback)(GLFWwindow*,double,double),void (*keyCallback)(GLFWwindow*,int,int,int,int));
+            void render(void (*renderCallback)(),void (*mouseCallback)(GLFWwindow*,double,double));
             void destroy();
             bool isFullscreen();
             void setFullscreen(bool fullscreen);

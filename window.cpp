@@ -82,11 +82,9 @@ void PFE::Window::setFullscreen(bool fullscreen)
 
     updateViewport = true;
 }
-void PFE::Window::render(void (*renderCallback)(),void (*mouseCallback)(GLFWwindow*,double,double),void (*keyCallback)(GLFWwindow*,int,int,int,int))
+void PFE::Window::render(void (*renderCallback)(), void (*mouseCallback)(GLFWwindow*,double,double))
 {
-
     glEnable(GL_DEPTH_TEST);
-
     //enable trancperency
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
