@@ -115,7 +115,20 @@ void PFE::Window::render(void (*renderCallback)(),void (*mouseCallback)(GLFWwind
 
         glfwSetCursorPosCallback(window, mouseCallback);
 
-        glfwSetKeyCallback(window,keyCallback);
+        glfwSetKeyCallback(window,Keyboard::keyboardCallback);
+        if(Keyboard::isKeyPressed(GLFW_KEY_F5))
+        {
+            setFullscreen(true);
+        }
+        if(Keyboard::isKeyPressed(GLFW_KEY_F6))
+        {
+            setFullscreen(false);
+        }
+        if(Keyboard::isKeyPressed(GLFW_KEY_ESCAPE))
+        {
+            destroy();
+        }
+
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         (*renderCallback)();
@@ -125,4 +138,5 @@ void PFE::Window::render(void (*renderCallback)(),void (*mouseCallback)(GLFWwind
 void PFE::Window::destroy()
 {
     glfwTerminate();
+    exit(0);
 }

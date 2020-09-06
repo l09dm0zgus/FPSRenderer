@@ -24,7 +24,7 @@ namespace PFE
             glm::vec3 getSize();
             glm::vec3 getPosition();
         protected:
-            virtual void drawTextures();
+            void drawTextures();
             vector<int> textureIds;
             vector<Texture*> textures;
             Transform transform;

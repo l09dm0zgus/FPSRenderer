@@ -8,10 +8,8 @@ void kCallback(GLFWwindow* window,int key,int scancode,int action,int mode);
 int main()
 {
     Window app(800,600,"Pure Fucking Armaggedon");
-    app.setFullscreen(true);
     scene.start();
     app.render(scene.update,mCallback,kCallback);
-
     scene.clear();
     app.destroy();
     return 0;

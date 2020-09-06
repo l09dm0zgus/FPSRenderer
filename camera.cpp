@@ -23,66 +23,62 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
 {
 
     camSpeed = speed *deltatime;
-    if(action  == GLFW_PRESS)
-        this->keys[key]=true;
-    else if(action == GLFW_RELEASE)
-        this->keys[key]=false;
 
-        if(this->keys[GLFW_KEY_W])
+    if(this->keys[GLFW_KEY_W])
+    {
+        isForwardMove = true;
+        isBackwardMove = false;
+
+        if(this->isFrontClear)
         {
-            isForwardMove = true;
-            isBackwardMove = false;
-
-            if(this->isFrontClear)
-            {
-                this->cameraPos += camSpeed * this->cameraFront;
-            }
-
-
-        }
-        else if(this->keys[GLFW_KEY_S])
-        {
-            isForwardMove = false;
-            isBackwardMove = true;
-
-            if(this->isBackClear)
-            {
-                this->cameraPos -= camSpeed * this->cameraFront;
-            }
-
-
-        }
-        else if(this->keys[GLFW_KEY_A])
-        {
-            isLeftMove = true;
-            isRihgtMove = false;
-
-            if(this->isLeftClear)
-            {
-                this->cameraPos -= camSpeed * this->cameraRight;
-            }
-
-        }
-        else if(this->keys[GLFW_KEY_D] )
-        {
-            isLeftMove = false;
-            isRihgtMove = true;
-            if(this->isRightClear)
-            {
-                this->cameraPos += camSpeed * this->cameraRight;
-            }
+            this->cameraPos += camSpeed * this->cameraFront;
         }
 
 
-        else
-        {
-                isFrontClear = true;
-                isBackClear = true;
-                isLeftClear = true;
-                isRightClear = true;
+    }
+    else if(this->keys[GLFW_KEY_S])
+    {
+        isForwardMove = false;
+        isBackwardMove = true;
 
+        if(this->isBackClear)
+        {
+            this->cameraPos -= camSpeed * this->cameraFront;
         }
-        cameraPos.y = 1;
+
+
+    }
+    else if(this->keys[GLFW_KEY_A])
+    {
+        isLeftMove = true;
+        isRihgtMove = false;
+
+        if(this->isLeftClear)
+        {
+            this->cameraPos -= camSpeed * this->cameraRight;
+        }
+
+    }
+    else if(this->keys[GLFW_KEY_D] )
+    {
+        isLeftMove = false;
+        isRihgtMove = true;
+        if(this->isRightClear)
+        {
+            this->cameraPos += camSpeed * this->cameraRight;
+        }
+    }
+
+
+    else
+    {
+        isFrontClear = true;
+        isBackClear = true;
+        isLeftClear = true;
+        isRightClear = true;
+
+    }
+    cameraPos.y = 1;
 
 
 }
@@ -98,26 +94,26 @@ int Camera::getDirection()
 }
 void Camera::mouse(GLFWwindow *window, double xpos, double ypos)
 {
-     if(this->isFirstMouse)
-     {
-         this->mouseLastX = xpos;
-         this->mouseLastY = ypos;
-         this->isFirstMouse = false;
-     }
-     GLfloat xoffset = xpos - this->mouseLastX;
-     GLfloat yoffset = this->mouseLastY - ypos;
-     this->mouseLastX = xpos;
-     this->mouseLastY = ypos;
+    if(this->isFirstMouse)
+    {
+        this->mouseLastX = xpos;
+        this->mouseLastY = ypos;
+        this->isFirstMouse = false;
+    }
+    GLfloat xoffset = xpos - this->mouseLastX;
+    GLfloat yoffset = this->mouseLastY - ypos;
+    this->mouseLastX = xpos;
+    this->mouseLastY = ypos;
 
-     xoffset *=this->sensitivity;
-     yoffset *=this->sensitivity;
-     this->yaw +=xoffset;
-     this->pitch += yoffset;
-     if(this->pitch>89.0f)
-         this->pitch = 89.0f;
-     if(this->pitch<-89.0f)
-         this->pitch = -89.0f;
-     this->updateVectors();
+    xoffset *=this->sensitivity;
+    yoffset *=this->sensitivity;
+    this->yaw +=xoffset;
+    this->pitch += yoffset;
+    if(this->pitch>89.0f)
+        this->pitch = 89.0f;
+    if(this->pitch<-89.0f)
+        this->pitch = -89.0f;
+    this->updateVectors();
     // cout<<"Yaw :"<<yaw<<endl;
 
 }

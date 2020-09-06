@@ -10,6 +10,7 @@ SOURCES += \
         block.cpp \
         blockvertices.cpp \
         camera.cpp \
+        keyboard.cpp \
         main.cpp \
         render.cpp \
         renderobject.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     block.h \
     blockvertices.h \
     camera.h \
+    keyboard.h \
     libs/ini.h \
     render.h \
     renderobject.h \
