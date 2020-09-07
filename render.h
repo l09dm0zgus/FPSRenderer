@@ -9,29 +9,34 @@
 #include "camera.h"
 #include "libs/ini.h"
 using std::vector;
-using namespace PFE;
 /**
  * @brief The Render class  Singleton class.We can have ONE object class.
  */
-class Render
+namespace PFE
 {
-public:
+    class Render
+    {
+        public:
+            void load(string mapName);
+            void render();
+            void setCameraView(glm::mat4 view);
+            void setViewportSize(glm::vec2 viewportSize);
+            static Render& createRender();
+            ~Render(){clear();};
+        private:
+            void clear();
+            glm::vec2 viewportSize;
+            glm::mat4 cameraView;
+            Camera *player;
+            Render(){};
+            //Render& operator=(const Render&);
+            Render(const Render&);
+            vector<RenderObject*> renderObjects;
+            //vector<RenderObject*> s;
+            void floor(int size,string texture);
+            void ceiling(int size,string texture);
+    };
+}
 
-    void load(string mapName,Camera &player);
-    void render(Camera &player);
-    static Render& createRender();
-     ~Render(){clear();};
-private:
-    void clear();
-    Render(){};
-    //Render& operator=(const Render&);
-    Render(const Render&);
-    vector<Block*>blocks;
-    vector<Block*>floorVec;
-    vector<Block*>ceilingVec;
-    vector<Sprite>sprites;
-    void floor(int size,string texture);
-    void ceiling(int size,string texture);
-};
 
 #endif // MAP_H

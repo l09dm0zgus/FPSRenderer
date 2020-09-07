@@ -15,8 +15,9 @@ namespace PFE
     class Sprite:public RenderObject
     {
         public:
+            //~Sprite() override{destroy();}
             void loadTextures() override;
-            void render(Camera &cam) override;
+            void render() override;
             void addTexture(string textureFile) override;
             void destroy() override;
         private:

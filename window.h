@@ -5,6 +5,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "keyboard.h"
+#include "mouse.h"
+#include "render.h"
 using namespace  std;
 namespace PFE
 {
@@ -12,7 +14,7 @@ namespace PFE
     {
         public:
             Window(int w,int h,string windowTitle);
-            void render(void (*renderCallback)(),void (*mouseCallback)(GLFWwindow*,double,double));
+            void render();
             void destroy();
             bool isFullscreen();
             void setFullscreen(bool fullscreen);

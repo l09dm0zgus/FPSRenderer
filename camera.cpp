@@ -19,13 +19,14 @@ Camera::Camera(float x,float y,float z,GLfloat sensitivity)
 
 }
 
-void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mode,double &deltatime)
+void Camera::move()
 {
 
-    camSpeed = speed *deltatime;
+    camSpeed = 0.1;
 
-    if(this->keys[GLFW_KEY_W])
+    if(PFE::Keyboard::isKeyPressed(GLFW_KEY_W))
     {
+        cout<<"W"<<endl;
         isForwardMove = true;
         isBackwardMove = false;
 
@@ -36,7 +37,7 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
 
 
     }
-    else if(this->keys[GLFW_KEY_S])
+    else if(PFE::Keyboard::isKeyPressed(GLFW_KEY_S))
     {
         isForwardMove = false;
         isBackwardMove = true;
@@ -48,7 +49,7 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
 
 
     }
-    else if(this->keys[GLFW_KEY_A])
+    else if(PFE::Keyboard::isKeyPressed(GLFW_KEY_A))
     {
         isLeftMove = true;
         isRihgtMove = false;
@@ -59,7 +60,7 @@ void Camera::move(GLFWwindow *window, int key, int scancode, int action, int mod
         }
 
     }
-    else if(this->keys[GLFW_KEY_D] )
+    else if(PFE::Keyboard::isKeyPressed(GLFW_KEY_D))
     {
         isLeftMove = false;
         isRihgtMove = true;
@@ -92,18 +93,19 @@ int Camera::getDirection()
 {
     return  this->dir;
 }
-void Camera::mouse(GLFWwindow *window, double xpos, double ypos)
+void Camera::mouse()
 {
+    glm::vec2 mousePosition = PFE::Mouse::getMousePosition();
     if(this->isFirstMouse)
     {
-        this->mouseLastX = xpos;
-        this->mouseLastY = ypos;
+        this->mouseLastX = mousePosition.x;
+        this->mouseLastY = mousePosition.y;
         this->isFirstMouse = false;
     }
-    GLfloat xoffset = xpos - this->mouseLastX;
-    GLfloat yoffset = this->mouseLastY - ypos;
-    this->mouseLastX = xpos;
-    this->mouseLastY = ypos;
+    GLfloat xoffset = mousePosition.x - this->mouseLastX;
+    GLfloat yoffset = this->mouseLastY - mousePosition.y;
+    this->mouseLastX = mousePosition.x;
+    this->mouseLastY = mousePosition.y;
 
     xoffset *=this->sensitivity;
     yoffset *=this->sensitivity;

@@ -22,23 +22,18 @@ void PFE::Sprite::loadTextures()
     anim->setTilesheet(tile,false,6,4);
     anim->setStartTilesetCell(1,1);
     animator.addAnimation(anim,"front");
-    animator.addAnimation(anim,"front");
+    //animator.addAnimation(anim,"front");
 }
 
-void PFE::Sprite::render(Camera &cam)
+void PFE::Sprite::render()
 {
     tile->draw(0);
     shaderPrograms->use();
 
     animator.playAnimation("front",shaderPrograms,0.1);
-    animator.playAnimation("test",shaderPrograms,0.1);
-    glm::mat4 projection,view(1.0);
-    view = cam.getView();
-    //todo class window with persepctive
-    projection = glm::perspective(glm::radians(65.0f),800.0f/600.0f,0.1f,100.0f);
-    shaderPrograms->setUniformVariable(projection,"projection");
-    shaderPrograms->setUniformVariable(view,"view");
-    shaderPrograms->setUniformVariable(transform.getTransformMatrix(),"model");
+    //animator.playAnimation("test",shaderPrograms,0.1);
+
+    updatePerspective();
     buffers.drawVertices(6);
 }
 

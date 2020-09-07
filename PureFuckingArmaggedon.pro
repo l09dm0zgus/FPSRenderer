@@ -15,7 +15,6 @@ SOURCES += \
         mouse.cpp \
         render.cpp \
         renderobject.cpp \
-        scene.cpp \
         shader.cpp \
         sprite.cpp \
         spritevertices.cpp \
@@ -40,7 +39,6 @@ HEADERS += \
     mouse.h \
     render.h \
     renderobject.h \
-    scene.h \
     shader.h \
     sprite.h \
     spritevertices.h \

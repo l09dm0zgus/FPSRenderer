@@ -22,20 +22,15 @@ void PFE::Block::loadTextures()
     buffers.addAttribute(2,7);
     buffers.addAttribute(2,7);
 }
-void PFE::Block::render(Camera &cam)
+void PFE::Block::render()
 {
 
     shaderPrograms->use();
     shaderPrograms->setUniformVariable(textureIds,"textures");
-    drawTextures();
-    glm::mat4 projection,view(1.0);
-    view = cam.getView();
-    //todo class window with persepctive
 
-    projection = glm::perspective(glm::radians(65.0f),800.0f/600.0f,0.1f,100.0f);
-    shaderPrograms->setUniformVariable(projection,"projection");
-    shaderPrograms->setUniformVariable(view,"view");
-    shaderPrograms->setUniformVariable(transform.getTransformMatrix(),"model");
+    drawTextures();
+    updatePerspective();
+
     shaderPrograms->setUniformVariable(transform.getSize().x,"sizeX");
     shaderPrograms->setUniformVariable(transform.getSize().z,"sizeY");
 

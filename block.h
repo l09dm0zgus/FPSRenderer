@@ -11,7 +11,8 @@ namespace PFE
     class Block:public RenderObject
     {
         public:
-            void render(Camera &cam) override;
+            //~Block()override{destroy();}
+            void render() override;
             void destroy() override;
             void loadTextures() override;
             void addTexture(string textureFile) override;

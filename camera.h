@@ -2,18 +2,19 @@
 #define CAMERA_H
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
+#include "keyboard.h"
+#include "mouse.h"
 //using namespace  reactphysics3d;
 using namespace  std;
 class Camera
 {
 public:
     Camera(float x,float y,float z,GLfloat sensitivity);
-    void move(GLFWwindow* window,int key,int scancode,int action,int mode,double &deltatime);
+    void move();
     void setCurrentFrame();
-    void mouse(GLFWwindow *window,double xpos, double ypos);
+    void mouse();
     glm::vec3 getPosition();
     void saveYaw();
     bool isBlocked = false;

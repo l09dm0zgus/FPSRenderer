@@ -1,10 +1,10 @@
 #include "render.h"
-Render& Render::createRender()
+PFE::Render& PFE::Render::createRender()
 {
     static Render instance;
     return instance;
 }
-void Render::load(string mapName,Camera &player)
+void PFE::Render::load(string mapName)
 {
      mINI::INIFile file(mapName);
      mINI::INIStructure ini;
@@ -18,13 +18,12 @@ void Render::load(string mapName,Camera &player)
 
     // ceilingThr.join();
    //  floorThr.join();
-     Sprite spr;
-     spr.setSize(glm::vec3(1.0f,1.0f,1.0f));
-     spr.setShaderFile("shaders/SpriteVS.glsl","shaders/SpriteFS.glsl");
-     spr.addTexture("spr.png");
-     spr.loadTextures();
-     spr.setPosition(glm::vec3(2.0f,0.5f,4.0f));
-     sprites.push_back(spr);
+     Sprite *spr = new Sprite;
+     spr->setSize(glm::vec3(1.0f,1.0f,1.0f));
+     spr->setShaderFile("shaders/SpriteVS.glsl","shaders/SpriteFS.glsl");
+     spr->addTexture("spr.png");
+     spr->loadTextures();
+     spr->setPosition(glm::vec3(2.0f,0.5f,4.0f));
      for(int i = 1;i<size+1;i++)
      {
          if(ini.get(to_string(i)).get("type") == "wall")
@@ -40,21 +39,24 @@ void Render::load(string mapName,Camera &player)
              pos.y = stoi(ini.get(to_string(i)).get("y"));
              pos.z = stoi(ini.get(to_string(i)).get("z"));
              wall->setPosition(pos);
-             blocks.push_back(wall);
+             renderObjects.push_back(wall);
+
          }
          if(ini.get(to_string(i)).get("type") == "player")
          {
              glm::vec3 pos ;
+             player = new Camera(0,0,0,0.5);
              pos.x = stoi(ini.get(to_string(i)).get("x"));
              pos.y = stoi(ini.get(to_string(i)).get("y"));
              pos.z = stoi(ini.get(to_string(i)).get("z"));
-             player.setPosition(pos);
+             player->setPosition(pos);
+             //renderObjects.push_back(spr);
          }
      }
-
-
+    //sprites add last
+    renderObjects.push_back(spr);
 }
-void Render::ceiling(int size,string texture)
+void PFE::Render::ceiling(int size,string texture)
 {
 
       Block *ceiling = new Block;
@@ -64,9 +66,9 @@ void Render::ceiling(int size,string texture)
       ceiling->addTexture(texture);
       ceiling->loadTextures();
       ceiling->setPosition(glm::vec3(1.0f,2.0f,1.0f));
-      ceilingVec.push_back(ceiling);
+      renderObjects.push_back(ceiling);
 }
-void Render::floor(int size, string texture)
+void PFE::Render::floor(int size, string texture)
 {
 
       Block *floor = new Block;
@@ -76,40 +78,38 @@ void Render::floor(int size, string texture)
       floor->addTexture(texture);
       floor->loadTextures();
       floor->setPosition(glm::vec3(1.0f,0.0f,1.0f));
-      floorVec.push_back(floor);
+      renderObjects.push_back(floor);
 
 
 }
-void Render::render(Camera &player)
+void PFE::Render::setViewportSize(glm::vec2 viewportSize)
 {
-    for(size_t i = 0;i<floorVec.size();i++)
-    {
-        ceilingVec[i]->render(player);
-        floorVec[i]->render(player);
-    }
-    for(size_t i = 0;i<blocks.size();i++)
-    {
-         blocks[i]->render(player);
-    }
-
-    for(size_t i =0;i<sprites.size();i++)
-    {
-         sprites[i].render(player);
-    }
+    this->viewportSize = viewportSize;
 }
-
-void Render::clear()
+void PFE::Render::render()
 {
-    for(size_t i = 0;i<blocks.size();i++)
+//   for(auto &object:renderObjects)
+//   {
+//      object->setViewportProperties(player->getView(),viewportSize);
+//      object->render();
+//   }
+    //s[0]->setViewportProperties(player->getView(),viewportSize);
+    //s[0]->render();
+    for(int i=0;i<renderObjects.size();i++)
     {
-        delete blocks[i];
-        blocks[i] = nullptr;
+        renderObjects[i]->setViewportProperties(player->getView(),viewportSize);
+        renderObjects[i]->render();
     }
-    for(size_t i = 0;i<floorVec.size();i++)
+   player->mouse();
+   player->move();
+}
+void PFE::Render::clear()
+{
+    for(auto &object:renderObjects)
     {
-        delete ceilingVec[i];
-        delete  floorVec[i];
-        ceilingVec[i] = nullptr;
-        floorVec[i] = nullptr;
+        delete object;
+        object = nullptr;
     }
+    delete player;
+    player = nullptr;
 }

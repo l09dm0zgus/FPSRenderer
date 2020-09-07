@@ -82,7 +82,7 @@ void PFE::Window::setFullscreen(bool fullscreen)
 
     updateViewport = true;
 }
-void PFE::Window::render(void (*renderCallback)(), void (*mouseCallback)(GLFWwindow*,double,double))
+void PFE::Window::render()
 {
     glEnable(GL_DEPTH_TEST);
     //enable trancperency
@@ -91,6 +91,8 @@ void PFE::Window::render(void (*renderCallback)(), void (*mouseCallback)(GLFWwin
 
     double lastTime = glfwGetTime();
     int nbFrames = 0;
+    Render &renderContext =  Render::createRender();
+    renderContext.load("maps/map1.ini");
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -111,8 +113,7 @@ void PFE::Window::render(void (*renderCallback)(), void (*mouseCallback)(GLFWwin
         }
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-        glfwSetCursorPosCallback(window, mouseCallback);
-
+        glfwSetCursorPosCallback(window, Mouse::mousePosCallback);
         glfwSetKeyCallback(window,Keyboard::keyboardCallback);
         if(Keyboard::isKeyPressed(GLFW_KEY_F5))
         {
@@ -126,10 +127,13 @@ void PFE::Window::render(void (*renderCallback)(), void (*mouseCallback)(GLFWwin
         {
             destroy();
         }
-
+        glm::vec2 viewportSize;
+        viewportSize.x = windowWidth;
+        viewportSize.y = windowHeight;
+        renderContext.setViewportSize(viewportSize);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        (*renderCallback)();
+        renderContext.render();
         glfwSwapBuffers(window);
     }
 }

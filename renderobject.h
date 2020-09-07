@@ -12,10 +12,11 @@ namespace PFE
     {
         public:
             //virtual~RenderObject() = 0;
-            virtual void render(Camera &cam)=0;
+            virtual void render()=0;
             virtual void destroy()=0;
             virtual void loadTextures()=0;
             virtual void addTexture(string textureFile) = 0;
+            void setViewportProperties(glm::mat4 view,glm::vec2 viewportSize);
             void setShaderFile(string vertexShader, string fragmentShader);
             Transform getTransform();
             void setPosition(glm::vec3 position);
@@ -24,7 +25,11 @@ namespace PFE
             glm::vec3 getSize();
             glm::vec3 getPosition();
         protected:
+            void updatePerspective();
             void drawTextures();
+            glm::mat4 projectionMatrix;
+            glm::mat4 viewMatrix;
+            glm::vec2 viewportSize;
             vector<int> textureIds;
             vector<Texture*> textures;
             Transform transform;
