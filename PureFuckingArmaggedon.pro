@@ -10,6 +10,7 @@ SOURCES += \
         block.cpp \
         blockvertices.cpp \
         camera.cpp \
+        gameobject.cpp \
         keyboard.cpp \
         main.cpp \
         mouse.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     block.h \
     blockvertices.h \
     camera.h \
+    gameobject.h \
     keyboard.h \
     libs/ini.h \
     mouse.h \
