@@ -19,11 +19,8 @@ namespace PFE
             void setViewportProperties(glm::mat4 view,glm::vec2 viewportSize);
             void setShaderFile(string vertexShader, string fragmentShader);
             Transform getTransform();
-            void setPosition(glm::vec3 position);
-            void setSize(glm::vec3 size);
-            void setRotate(float angle,glm::vec3 axis);
-            glm::vec3 getSize();
-            glm::vec3 getPosition();
+            void setTransform(Transform &transform);
+            
         protected:
             void updatePerspective();
             void drawTextures();

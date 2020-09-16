@@ -4,9 +4,7 @@
 #include <vector>
 #include "window.h"
 //#include <reactphysics3d/reactphysics3d.h>
-#include "block.h"
-#include "sprite.h"
-#include "camera.h"
+#include "scenecreator.h"
 #include "libs/ini.h"
 using std::vector;
 /**
@@ -31,10 +29,8 @@ namespace PFE
             Render(){};
             //Render& operator=(const Render&);
             Render(const Render&);
-            vector<RenderObject*> renderObjects;
-            //vector<RenderObject*> s;
-            void floor(int size,string texture);
-            void ceiling(int size,string texture);
+            SceneCreator sceneCreator;
+            GameObject *scene;
     };
 }
 

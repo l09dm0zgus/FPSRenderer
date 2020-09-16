@@ -3,25 +3,9 @@ PFE::Transform PFE::RenderObject::getTransform()
 {
     return  transform;
 }
-void PFE::RenderObject::setPosition(glm::vec3 position)
+void PFE::RenderObject::setTransform(Transform &transform)
 {
-    transform.setPosition(position);
-}
-void PFE::RenderObject::setSize(glm::vec3 size)
-{
-    transform.setSize(size);
-}
-void PFE::RenderObject::setRotate(float angle, glm::vec3 axis)
-{
-    transform.setRotate(angle,axis);
-}
-glm::vec3 PFE::RenderObject::getPosition()
-{
-    return transform.getPosition();
-}
-glm::vec3 PFE::RenderObject::getSize()
-{
-    return transform.getSize();
+    this->transform = transform;
 }
 void PFE::RenderObject::setShaderFile(string vertexShader, string fragmentShader)
 {

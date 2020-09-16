@@ -1,6 +1,6 @@
-#include "block.h"
+#include "cube.h"
 
-void PFE::Block::addTexture(string textureFile)
+void PFE::Cube::addTexture(string textureFile)
 {
     Texture *texture = new Texture();
     texture->loadImageFile(textureFile);
@@ -9,7 +9,7 @@ void PFE::Block::addTexture(string textureFile)
     textureIds.push_back(textures.size()-1);
 }
 
-void PFE::Block::loadTextures()
+void PFE::Cube::loadTextures()
 {
 
     //create vertices and buffers
@@ -22,7 +22,7 @@ void PFE::Block::loadTextures()
     buffers.addAttribute(2,7);
     buffers.addAttribute(2,7);
 }
-void PFE::Block::render()
+void PFE::Cube::render()
 {
 
     shaderPrograms->use();
@@ -36,7 +36,7 @@ void PFE::Block::render()
 
     buffers.drawVertices(36);
 }
-void PFE::Block::destroy()
+void PFE::Cube::destroy()
 {
     delete  shaderPrograms;
     shaderPrograms = nullptr;

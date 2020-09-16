@@ -8,7 +8,7 @@
 using namespace  std;
 namespace PFE
 {
-    class Block:public RenderObject
+    class Cube:public RenderObject
     {
         public:
             //~Block()override{destroy();}
