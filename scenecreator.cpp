@@ -24,7 +24,7 @@ void PFE::SceneCreator::create(std::string mapName)
     enemy->addRenderObject(spr);
     enemy->setSize(glm::vec3(1.0f,1.0f,1.0f));
     enemy->setPosition(glm::vec3(2.0f,0.5f,4.0f));
-    scene->getChild("CeilingAndFloor")->getChild("floor")->addChild("enemy",enemy);
+    scene->addChild("enemy",enemy);
     for(int i = 1;i<size+1;i++)
     {
         if(ini.get(to_string(i)).get("type") == "wall")
