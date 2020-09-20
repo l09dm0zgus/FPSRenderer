@@ -96,3 +96,7 @@ void PFE::SceneCreator::floor(int size, string texture)
 
 
 }
+glm::mat4 PFE::SceneCreator::getCameraView()
+{
+    return scene->getChild("CeilingAndFloor")->getChild("floor")->getChild("player")->getView();
+}

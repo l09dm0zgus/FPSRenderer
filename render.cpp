@@ -16,7 +16,8 @@ void PFE::Render::setViewportSize(glm::vec2 viewportSize)
 }
 void PFE::Render::render()
 {
-    scene->render();
+
+    scene->render(sceneCreator.getCameraView(),viewportSize);
 }
 void PFE::Render::clear()
 {

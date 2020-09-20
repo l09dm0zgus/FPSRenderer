@@ -14,6 +14,7 @@ namespace PFE
         public:
             void create(std::string mapName);
             GameObject *getSceneGraph();
+            glm::mat4 getCameraView();
         private:
             void ceiling(int size,std::string texture);
             void floor(int size,std::string texture);

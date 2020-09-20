@@ -14,5 +14,8 @@ void PFE::Player::update()
     {
         camera->mouse();
         camera->move();
+        view = camera->getView();
     }
+
 }
+

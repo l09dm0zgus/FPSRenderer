@@ -51,15 +51,16 @@ void PFE::GameObject::addRenderObject(RenderObject *renderObject)
     this->renderObject = renderObject;
     this->renderObject->setTransform(transform);
 }
-void PFE::GameObject::render()
+void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize)
 {
     if(renderObject != nullptr)
     {
+        renderObject->setViewportProperties(view,viewportSize);
         renderObject->render();
     }
     for(it = childrens.begin();it!=childrens.end();it++)
     {
-        it->second->render();
+        it->second->render(view,viewportSize);
     }
     update();
 }
@@ -94,4 +95,8 @@ glm::vec3 PFE::GameObject::getPosition()
 glm::vec3 PFE::GameObject::getSize()
 {
     return transform.getSize();
+}
+glm::mat4 PFE::GameObject::getView()
+{
+    return view;
 }

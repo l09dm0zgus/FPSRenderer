@@ -15,13 +15,16 @@ namespace PFE
             void addRenderObject(RenderObject *renderObject);
             void addChild(std::string name ,GameObject *object);
             GameObject *getChild(std::string name);
-            void render();
+            void render(glm::mat4 view, glm::vec2 viewportSize);
             void setPosition(glm::vec3 position);
             void setSize(glm::vec3 size);
             void setRotate(float angle,glm::vec3 axis);
             glm::vec3 getSize();
             glm::vec3 getPosition();
+            glm::mat4 getView();
             void destroy();
+        protected:
+             glm::mat4 view;
         private:
             Transform transform;
             bool isChildExist(std::string name);
