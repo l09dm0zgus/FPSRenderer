@@ -31,7 +31,7 @@ namespace PFE
             vector<Texture*> textures;
             Transform transform;
             IVertices *vertices;
-            Shader *shaderPrograms;
+            ShaderProgram *shaderPrograms;
             VertexBuffers buffers;
     };
 }

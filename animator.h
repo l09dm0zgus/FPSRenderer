@@ -10,7 +10,7 @@ namespace PFE
     {
         public:
             void addAnimation(T *animation,std::string animationName);
-            void playAnimation(std::string animationName,Shader *shaderProgram,float speed);
+            void playAnimation(std::string animationName,ShaderProgram *shaderProgram,float speed);
         private:
             std::map<std::string,T*> animations;
             bool isAnimationExist(std::string animationName);
@@ -26,7 +26,7 @@ bool PFE::Animator<T>::isAnimationExist(std::string animationName)
     return true;
 }
 template<class T>
-void PFE::Animator<T>::playAnimation(std::string animationName,Shader *shaderProgram,float speed)
+void PFE::Animator<T>::playAnimation(std::string animationName,ShaderProgram *shaderProgram,float speed)
 {
        try
        {

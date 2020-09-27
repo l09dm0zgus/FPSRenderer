@@ -9,7 +9,7 @@ void PFE::RenderObject::setTransform(Transform &transform)
 }
 void PFE::RenderObject::setShaderFile(string vertexShader, string fragmentShader)
 {
-    shaderPrograms = new Shader(vertexShader.c_str(),fragmentShader.c_str());
+    shaderPrograms = new ShaderProgram(vertexShader.c_str(),fragmentShader.c_str());
 }
 
 void PFE::RenderObject::drawTextures()

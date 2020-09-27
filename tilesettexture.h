@@ -7,10 +7,10 @@ namespace PFE
     {
         public:
            ~TilesetTexture(){shader = nullptr;}
-           void setShader(Shader *shader);
+           void setShader(ShaderProgram *shader);
            void setTilePosition(float rows, float collums, float rowPos, float colPos);
         private:
-           Shader *shader = nullptr;
+           ShaderProgram *shader = nullptr;
     };
 }
 

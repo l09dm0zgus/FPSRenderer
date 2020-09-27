@@ -1,9 +1,7 @@
 #include "shader.h"
-
-PFE::Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
+void PFE::ShaderProgram::readFiles(const GLchar * vertexPath,const GLchar *fragmentPath)
 {
-    std::string vertexCode;
-    std::string fragmentCode;
+
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
     vShaderFile.exceptions(std::ifstream::badbit);
@@ -24,23 +22,18 @@ PFE::Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
     {
         std::cout<<"Error shader : file not load"<<std::endl;
     }
-    GLuint vertexShader,fragmentShader;
 
 
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-
-    const char *vertexShaderText,*fragmentShaderText;
-    GLint success;
-    GLchar log[512];
-
-
     vertexShaderText = vertexCode.c_str();
     fragmentShaderText = fragmentCode.c_str();
 
 
-
+}
+void PFE::ShaderProgram::compile()
+{
     glShaderSource(vertexShader,1,&vertexShaderText,NULL);
     glCompileShader(vertexShader);
     glGetShaderiv(vertexShader,GL_COMPILE_STATUS,&success);
@@ -48,9 +41,8 @@ PFE::Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
     {
         glGetShaderInfoLog(vertexShader,512,NULL,log);
         std::cout<<"Error compile shader : "<<log<<std::endl;
+        exit(-1);
     }
-
-
 
     glShaderSource(fragmentShader,1,&fragmentShaderText,NULL);
     glCompileShader(fragmentShader);
@@ -59,13 +51,16 @@ PFE::Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
     {
         glGetShaderInfoLog(fragmentShader,512,NULL,log);
         std::cout<<"Error compile shader : "<<log<<std::endl;
+        exit(-1);
     }
 
+}
+void PFE::ShaderProgram::link()
+{
     program = glCreateProgram();
 
     glAttachShader(program,vertexShader);
     glAttachShader(program,fragmentShader);
-
 
     glLinkProgram(program);
     glGetProgramiv(program, GL_LINK_STATUS, &success);
@@ -73,29 +68,36 @@ PFE::Shader::Shader(const GLchar* vertexPath,const GLchar* fragmentPath)
     {
         glGetProgramInfoLog(program, 512, NULL, log);
         std::cout<<"Error link shaders  :  "<<log<<std::endl;
+        exit(-1);
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 }
-void PFE::Shader::use()
+PFE::ShaderProgram::ShaderProgram(const GLchar* vertexPath,const GLchar* fragmentPath)
+{
+  readFiles(vertexPath,fragmentPath);
+  compile();
+  link();
+}
+void PFE::ShaderProgram::use()
 {
     glUseProgram(program);
 }
-void PFE::Shader::setUniformVariable(glm::mat4 value, std::string uniformName)
+void PFE::ShaderProgram::setUniformVariable(glm::mat4 value, std::string uniformName)
 {
     glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()), 1, GL_FALSE, &value[0][0]);
 }
-void PFE::Shader::setUniformVariable(int value,std::string uniformName)
+void PFE::ShaderProgram::setUniformVariable(int value,std::string uniformName)
 {
 
     glUniform1i(glGetUniformLocation(program,uniformName.c_str()),value);
 
 }
-void PFE::Shader::setUniformVariable(float value,std::string uniformName)
+void PFE::ShaderProgram::setUniformVariable(float value,std::string uniformName)
 {
     glUniform1f(glGetUniformLocation(program,uniformName.c_str()),value);
 }
-void PFE::Shader::setUniformVariable(std::vector<int>value, std::string uniformName)
+void PFE::ShaderProgram::setUniformVariable(std::vector<int>value, std::string uniformName)
 {
 
     glUniform1iv(glGetUniformLocation(program,uniformName.c_str()),value.size(),value.data());

@@ -21,11 +21,6 @@ void PFE::Render::render()
 }
 void PFE::Render::clear()
 {
-//    for(auto &object:renderObjects)
-//    {
-//        delete object;
-//        object = nullptr;
-//    }
-//    delete player;
-//    player = nullptr;
+    delete scene;
+    scene = 0;
 }

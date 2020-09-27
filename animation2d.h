@@ -16,7 +16,7 @@ namespace PFE
         public:
             ~Animation2D(){texture = nullptr;}
             void setTilesheet(TilesetTexture *texture,bool isAnimationVertical,int rowsCount,int columnsCount);
-            void setShader(Shader *shaderPrograms);
+            void setShader(ShaderProgram *shaderPrograms);
             void setStartTilesetCell(int rowCell,int columnCell);
             void play(float speed);
             std::shared_ptr<int> ptr;

@@ -8,7 +8,7 @@ void PFE::Animation2D::setTilesheet(TilesetTexture *texture, bool isAnimationVer
     animationStartPosition.x = 1;
     animationStartPosition.y = 1;
 }
-void PFE::Animation2D::setShader(Shader *shaderPrograms)
+void PFE::Animation2D::setShader(ShaderProgram *shaderPrograms)
 {
     if(texture != nullptr)
         texture->setShader(shaderPrograms);

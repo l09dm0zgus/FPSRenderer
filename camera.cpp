@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera(float x,float y,float z,GLfloat sensitivity)
+PFE::Camera::Camera(float x,float y,float z,GLfloat sensitivity)
 {
     position = glm::vec3(x,y,z);
     worldUp = glm::vec3(0.0f,1.0f,0.0f);
@@ -15,26 +15,26 @@ Camera::Camera(float x,float y,float z,GLfloat sensitivity)
 
 
 }
-void Camera::updatePosition(glm::vec3 position)
+void PFE::Camera::updatePosition(glm::vec3 position)
 {
     this->position = position;
 }
-glm::vec3 Camera::getRightVector()
+glm::vec3 PFE::Camera::getRightVector()
 {
     updateVectors();
     return cameraRight;
 }
-glm::vec3 Camera::getForwardVector()
+glm::vec3 PFE::Camera::getForwardVector()
 {
     updateVectors();
     return cameraFront;
 }
-glm::mat4 Camera::getView()
+glm::mat4 PFE::Camera::getView()
 {
     view =  glm::lookAt(position,position+cameraFront,cameraUp);
     return view;
 }
-void Camera::rotateCamera(glm::vec2 mousePosition)
+void PFE::Camera::rotateCamera(glm::vec2 mousePosition)
 {
     if(isFirstMouse)
     {
@@ -57,7 +57,7 @@ void Camera::rotateCamera(glm::vec2 mousePosition)
         pitch = -89.0f;
     updateVectors();
 }
-void Camera::updateVectors()
+void PFE::Camera::updateVectors()
 {
     glm::vec3 front(0,0,0);
     front.x = cos(glm::radians(yaw)) *  cos(glm::radians(pitch));

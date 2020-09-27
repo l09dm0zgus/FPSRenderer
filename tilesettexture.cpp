@@ -1,5 +1,5 @@
 #include "tilesettexture.h"
-void PFE::TilesetTexture::setShader(Shader *shader)
+void PFE::TilesetTexture::setShader(ShaderProgram *shader)
 {
     try
     {
