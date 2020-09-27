@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <gameobject.h>
+#include "character.h"
 namespace PFE
 {
     class Enemy : public GameObject

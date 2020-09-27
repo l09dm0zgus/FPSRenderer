@@ -47,6 +47,7 @@ HEADERS += \
     render.h \
     renderobject.h \
     scenecreator.h \
+    scripts/character.h \
     scripts/enemy.h \
     scripts/player.h \
     scripts/scenefolder.h \

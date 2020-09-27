@@ -89,22 +89,22 @@ void PFE::Window::render()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    double lastTime = glfwGetTime();
-    int nbFrames = 0;
+
     Render &renderContext =  Render::createRender();
     renderContext.load("maps/map1.ini");
+    double lastTime = glfwGetTime();
+    int nbFrames = 0;
     while (!glfwWindowShouldClose(window))
     {
-        glfwPollEvents();
         double currentTime = glfwGetTime();
         nbFrames++;
         if ( currentTime - lastTime >= 1.0 )
-        { // If last prinf() was more than 1 sec ago
-            // printf and reset timer
-            printf("%f ms/frame\n", 1000.0/double(nbFrames));
+        {
+            printf("%i ms/frame\n", nbFrames);
             nbFrames = 0;
-            lastTime += 1.0;
+            lastTime =currentTime ;
         }
+        glfwPollEvents();
         if(updateViewport)
         {
             glfwGetFramebufferSize(window,&viewportWidth,&viewportHeight);

@@ -48,12 +48,12 @@ void PFE::SceneCreator::create(std::string mapName)
         if(ini.get(to_string(i)).get("type") == "player")
         {
             glm::vec3 pos ;
-            Camera *camera = new Camera(0,0,0,0.5);
+
             Player *player = new Player();
             pos.x = stoi(ini.get(to_string(i)).get("x"));
             pos.y = stoi(ini.get(to_string(i)).get("y"));
             pos.z = stoi(ini.get(to_string(i)).get("z"));
-            camera->setPosition(pos);
+            Camera *camera = new Camera(pos.x,pos.y,pos.z,0.5);
             player->setCamera(camera);
             player->setPosition(pos);
             scene->getChild("CeilingAndFloor")->getChild("floor")->addChild("player",player);
@@ -93,8 +93,6 @@ void PFE::SceneCreator::floor(int size, string texture)
       wall->setSize(glm::vec3(size,1.0,size));
       wall->setPosition(glm::vec3(1.0f,0.0f,1.0f));
       scene->getChild("CeilingAndFloor")->addChild("floor",wall);
-
-
 }
 glm::mat4 PFE::SceneCreator::getCameraView()
 {

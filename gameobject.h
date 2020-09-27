@@ -24,9 +24,9 @@ namespace PFE
             glm::mat4 getView();
             void destroy();
         protected:
+             Transform transform;
              glm::mat4 view;
         private:
-            Transform transform;
             bool isChildExist(std::string name);
             RenderObject *renderObject = 0;
             std::map<std::string,GameObject*>::iterator it;
