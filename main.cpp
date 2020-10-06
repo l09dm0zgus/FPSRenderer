@@ -1,6 +1,6 @@
 #include <iostream>
-#include "window.h"
-#include "render.h"
+#include "engine/render/window.h"
+#include "engine/render/render.h"
 using namespace PFE;
 int main()
 {

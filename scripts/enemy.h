@@ -1,7 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <gameobject.h>
+#include <engine/gameobject/gameobject.h>
 #include "character.h"
 namespace PFE
 {

@@ -1,7 +1,7 @@
 #ifndef SCENEFOLDER_H
 #define SCENEFOLDER_H
 
-#include <gameobject.h>
+#include <engine/gameobject/gameobject.h>
 namespace PFE
 {
     class SceneFolder : public GameObject

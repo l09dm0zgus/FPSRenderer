@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include <gameobject.h>
-#include <camera.h>
+#include <engine/gameobject/gameobject.h>
+#include <engine/camera/camera.h>
 #include "character.h"
 namespace PFE
 {

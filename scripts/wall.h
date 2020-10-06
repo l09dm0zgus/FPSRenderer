@@ -1,7 +1,7 @@
 #ifndef WALL_H
 #define WALL_H
 
-#include <gameobject.h>
+#include <engine/gameobject/gameobject.h>
 namespace PFE
 {
     class Wall : public GameObject

@@ -6,64 +6,65 @@ CONFIG += c++17
 CONFIG += sanitizer sanitize_leak
 LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr
 SOURCES += \
-        animation2d.cpp \
-        blockvertices.cpp \
-        camera.cpp \
-        cube.cpp \
-        gameobject.cpp \
-        keyboard.cpp \
-        main.cpp \
-        mouse.cpp \
-        render.cpp \
-        renderobject.cpp \
-        scenecreator.cpp \
+        engine/camera/camera.cpp \
+        engine/gameobject/gameobject.cpp \
+        engine/gameobject/scenecreator.cpp \
+        engine/input/keyboard.cpp \
+        engine/input/mouse.cpp \
+        engine/primitives/cube.cpp \
+        engine/primitives/sprite.cpp \
+        engine/render/animation/animation2d.cpp \
+        engine/render/render.cpp \
+        engine/render/renderobject.cpp \
+        engine/render/shader/shader.cpp \
+        engine/render/texture/texture.cpp \
+        engine/render/texture/tilesettexture.cpp \
+        engine/render/vertices/blockvertices.cpp \
+        engine/render/vertices/spritevertices.cpp \
+        engine/render/vertices/vertexatrribute.cpp \
+        engine/render/vertices/vertexbuffers.cpp \
+        engine/render/window.cpp \
+        engine/transform/transform.cpp \
+    main.cpp \
         scripts/enemy.cpp \
         scripts/player.cpp \
         scripts/scenefolder.cpp \
         scripts/wall.cpp \
-        shader.cpp \
-        sprite.cpp \
-        spritevertices.cpp \
-        texture.cpp \
-        tilesettexture.cpp \
-        transform.cpp \
-        vertexatrribute.cpp \
-        vertexbuffers.cpp \
-        window.cpp
 
 
 CONFIG += <standard>
 HEADERS += \
-    IVertices.h \
-    animation2d.h \
-    animator.h \
-    blockvertices.h \
-    camera.h \
-    cube.h \
-    gameobject.h \
-    keyboard.h \
+    engine/camera/camera.h \
+    engine/gameobject/gameobject.h \
+    engine/gameobject/scenecreator.h \
+    engine/input/keyboard.h \
+    engine/input/mouse.h \
+    engine/primitives/cube.h \
+    engine/primitives/sprite.h \
+    engine/render/animation/animation2d.h \
+    engine/render/animation/animator.h \
+    engine/render/render.h \
+    engine/render/renderobject.h \
+    engine/render/shader/shader.h \
+    engine/render/texture/texture.h \
+    engine/render/texture/tilesettexture.h \
+    engine/render/vertices/IVertices.h \
+    engine/render/vertices/blockvertices.h \
+    engine/render/vertices/spritevertices.h \
+    engine/render/vertices/vertexatrribute.h \
+    engine/render/vertices/vertexbuffers.h \
+    engine/render/window.h \
+    engine/transform/transform.h \
     libs/ini.h \
     libs/stb_image.h \
-    mouse.h \
-    render.h \
-    renderobject.h \
-    scenecreator.h \
     scripts/character.h \
     scripts/enemy.h \
     scripts/player.h \
     scripts/scenefolder.h \
-    scripts/wall.h \
-    shader.h \
-    sprite.h \
-    spritevertices.h \
-    texture.h \
-    tilesettexture.h \
-    transform.h \
-    vertexatrribute.h \
-    vertexbuffers.h \
-    window.h
+    scripts/wall.h
 
 #unix|win32: LIBS += -lreactphysics3d
 unix|win32: INCLUDEPATH += $$PWD/libs/glm
 DISTFILES += \
+    libs/LICENSE \
     libs/glm/glm/CMakeLists.txt
