@@ -10,7 +10,8 @@ void PFE::Texture::loadImageFile(std::string file)
 {
     try
     {
-       image = SOIL_load_image(file.c_str(),&imageWidth,&imageHeight,0,SOIL_LOAD_RGBA);
+       int imageChanels;
+       image = stbi_load(file.c_str(),&imageWidth,&imageHeight,&imageChanels,STBI_rgb_alpha);
        if(!image)
        {
            throw "ERROR::Image file not found.";
@@ -35,7 +36,7 @@ void PFE::Texture::create()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imageWidth,imageHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
         glGenerateMipmap(GL_TEXTURE_2D);
-        SOIL_free_image_data(image);
+        stbi_image_free(image);
         glBindTexture(GL_TEXTURE_2D,0);
     }
     else

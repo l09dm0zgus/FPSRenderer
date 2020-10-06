@@ -1,7 +1,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 #include <iostream>
-#include <SOIL/SOIL.h>
+#include "libs/stb_image.h"
 #include "shader.h"
 
 namespace PFE

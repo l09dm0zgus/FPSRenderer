@@ -43,6 +43,7 @@ HEADERS += \
     gameobject.h \
     keyboard.h \
     libs/ini.h \
+    libs/stb_image.h \
     mouse.h \
     render.h \
     renderobject.h \
