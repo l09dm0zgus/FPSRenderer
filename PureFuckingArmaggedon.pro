@@ -29,7 +29,7 @@ SOURCES += \
         scripts/enemy.cpp \
         scripts/player.cpp \
         scripts/scenefolder.cpp \
-        scripts/wall.cpp \
+        scripts/wall.cpp
 
 
 CONFIG += <standard>
