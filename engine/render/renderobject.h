@@ -11,7 +11,7 @@ namespace PFE
     class RenderObject
     {
         public:
-            //virtual~RenderObject() = 0;
+            virtual~RenderObject(){}
             virtual void render()=0;
             virtual void destroy()=0;
             virtual void loadTextures()=0;

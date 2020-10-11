@@ -92,18 +92,9 @@ void PFE::Window::render()
 
     Render &renderContext =  Render::createRender();
     renderContext.load("maps/map1.ini");
-    double lastTime = glfwGetTime();
-    int nbFrames = 0;
     while (!glfwWindowShouldClose(window))
     {
-        double currentTime = glfwGetTime();
-        nbFrames++;
-        if ( currentTime - lastTime >= 1.0 )
-        {
-            printf("%i ms/frame\n", nbFrames);
-            nbFrames = 0;
-            lastTime =currentTime ;
-        }
+
         glfwPollEvents();
         if(updateViewport)
         {

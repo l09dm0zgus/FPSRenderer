@@ -4,6 +4,7 @@
 #include <iostream>
 #include "engine/render/renderobject.h"
 #include "engine/transform/transform.h"
+#include "engine/components/IComponent.h"
 namespace PFE
 {
     class GameObject
@@ -28,10 +29,12 @@ namespace PFE
              glm::mat4 view;
         private:
             bool isChildExist(std::string name);
+            bool isComponentExist(std::string);
             RenderObject *renderObject = 0;
             std::map<std::string,GameObject*>::iterator it;
             std::map<std::string,GameObject*>childrens;
-
+            std::map<std::string,IComponent*>components;
+            std::map<std::string,IComponent*>::iterator componentsIterator;
     };
 }
 

@@ -7,6 +7,7 @@ CONFIG += sanitizer sanitize_leak
 LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr
 SOURCES += \
         engine/camera/camera.cpp \
+    engine/components/renderobjectcomponent.cpp \
         engine/gameobject/gameobject.cpp \
         engine/gameobject/scenecreator.cpp \
         engine/input/keyboard.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
         engine/render/vertices/vertexatrribute.cpp \
         engine/render/vertices/vertexbuffers.cpp \
         engine/render/window.cpp \
+    engine/time/time.cpp \
         engine/transform/transform.cpp \
     main.cpp \
         scripts/enemy.cpp \
@@ -35,6 +37,8 @@ SOURCES += \
 CONFIG += <standard>
 HEADERS += \
     engine/camera/camera.h \
+    engine/components/IComponent.h \
+    engine/components/renderobjectcomponent.h \
     engine/gameobject/gameobject.h \
     engine/gameobject/scenecreator.h \
     engine/input/keyboard.h \
@@ -54,9 +58,11 @@ HEADERS += \
     engine/render/vertices/vertexatrribute.h \
     engine/render/vertices/vertexbuffers.h \
     engine/render/window.h \
+    engine/time/time.h \
     engine/transform/transform.h \
     libs/ini.h \
     libs/stb_image.h \
+    libs/vectorsconventers.h \
     scripts/character.h \
     scripts/enemy.h \
     scripts/player.h \
