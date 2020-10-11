@@ -4,7 +4,6 @@
 #include <iterator>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <SOIL/SOIL.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "engine/render/renderobject.h"
 #include "engine/render/vertices/spritevertices.h"
