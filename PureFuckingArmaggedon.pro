@@ -1,4 +1,11 @@
 TEMPLATE = app
+TEMPLATE = vcapp
+contains(QMAKE_HOST.arch, x86):{
+QMAKE_LFLAGS *= /MACHINE:X86
+}
+contains(QMAKE_HOST.arch, x86_64):{
+QMAKE_LFLAGS *= /MACHINE:X64
+}
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
