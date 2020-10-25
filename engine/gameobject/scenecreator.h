@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include "engine/primitives/cube.h"
 #include "engine/primitives/sprite.h"
+#include "engine/file/path.h"
 #include "scripts/wall.h"
 #include "scripts/scenefolder.h"
 #include "scripts/enemy.h"

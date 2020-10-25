@@ -85,5 +85,5 @@ void PFE::BlockVertices::deleteVertices()
  */
 int PFE::BlockVertices::getArraySizeInBytes()
 {
-    return sizeof(float[arraySize]);
+    return sizeof(float)*arraySize;
 }

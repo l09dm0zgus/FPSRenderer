@@ -8,18 +8,21 @@ void PFE::SceneCreator::create(std::string mapName)
 
     mINI::INIFile file(mapName);
     mINI::INIStructure ini;
-    if(!file.read(ini))
-        cout<<"File not found!!!"<<endl;
+    if (!file.read(ini))
+    {
+        cout << "File not found!!!" << endl;
+    }
+        
     int size = stoi(ini.get("SystemInfo").get("mapObjects"));
-    string blockTexture = ini.get("SystemInfo").get("textureWall");
+    string blockTexture = Path::getImageFilePath(ini.get("SystemInfo").get("textureWall"));
     ceiling(size,blockTexture);
     floor(size,blockTexture);
 
     Sprite *spr = new Sprite;
     Enemy *enemy = new Enemy();
 
-    spr->setShaderFile("shaders/SpriteVS.glsl","shaders/SpriteFS.glsl");
-    spr->addTexture("spr.png");
+    spr->setShaderFile(Path::getShaderFilePath("SpriteVS.glsl"), Path::getShaderFilePath("SpriteFS.glsl"));
+    spr->addTexture(Path::getImageFilePath("spr.png"));
     spr->loadTextures();
     enemy->addRenderObject(spr);
     enemy->setSize(glm::vec3(1.0f,1.0f,1.0f));
@@ -32,7 +35,7 @@ void PFE::SceneCreator::create(std::string mapName)
             Cube *block = new Cube;
             Wall *wall = new Wall();
 
-            block->setShaderFile("shaders/BlockVS.glsl","shaders/BlockFS.glsl");
+            block->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
             block->addTexture(blockTexture);
             block->addTexture(blockTexture);
             block->loadTextures();
@@ -69,7 +72,7 @@ void PFE::SceneCreator::ceiling(int size,string texture)
 
       Cube *ceiling = new Cube;
       Wall *wall = new Wall();
-      ceiling->setShaderFile("shaders/BlockVS.glsl","shaders/BlockFS.glsl");
+      ceiling->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
       ceiling->addTexture(texture);
       ceiling->addTexture(texture);
       ceiling->loadTextures();
@@ -85,7 +88,7 @@ void PFE::SceneCreator::floor(int size, string texture)
       Cube *floor = new Cube;
       Wall *wall = new Wall();
 
-      floor->setShaderFile("shaders/BlockVS.glsl","shaders/BlockFS.glsl");
+      floor->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"),Path::getShaderFilePath("BlockFS.glsl"));
       floor->addTexture(texture);
       floor->addTexture(texture);
       floor->loadTextures();

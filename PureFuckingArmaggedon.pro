@@ -11,10 +11,19 @@ CONFIG -= app_bundle
 CONFIG -= qt
 CONFIG += c++17
 CONFIG += sanitizer sanitize_leak
-LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr
+unix:LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr -lreactphysics3d
+win32:LIBS += -lglfw3 -lglew32 -lopengl32 
+contains(QMAKE_HOST.arch, x86_64):{
+    CONFIG(release, debug|release) {
+        win32:LIBS += -lreactphysics3d
+    }
+    CONFIG(debug, debug|release) {
+        win32:LIBS += -lreactphysics3dD
+    } 
+}
 SOURCES += \
         engine/camera/camera.cpp \
-    engine/components/renderobjectcomponent.cpp \
+        engine/components/renderobjectcomponent.cpp \
         engine/gameobject/gameobject.cpp \
         engine/gameobject/scenecreator.cpp \
         engine/input/keyboard.cpp \
@@ -32,9 +41,10 @@ SOURCES += \
         engine/render/vertices/vertexatrribute.cpp \
         engine/render/vertices/vertexbuffers.cpp \
         engine/render/window.cpp \
-    engine/time/time.cpp \
+        engine/time/time.cpp \
+        engine/file/path.cpp \
         engine/transform/transform.cpp \
-    main.cpp \
+        main.cpp \
         scripts/enemy.cpp \
         scripts/player.cpp \
         scripts/scenefolder.cpp \
@@ -66,6 +76,7 @@ HEADERS += \
     engine/render/vertices/vertexbuffers.h \
     engine/render/window.h \
     engine/time/time.h \
+    engine/file/path.h \
     engine/transform/transform.h \
     libs/ini.h \
     libs/stb_image.h \

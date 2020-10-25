@@ -1,5 +1,6 @@
 #ifndef ANIMATION2D_H
 #define ANIMATION2D_H
+#define STB_IMAGE_IMPLEMENTATION
 #include "engine/render/texture/tilesettexture.h"
 #include <memory>
 #include<GLFW/glfw3.h>

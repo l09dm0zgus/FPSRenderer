@@ -1,5 +1,9 @@
 #include "window.h"
-
+#include <engine\file\path.h>
+static void glfwError(int id, const char* description)
+{
+    std::cout << description << std::endl;
+}
 PFE::Window::Window(int w,int h,string windowTitle)
 {
     this->windowWidth = w;
@@ -9,9 +13,10 @@ PFE::Window::Window(int w,int h,string windowTitle)
 }
 void PFE::Window::GLFWInit()
 {
+    glfwSetErrorCallback(&glfwError);
     glfwInit();
     window = glfwCreateWindow(windowWidth,windowHeight,windowTitle,nullptr,nullptr);
-    if(window == nullptr)
+    if(window == NULL)
     {
         glfwTerminate();
         throw std::runtime_error("Failed create window!");
@@ -88,13 +93,18 @@ void PFE::Window::render()
     //enable trancperency
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
+    Path::setImagesFolder("/");
+    Path::setMapsFolder("maps/");
+    Path::setShadersFolder("shaders/");
+    #if defined(WIN32)
+        Path::setRootFolder("debug/");
+    #endif
     Render &renderContext =  Render::createRender();
-    renderContext.load("maps/map1.ini");
+    renderContext.load(Path::getMapFilePath("map1.ini"));
+    timer.start();
     while (!glfwWindowShouldClose(window))
     {
-
+        timer.showFPS();
         glfwPollEvents();
         if(updateViewport)
         {

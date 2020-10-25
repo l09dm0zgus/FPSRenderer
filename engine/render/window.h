@@ -2,12 +2,15 @@
 #define WINDOW_H
 
 #include <iostream>
+#include <filesystem>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "engine/input/keyboard.h"
 #include "engine/input/mouse.h"
+#include "engine/time/time.h"
 #include "render.h"
 using namespace  std;
+using namespace filesystem;
 namespace PFE
 {
     class Window
@@ -32,6 +35,7 @@ namespace PFE
              void resize(int cx , int cy);
              bool updateViewport = true;
              const char *windowTitle;
+             Time timer;
     };
 }
 
