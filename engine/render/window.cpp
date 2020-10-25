@@ -1,5 +1,5 @@
 #include "window.h"
-#include <engine\file\path.h>
+#include <engine/file/path.h>
 static void glfwError(int id, const char* description)
 {
     std::cout << description << std::endl;
@@ -93,7 +93,7 @@ void PFE::Window::render()
     //enable trancperency
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    Path::setImagesFolder("/");
+    Path::setImagesFolder("");
     Path::setMapsFolder("maps/");
     Path::setShadersFolder("shaders/");
     #if defined(WIN32)

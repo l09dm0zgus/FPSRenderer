@@ -1,9 +1,8 @@
 TEMPLATE = app
-TEMPLATE = vcapp
-contains(QMAKE_HOST.arch, x86):{
+win32:contains(QMAKE_HOST.arch, x86):{
 QMAKE_LFLAGS *= /MACHINE:X86
 }
-contains(QMAKE_HOST.arch, x86_64):{
+win32:contains(QMAKE_HOST.arch, x86_64):{
 QMAKE_LFLAGS *= /MACHINE:X64
 }
 CONFIG += console c++11
@@ -13,13 +12,13 @@ CONFIG += c++17
 CONFIG += sanitizer sanitize_leak
 unix:LIBS += -lGLEW -lSOIL  -lglfw -lGL -lX11 -lpthread -lXrandr -lreactphysics3d
 win32:LIBS += -lglfw3 -lglew32 -lopengl32 
-contains(QMAKE_HOST.arch, x86_64):{
+win32:contains(QMAKE_HOST.arch, x86_64):{
     CONFIG(release, debug|release) {
         win32:LIBS += -lreactphysics3d
     }
     CONFIG(debug, debug|release) {
         win32:LIBS += -lreactphysics3dD
-    } 
+    }
 }
 SOURCES += \
         engine/camera/camera.cpp \
