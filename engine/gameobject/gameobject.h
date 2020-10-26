@@ -5,6 +5,7 @@
 #include "engine/render/renderobject.h"
 #include "engine/transform/transform.h"
 #include "engine/components/IComponent.h"
+#include <reactphysics3d/reactphysics3d.h>
 namespace PFE
 {
     class GameObject
@@ -13,6 +14,7 @@ namespace PFE
             virtual void start() = 0;
             virtual void update() = 0;
             virtual ~GameObject(){destroy();}
+            void load();
             void addRenderObject(RenderObject *renderObject);
             void addChild(std::string name ,GameObject *object);
             GameObject *getChild(std::string name);

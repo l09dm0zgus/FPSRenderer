@@ -51,6 +51,14 @@ void PFE::GameObject::addRenderObject(RenderObject *renderObject)
     this->renderObject = renderObject;
     this->renderObject->setTransform(transform);
 }
+void PFE::GameObject::load()
+{
+    for(it = childrens.begin();it!=childrens.end();it++)
+    {
+        it->second->load();
+    }
+    start();
+}
 void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize)
 {
     if(renderObject != nullptr)

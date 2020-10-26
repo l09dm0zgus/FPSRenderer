@@ -62,6 +62,8 @@ void PFE::SceneCreator::create(std::string mapName)
             scene->getChild("CeilingAndFloor")->getChild("floor")->addChild("player",player);
         }
     }
+    scene->load();
+
 }
 PFE::GameObject *PFE::SceneCreator::getSceneGraph()
 {
