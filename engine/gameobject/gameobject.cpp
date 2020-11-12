@@ -1,16 +1,31 @@
 #include "gameobject.h"
-void PFE::GameObject::addChild(std::string name, GameObject *object)
+void PFE::GameObject::addComponent(std::string name, IComponent *component)
 {
 
     try
     {
-        if(isChildExist(name))
+        if(isComponentExist(name))
+            throw "Component with this name exist.";
+        components[name] = component;
+    }
+    catch (const char* e)
+    {
+        std::cout<<e<<std::endl;
+    }
+
+}
+void PFE::GameObject::addChild(std::string name, GameObject* object)
+{
+
+    try
+    {
+        if (isChildExist(name))
             throw "Child with this name exist.";
         childrens[name] = object;
     }
     catch (const char* e)
     {
-        std::cout<<e<<std::endl;
+        std::cout << e << std::endl;
     }
 
 }
@@ -21,8 +36,15 @@ void PFE::GameObject::destroy()
     for(it = childrens.begin();it != childrens.end();it++)
     {
         delete it->second;
+        it->second = nullptr;
     }
     childrens.clear();
+    for (componentsIterator = components.begin(); componentsIterator != components.end(); componentsIterator++)
+    {
+        delete componentsIterator->second;
+        componentsIterator->second = nullptr;
+    }
+    components.clear();
 
 }
 PFE::GameObject *PFE::GameObject::getChild(std::string name)
@@ -41,10 +63,31 @@ PFE::GameObject *PFE::GameObject::getChild(std::string name)
     }
 
 }
+PFE::IComponent* PFE::GameObject::getComponent(std::string name)
+{
+    try
+    {
+        if (isComponentExist(name))
+            return components[name];
+        else
+            throw "Component not found.";
+    }
+    catch (const char* e)
+    {
+        return nullptr;
+        std::cout << e << std::endl;
+    }
+
+}
 bool PFE::GameObject::isChildExist(std::string name)
 {
     it = childrens.find(name);
     return it != childrens.end();
+}
+bool PFE::GameObject::isComponentExist(std::string name)
+{
+    componentsIterator = components.find(name);
+    return componentsIterator != components.end();
 }
 void PFE::GameObject::addRenderObject(RenderObject *renderObject)
 {

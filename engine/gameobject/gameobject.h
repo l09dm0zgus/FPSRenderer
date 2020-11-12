@@ -15,6 +15,8 @@ namespace PFE
             virtual void update() = 0;
             virtual ~GameObject(){destroy();}
             void load();
+            void addComponent(std::string name,IComponent* component);
+            IComponent* getComponent(std::string name);
             void addRenderObject(RenderObject *renderObject);
             void addChild(std::string name ,GameObject *object);
             GameObject *getChild(std::string name);
@@ -25,6 +27,7 @@ namespace PFE
             glm::vec3 getSize();
             glm::vec3 getPosition();
             glm::mat4 getView();
+            
             void destroy();
         protected:
              Transform transform;
