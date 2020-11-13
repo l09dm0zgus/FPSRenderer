@@ -35,7 +35,6 @@ namespace PFE
              void resize(int cx , int cy);
              bool updateViewport = true;
              const char *windowTitle;
-             Time timer;
     };
 }
 

@@ -107,11 +107,8 @@ void PFE::Window::render()
     renderContext.load(Path::getMapFilePath("map1.ini"));
     rp3d::PhysicsCommon physicsCommon;
     rp3d::PhysicsWorld *world = physicsCommon.createPhysicsWorld(settings);
-    timer.start();
     while (!glfwWindowShouldClose(window))
     {
-        timer.showFPS();
-        timer.updatePhysicsWorld(world);
         glfwPollEvents();
         if(updateViewport)
         {

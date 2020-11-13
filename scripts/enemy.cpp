@@ -5,7 +5,7 @@ void PFE::Enemy::start()
 
 }
 
-void PFE::Enemy::update()
+void PFE::Enemy::update(Time &timer)
 {
 
 }

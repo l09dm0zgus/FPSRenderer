@@ -53,7 +53,7 @@ namespace PFE
     {
         public:
             void start() override;
-            void update() override;
+            void update(Time& timer) override;
             void setCamera(Camera *camera);
             void moveForward() override;
             void moveBackward() override;

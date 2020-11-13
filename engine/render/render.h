@@ -22,6 +22,7 @@ namespace PFE
             static Render& createRender();
             ~Render(){clear();};
         private:
+            Time timer;
             void clear();
             glm::vec2 viewportSize;
             glm::mat4 cameraView;

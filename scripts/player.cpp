@@ -8,7 +8,7 @@ void PFE::Player::start()
 {
 
 }
-void PFE::Player::update()
+void PFE::Player::update(Time& timer)
 {
     if(camera != nullptr)
     {

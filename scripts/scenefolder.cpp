@@ -6,7 +6,7 @@ void PFE::SceneFolder::start()
 
 }
 
-void PFE::SceneFolder::update()
+void PFE::SceneFolder::update(Time& timer)
 {
 
 }

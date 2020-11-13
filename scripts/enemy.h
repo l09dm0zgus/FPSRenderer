@@ -8,7 +8,7 @@ namespace PFE
     class Enemy : public GameObject
     {
         public:
-            void update() override;
+            void update(Time& timer) override;
             void start() override;
     };
 }

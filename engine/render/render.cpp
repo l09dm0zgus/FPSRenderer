@@ -8,6 +8,7 @@ void PFE::Render::load(string mapName)
 {
     sceneCreator.create(mapName);
     scene = sceneCreator.getSceneGraph();
+    timer.start();
 }
 
 void PFE::Render::setViewportSize(glm::vec2 viewportSize)
@@ -16,8 +17,9 @@ void PFE::Render::setViewportSize(glm::vec2 viewportSize)
 }
 void PFE::Render::render()
 {
-
-    scene->render(sceneCreator.getCameraView(),viewportSize);
+    timer.showFPS();
+    ///timer.updatePhysicsWorld(world)
+    scene->render(sceneCreator.getCameraView(),viewportSize,timer);
 }
 void PFE::Render::clear()
 {

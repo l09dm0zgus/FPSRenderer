@@ -8,7 +8,7 @@ namespace PFE
     {
         public:
             void start() override;
-            void update() override;
+            void update(Time& timer) override;
             ~Wall() override{destroy();}
     };
 

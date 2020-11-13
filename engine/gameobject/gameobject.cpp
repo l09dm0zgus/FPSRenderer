@@ -102,7 +102,7 @@ void PFE::GameObject::load()
     }
     start();
 }
-void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize)
+void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize, Time& timer)
 {
     if(renderObject != nullptr)
     {
@@ -111,9 +111,9 @@ void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize)
     }
     for(it = childrens.begin();it!=childrens.end();it++)
     {
-        it->second->render(view,viewportSize);
+        it->second->render(view,viewportSize,timer);
     }
-    update();
+    update(timer);
 }
 void PFE::GameObject::setPosition(glm::vec3 position)
 {
