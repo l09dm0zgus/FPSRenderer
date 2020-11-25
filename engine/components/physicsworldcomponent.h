@@ -8,11 +8,12 @@ namespace PFE
 	class PhysicsWorldComponent : public IComponent
 	{
 	public:
-		~PhysicsWorldComponent() {}
+		~PhysicsWorldComponent() { physicsCommon.destroyPhysicsWorld(world); }
 		void start()  override;
 	    void update(Time &timer) override;
 	    void addProppertyFile() override;
 	private:
+		rp3d::PhysicsCommon physicsCommon;
 		rp3d::PhysicsWorld* world;
 	};
 

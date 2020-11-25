@@ -34,7 +34,6 @@ void PFE::SceneCreator::create(std::string mapName)
             Cube *block = new Cube;
             Wall *wall = new Wall();
             PhysicsWorldComponent* component = new PhysicsWorldComponent();
-            //component->set(world);
             block->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
             block->addTexture(blockTexture);
             block->addTexture(blockTexture);
