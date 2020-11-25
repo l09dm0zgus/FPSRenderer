@@ -58,7 +58,7 @@ void PFE::Player::moveRight()
 {
     if(camera != nullptr)
     {
-        move(0.1,camera->getForwardVector());
+        move(0.1,camera->getRightVector());
     }
 }
 PFE::CharacterCommand *PFE::InputHandler::handleInput()

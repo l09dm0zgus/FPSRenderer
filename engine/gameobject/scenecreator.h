@@ -10,6 +10,7 @@
 #include "scripts/enemy.h"
 #include "scripts/player.h"
 #include "gameobject.h"
+#include "engine/components/physicsworldcomponent.h"
 namespace PFE
 {
     class SceneCreator

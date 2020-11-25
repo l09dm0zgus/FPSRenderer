@@ -100,13 +100,7 @@ void PFE::Window::render()
         Path::setRootFolder("debug/");
     #endif
     Render &renderContext =  Render::createRender();
-    rp3d::PhysicsWorld::WorldSettings settings;
-    settings.defaultVelocitySolverNbIterations = 20;
-    settings.isSleepingEnabled = true;
-    settings.gravity = rp3d::Vector3(0,9.81,0);
     renderContext.load(Path::getMapFilePath("map1.ini"));
-    rp3d::PhysicsCommon physicsCommon;
-    rp3d::PhysicsWorld *world = physicsCommon.createPhysicsWorld(settings);
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();

@@ -1,6 +1,7 @@
 #ifndef ICOMPONENT_H
 #define ICOMPONENT_H
 #include <iostream>
+#include "engine/time/time.h"
 namespace PFE
 {
     class IComponent
@@ -8,11 +9,9 @@ namespace PFE
         public:
             virtual ~IComponent(){}
             virtual void start() = 0;
-            virtual void update() = 0;
+            virtual void update(Time &timer) = 0;
             virtual void addProppertyFile() = 0;
-            template<class T> T get() { return data<T>; }
-        protected:
-            template<class T> T inline static data = T(0);
+            
     };
 }
 

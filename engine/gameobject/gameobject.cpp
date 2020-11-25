@@ -100,6 +100,7 @@ void PFE::GameObject::load()
     {
         it->second->load();
     }
+    startComponents();
     start();
 }
 void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize, Time& timer)
@@ -113,6 +114,7 @@ void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize, Time& timer
     {
         it->second->render(view,viewportSize,timer);
     }
+    updateComponents(timer);
     update(timer);
 }
 void PFE::GameObject::setPosition(glm::vec3 position)
@@ -150,4 +152,18 @@ glm::vec3 PFE::GameObject::getSize()
 glm::mat4 PFE::GameObject::getView()
 {
     return view;
+}
+void PFE::GameObject::startComponents()
+{
+    for (auto& component : components)
+    {
+        component.second->start();
+    }
+}
+void PFE::GameObject::updateComponents(Time& timer)
+{
+    for (auto& component : components)
+    {
+        component.second->update(timer);
+    }
 }

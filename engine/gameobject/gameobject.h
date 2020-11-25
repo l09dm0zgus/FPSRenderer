@@ -34,6 +34,8 @@ namespace PFE
              Transform transform;
              glm::mat4 view;
         private:
+            void startComponents();
+            void updateComponents(Time& timer);
             bool isChildExist(std::string name);
             bool isComponentExist(std::string);
             RenderObject *renderObject = 0;

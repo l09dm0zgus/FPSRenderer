@@ -10,10 +10,10 @@ namespace PFE
 	public:
 		~PhysicsWorldComponent() {}
 		void start()  override;
-	    void update() override;
+	    void update(Time &timer) override;
 	    void addProppertyFile() override;
-		template<class T> T get(){ return data<T>; }
-		template<class T> T inline static data=T(0);
+	private:
+		rp3d::PhysicsWorld* world;
 	};
 
 }
