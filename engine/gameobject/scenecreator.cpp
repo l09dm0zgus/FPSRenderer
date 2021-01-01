@@ -3,6 +3,7 @@
 void PFE::SceneCreator::create(std::string mapName)
 {
     scene = new SceneFolder();
+    PhysicsWorldComponent* physicsWorld = new PhysicsWorldComponent();
     scene->addChild("Walls",new SceneFolder());
     scene->addChild("CeilingAndFloor",new SceneFolder());
     mINI::INIFile file(mapName);
@@ -31,9 +32,9 @@ void PFE::SceneCreator::create(std::string mapName)
     {
         if(ini.get(to_string(i)).get("type") == "wall")
         {
-            Cube *block = new Cube;
+            Cube *block = new Cube();
             Wall *wall = new Wall();
-            PhysicsWorldComponent* component = new PhysicsWorldComponent();
+            RigidBodyComponent* rigidBodyComponent = new RigidBodyComponent();
             block->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
             block->addTexture(blockTexture);
             block->addTexture(blockTexture);
@@ -45,7 +46,10 @@ void PFE::SceneCreator::create(std::string mapName)
             wall->addRenderObject(block);
             wall->setSize(glm::vec3(1.0f,1.0f,1.0f));
             wall->setPosition(pos);
-            wall->addComponent("PhysicsWorld",component);
+            wall->addComponent("PhysicsWorld", physicsWorld);
+            rigidBodyComponent->setBody(physicsWorld->createRigidbody(glmVectorToReactPhysicsVector(pos), rp3d::Quaternion::identity()));
+            rigidBodyComponent->addBoxShape(physicsWorld->createBoxShape(rp3d::Vector3(0.5f,0.5f,0.5f)));
+            wall->addComponent("RigidBody", rigidBodyComponent);
             scene->getChild("Walls")->addChild("wall"+to_string(i),wall);
         }
         if(ini.get(to_string(i)).get("type") == "player")

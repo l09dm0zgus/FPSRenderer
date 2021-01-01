@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\components\physicsworldcomponent.cpp" />
+    <ClCompile Include="engine\components\rigidbodycomponent.cpp" />
     <ClCompile Include="engine\render\animation\animation2d.cpp" />
     <ClCompile Include="engine\render\vertices\blockvertices.cpp" />
     <ClCompile Include="engine\camera\camera.cpp" />
@@ -199,6 +200,7 @@
   <ItemGroup>
     <ClInclude Include="engine\components\IComponent.h" />
     <ClInclude Include="engine\components\physicsworldcomponent.h" />
+    <ClInclude Include="engine\components\rigidbodycomponent.h" />
     <ClInclude Include="engine\render\vertices\IVertices.h" />
     <ClInclude Include="engine\render\animation\animation2d.h" />
     <ClInclude Include="engine\render\animation\animator.h" />

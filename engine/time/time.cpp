@@ -25,9 +25,16 @@ long double PFE::Time::getDeltaTime()
 }
 void PFE::Time::updatePhysicsWorld(rp3d::PhysicsWorld *world)
 {
+    getDeltaTime();
     while(accumulator >= timeStep)
     {
         world->update(timeStep);
         accumulator -= timeStep;
     }
+    factor = accumulator / timeStep;
+}
+
+long double PFE::Time::getFactor()
+{
+    return factor;
 }

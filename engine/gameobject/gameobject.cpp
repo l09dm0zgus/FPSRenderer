@@ -31,21 +31,8 @@ void PFE::GameObject::addChild(std::string name, GameObject* object)
 }
 void PFE::GameObject::destroy()
 {
-
-
-    for(it = childrens.begin();it != childrens.end();it++)
-    {
-        delete it->second;
-        it->second = nullptr;
-    }
     childrens.clear();
-    for (componentsIterator = components.begin(); componentsIterator != components.end(); componentsIterator++)
-    {
-        delete componentsIterator->second;
-        componentsIterator->second = nullptr;
-    }
     components.clear();
-
 }
 PFE::GameObject *PFE::GameObject::getChild(std::string name)
 {

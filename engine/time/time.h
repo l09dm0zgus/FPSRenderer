@@ -12,6 +12,7 @@ namespace PFE
             void start();
             long double getDeltaTime();
             void updatePhysicsWorld(rp3d::PhysicsWorld *world);
+            long double getFactor();
         private:
             double lastTime;
             double currentTime;
@@ -19,6 +20,7 @@ namespace PFE
             const float timeStep = 1.0f/120.0f;
             long double deltaTime = 0;
             long double accumulator = 0;
+            long double factor = 0;
     };
 }
 

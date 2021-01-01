@@ -11,6 +11,8 @@
 #include "scripts/player.h"
 #include "gameobject.h"
 #include "engine/components/physicsworldcomponent.h"
+#include "engine/components/rigidbodycomponent.h"
+#include "libs/vectorsconventers.h"
 namespace PFE
 {
     class SceneCreator

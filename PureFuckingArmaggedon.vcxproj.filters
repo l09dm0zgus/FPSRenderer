@@ -113,6 +113,9 @@
     <ClCompile Include="engine\components\physicsworldcomponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\components\rigidbodycomponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\components\IComponent.h">
@@ -215,6 +218,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\components\physicsworldcomponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\rigidbodycomponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
