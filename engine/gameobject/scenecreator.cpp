@@ -55,14 +55,20 @@ void PFE::SceneCreator::create(std::string mapName)
         if(ini.get(to_string(i)).get("type") == "player")
         {
             glm::vec3 pos ;
-
             Player *player = new Player();
+            RigidBodyComponent* rigidBodyComponent = new RigidBodyComponent();
             pos.x = stoi(ini.get(to_string(i)).get("x"));
             pos.y = stoi(ini.get(to_string(i)).get("y"));
             pos.z = stoi(ini.get(to_string(i)).get("z"));
             Camera *camera = new Camera(pos.x,pos.y,pos.z,0.5);
+            player->addComponent("PhysicsWorld", physicsWorld);
             player->setCamera(camera);
             player->setPosition(pos);
+            rigidBodyComponent->setBody(physicsWorld->createRigidbody(glmVectorToReactPhysicsVector(pos), rp3d::Quaternion::identity()));
+            rigidBodyComponent->addCapsuleShape(physicsWorld->createCapsuleShape(0.5f,1.0f));
+            //in future will be deleted when will be refactored this class
+            rigidBodyComponent->setIsPlayer(true);
+            player->addComponent("RigidBody", rigidBodyComponent);
             scene->getChild("CeilingAndFloor")->getChild("floor")->addChild("player",player);
         }
     }

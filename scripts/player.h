@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include <engine/gameobject/gameobject.h>
 #include <engine/camera/camera.h>
+#include "engine/components/rigidbodycomponent.h"
 #include "character.h"
 namespace PFE
 {
@@ -61,6 +62,7 @@ namespace PFE
             void moveRight() override;
         private:
             void move(float speed,glm::vec3 direction) override;
+           float deltaTime = 0;
             Camera *camera;
             InputHandler inputHandler;
 

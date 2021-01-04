@@ -9,7 +9,5 @@ void PFE::Wall::start()
 
 void PFE::Wall::update(Time& timer)
 {
-    RigidBodyComponent* component = dynamic_cast<RigidBodyComponent*>(getComponent("RigidBody"));
-    if(component != nullptr)
-        setPosition(component->getInterpolarePosition());
+  
 }

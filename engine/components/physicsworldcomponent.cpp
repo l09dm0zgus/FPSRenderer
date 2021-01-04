@@ -6,10 +6,16 @@ PFE::PhysicsWorldComponent::PhysicsWorldComponent()
     settings.isSleepingEnabled = true;
     settings.gravity = rp3d::Vector3(0, -9.81, 0);
     world = physicsCommon.createPhysicsWorld(settings);
+  
 }
 void  PFE::PhysicsWorldComponent::start()
 {
-    
+    if (world != nullptr)
+    {
+        event = new CollisionEvent();
+        listener.setCollisionEvent(event);
+        world->setEventListener(&listener);
+    }
 }
 void PFE::PhysicsWorldComponent::update(Time& timer)
 {
@@ -49,4 +55,37 @@ rp3d::CapsuleShape* PFE::PhysicsWorldComponent::createCapsuleShape(float radius,
 rp3d::BoxShape* PFE::PhysicsWorldComponent::createBoxShape(rp3d::Vector3 halfExtends)
 {
     return physicsCommon.createBoxShape(halfExtends);
+}
+
+PFE::CollisionEvent* PFE::PhysicsWorldComponent::getCollisionEvent()
+{
+    return this->event;
+}
+
+void PFE::PhysicsEventListener::onContact(const CollisionCallback::CallbackData& callbackData)
+{
+    for (rp3d::uint p = 0; p < callbackData.getNbContactPairs(); p++)
+    {
+        std::cout << "Collision!!!!" << std::endl;
+        ContactPair contactPair = callbackData.getContactPair(p);
+       if(!event->isCollision)
+            transform = contactPair.getBody1()->getTransform();
+       rp3d::Vector3 position = transform.getPosition();
+       event->isCollision = true;
+       for(int i = 0; i < 10; i++)
+       {
+           position.x++;
+           position.z++;
+           transform.setPosition(position);
+           contactPair.getBody1()->setTransform(transform);
+       }
+   
+        
+            
+    }
+}
+
+void PFE::PhysicsEventListener::setCollisionEvent(CollisionEvent* event)
+{
+    this->event = event;
 }
