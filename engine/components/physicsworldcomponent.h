@@ -7,6 +7,7 @@ namespace PFE
 	struct CollisionEvent
 	{
 		bool isCollision = false;
+		bool isStay = false;
 		bool isTrigger = false;
 	};
 	class PhysicsEventListener : public rp3d::EventListener

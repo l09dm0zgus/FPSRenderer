@@ -62,7 +62,11 @@ namespace PFE
             void moveRight() override;
         private:
             void move(float speed,glm::vec3 direction) override;
-           float deltaTime = 0;
+            void updatePlayerPosition();
+            void updatePhysics();
+            glm::vec3 cameraDirection;
+            int coll=0;
+            float deltaTime = 0;
             Camera *camera;
             InputHandler inputHandler;
 

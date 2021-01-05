@@ -12,17 +12,7 @@ void PFE::Player::start()
 void PFE::Player::update(Time& timer)
 {
     deltaTime = timer.getDeltaTime();
-    if(camera != nullptr)
-    {
-        CharacterCommand *action  = inputHandler.handleInput();
-        camera->rotateCamera(Mouse::getMousePosition());;
-        if(action != nullptr)
-        {
-            action->execute(this);
-        }
-        view = camera->getView();
-        
-    }
+    updatePhysics();
 
 }
 
@@ -34,52 +24,86 @@ void PFE::Player::move(float speed, glm::vec3 direction)
     transform.position.y = 1;
     if(camera != nullptr)
     {
-        camera->updatePosition(transform.position);
-        RigidBodyComponent* component = dynamic_cast<RigidBodyComponent*>(getComponent("RigidBody"));
-        PhysicsWorldComponent* c = dynamic_cast<PhysicsWorldComponent*>(getComponent("PhysicsWorld"));
-        if (component != nullptr && c != nullptr)
+        transform.position += (speed * deltaTime * direction);
+    }
+}
+void PFE::Player::updatePlayerPosition()
+{
+    CharacterCommand* action = inputHandler.handleInput();
+    camera->rotateCamera(Mouse::getMousePosition());;
+    if (action != nullptr)
+    {
+        action->execute(this);
+    }
+    view = camera->getView();
+}
+void PFE::Player::updatePhysics()
+{
+    RigidBodyComponent* rigidBody = dynamic_cast<RigidBodyComponent*>(getComponent("RigidBody"));
+    PhysicsWorldComponent* physicsWorld = dynamic_cast<PhysicsWorldComponent*>(getComponent("PhysicsWorld"));
+    if (physicsWorld != nullptr && rigidBody != nullptr)
+    {
+        CollisionEvent* event = physicsWorld->getCollisionEvent();
+        if (event->isCollision)
         {
-            CollisionEvent* event = c->getCollisionEvent();
-            if (event->isCollision)
-                transform.position += 0;
-            else
-                transform.position += speed * deltaTime * direction;
-            component->moveBody(transform.position);
-            glm::vec3 pos = component->getBodyPosition();
-            setPosition(pos);
-            cout << "Physics Position X : " << pos.x << " Z : " << pos.z << endl;
-            cout << "Player position X : " << transform.position.x << " Z : " << transform.position.z << endl;
-            
+            transform.position += 0;
         }
-            
+        if (event->isStay)
+        {
+            transform.position += (-100 * deltaTime * cameraDirection);
+            //TODO add sleep function from Timer class
+            for (int i = 0; i < 100; i++)
+            {
+                1 + 1;
+            }
+            event->isStay = false;
+        }
+        if (!event->isCollision && !event->isStay)
+        {
+            //TODO add sleep function from Timer class
+            for (int i = 0; i < 20; i++)
+            {
+                1 + 1;
+            }
+            updatePlayerPosition();
+        }
+        camera->updatePosition(transform.position);
+        rigidBody->moveBody(transform.position);
+        glm::vec3 rigidBodyPosition = rigidBody->getBodyPosition();
+        setPosition(rigidBodyPosition);
+
     }
 }
 void PFE::Player::moveBackward()
 {
     if(camera != nullptr)
     {
-        move(100.0f,(-camera->getForwardVector()));
+        cameraDirection = -1.0f * camera->getForwardVector();
+        move(100.0f,cameraDirection);
     }
 }
 void PFE::Player::moveForward()
 {
     if(camera != nullptr)
     {
-        move(100.0f,camera->getForwardVector());
+        cameraDirection = camera->getForwardVector();
+        move(100.0f,cameraDirection);
     }
 }
 void PFE::Player::moveLeft()
 {
     if(camera != nullptr)
     {
-        move(100.0f,(-camera->getRightVector()));
+        cameraDirection = -1.0f * camera->getRightVector();
+        move(100.0f,cameraDirection);
     }
 }
 void PFE::Player::moveRight()
 {
     if(camera != nullptr)
     {
-        move(100.0f,camera->getRightVector());
+        cameraDirection = camera->getRightVector();
+        move(100.0f,cameraDirection);
     }
 }
 PFE::CharacterCommand *PFE::InputHandler::handleInput()

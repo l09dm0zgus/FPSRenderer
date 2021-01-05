@@ -66,22 +66,22 @@ void PFE::PhysicsEventListener::onContact(const CollisionCallback::CallbackData&
 {
     for (rp3d::uint p = 0; p < callbackData.getNbContactPairs(); p++)
     {
-        std::cout << "Collision!!!!" << std::endl;
         ContactPair contactPair = callbackData.getContactPair(p);
-       if(!event->isCollision)
-            transform = contactPair.getBody1()->getTransform();
-       rp3d::Vector3 position = transform.getPosition();
-       event->isCollision = true;
-       for(int i = 0; i < 10; i++)
-       {
-           position.x++;
-           position.z++;
-           transform.setPosition(position);
-           contactPair.getBody1()->setTransform(transform);
-       }
-   
-        
-            
+        if(contactPair.getEventType() == ContactPair::EventType::ContactStart)
+        {
+            event->isCollision = true;
+            event->isStay = false;
+        }
+        if(contactPair.getEventType() == ContactPair::EventType::ContactStay)
+        {
+            event->isCollision = false;
+            event->isStay = true;
+        }
+        if(contactPair.getEventType() == ContactPair::EventType::ContactExit)
+        {
+            event->isCollision = false;
+            event->isStay = false;
+        }
     }
 }
 
