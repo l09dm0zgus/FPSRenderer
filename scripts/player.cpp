@@ -20,8 +20,7 @@ void PFE::Player::move(float speed, glm::vec3 direction)
 {
 
     
-    //disable flying camera
-    transform.position.y = 1;
+    
     if(camera != nullptr)
     {
         transform.position += (speed * deltaTime * direction);
@@ -67,6 +66,8 @@ void PFE::Player::updatePhysics()
             }
             updatePlayerPosition();
         }
+        //disable flying camera
+        transform.position.y = 1;
         camera->updatePosition(transform.position);
         rigidBody->moveBody(transform.position);
         glm::vec3 rigidBodyPosition = rigidBody->getBodyPosition();
