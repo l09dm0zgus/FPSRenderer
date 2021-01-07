@@ -1,4 +1,5 @@
 #include "tilesettexture.h"
+
 void PFE::TilesetTexture::setShader(ShaderProgram *shader)
 {
     try
@@ -15,9 +16,9 @@ void PFE::TilesetTexture::setShader(ShaderProgram *shader)
         exit(-1);
     }
 }
+
 void PFE::TilesetTexture::setTilePosition(float rows, float collums, float rowPos, float colPos)
 {
-
     try
     {
         if(!shader)
@@ -31,12 +32,10 @@ void PFE::TilesetTexture::setTilePosition(float rows, float collums, float rowPo
             shader->setUniformVariable(rowPos,"rowPosition");
             shader->setUniformVariable(colPos,"collumsPosition");
         }
-
     }
     catch (const char* e)
     {
        std::cout<<e<<std::endl;
        exit(-1);
     }
-
 }

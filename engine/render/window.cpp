@@ -1,9 +1,11 @@
 #include "window.h"
 #include <engine/file/path.h>
+
 static void glfwError(int id, const char* description)
 {
     std::cout << description << std::endl;
 }
+
 PFE::Window::Window(int w,int h,string windowTitle)
 {
     this->windowWidth = w;
@@ -11,6 +13,7 @@ PFE::Window::Window(int w,int h,string windowTitle)
     this->windowTitle = windowTitle.c_str();
     init();
 }
+
 void PFE::Window::GLFWInit()
 {
     glfwSetErrorCallback(&glfwError);
@@ -21,7 +24,6 @@ void PFE::Window::GLFWInit()
         glfwTerminate();
         throw std::runtime_error("Failed create window!");
     }
-
     glfwMakeContextCurrent(window);
 
     glfwSetWindowUserPointer(window,this);
@@ -34,6 +36,7 @@ void PFE::Window::GLFWInit()
     glfwGetWindowPos(window, &windowX, &windowY);
     updateViewport = true;
 }
+
 void PFE::Window::GLEWInit()
 {
     glewExperimental = GL_TRUE;
@@ -44,25 +47,30 @@ void PFE::Window::GLEWInit()
         throw runtime_error("GL context not created!");
     }
 }
+
 void PFE::Window::init()
 {
     GLFWInit();
     GLEWInit();
 }
+
 void PFE::Window::resizeCallback(GLFWwindow *window, int cx, int cy)
 {
     void *ptr = glfwGetWindowUserPointer(window);
     if(Window *win = static_cast<Window*>(ptr))
+     
         win->resize(cx,cy);
 }
 void PFE::Window::resize(int cx,int cy)
 {
     updateViewport = true;
 }
+
 bool PFE::Window::isFullscreen()
 {
     return glfwGetWindowMonitor(window) != nullptr;
 }
+
 void PFE::Window::setFullscreen(bool fullscreen)
 {
     if(isFullscreen() == fullscreen)
@@ -84,9 +92,9 @@ void PFE::Window::setFullscreen(bool fullscreen)
         // restore last window size and position
         glfwSetWindowMonitor(window, nullptr,  windowX, windowY, windowWidth, windowHeight, 0 );
     }
-
     updateViewport = true;
 }
+
 void PFE::Window::render()
 {
     glEnable(GL_DEPTH_TEST);
@@ -136,9 +144,9 @@ void PFE::Window::render()
         glfwSwapBuffers(window);
     }
 }
+
 void PFE::Window::destroy()
 {
-
     glfwTerminate();
     exit(0);
 }

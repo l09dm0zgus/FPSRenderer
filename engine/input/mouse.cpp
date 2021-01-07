@@ -1,4 +1,5 @@
 #include "mouse.h"
+
 bool PFE::Mouse::buttons[32] = {0};
 
 double PFE::Mouse::x = 0;

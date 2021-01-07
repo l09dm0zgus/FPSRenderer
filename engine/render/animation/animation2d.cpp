@@ -1,4 +1,5 @@
 #include "animation2d.h"
+
 void PFE::Animation2D::setTilesheet(TilesetTexture *texture, bool isAnimationVertical , int rowsCount,int columnsCount)
 {
     this->texture = texture;
@@ -8,6 +9,7 @@ void PFE::Animation2D::setTilesheet(TilesetTexture *texture, bool isAnimationVer
     animationStartPosition.x = 1;
     animationStartPosition.y = 1;
 }
+
 void PFE::Animation2D::setShader(ShaderProgram *shaderPrograms)
 {
     if(texture != nullptr)
@@ -19,6 +21,7 @@ void PFE::Animation2D::setStartTilesetCell(int rowCell,int columnCell)
         animationStartPosition.x = rowCell;
         animationStartPosition.y = columnCell;
 }
+
 void PFE::Animation2D::verticalAnimation()
 {
     if(animationFrame > columnCount)
@@ -28,6 +31,7 @@ void PFE::Animation2D::verticalAnimation()
     if(texture != nullptr)
         texture->setTilePosition(rowsCount,columnCount,animationStartPosition.y,animationFrame);
 }
+
 void PFE::Animation2D::horizontalAnimation()
 {
     if(animationFrame > rowsCount)
@@ -37,6 +41,7 @@ void PFE::Animation2D::horizontalAnimation()
     if(texture != nullptr)
         texture->setTilePosition(rowsCount,columnCount,animationFrame,animationStartPosition.y);
 }
+
 void PFE::Animation2D::play(float speed)
 {
     //if frames in tileset are from top to bottom

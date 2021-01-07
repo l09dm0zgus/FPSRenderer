@@ -1,4 +1,5 @@
 #include "sprite.h"
+
 void PFE::Sprite::addTexture(string textureFile)
 {
     tile = new TilesetTexture();
@@ -8,7 +9,6 @@ void PFE::Sprite::addTexture(string textureFile)
 
 void PFE::Sprite::loadTextures()
 {
-
     //create vertices and buffers
     vertices = new SpriteVertices();
     vertices->createVertices();
@@ -45,7 +45,4 @@ void PFE::Sprite::destroy()
    // tile = nullptr;
     buffers.clear();
     vertices->deleteVertices();
-
 }
-
-

@@ -1,7 +1,7 @@
 #include "gameobject.h"
+
 void PFE::GameObject::addComponent(std::string name, IComponent *component)
 {
-
     try
     {
         if(isComponentExist(name))
@@ -12,11 +12,10 @@ void PFE::GameObject::addComponent(std::string name, IComponent *component)
     {
         std::cout<<e<<std::endl;
     }
-
 }
+
 void PFE::GameObject::addChild(std::string name, GameObject* object)
 {
-
     try
     {
         if (isChildExist(name))
@@ -27,13 +26,14 @@ void PFE::GameObject::addChild(std::string name, GameObject* object)
     {
         std::cout << e << std::endl;
     }
-
 }
+
 void PFE::GameObject::destroy()
 {
     childrens.clear();
     components.clear();
 }
+
 PFE::GameObject *PFE::GameObject::getChild(std::string name)
 {
     try
@@ -48,8 +48,8 @@ PFE::GameObject *PFE::GameObject::getChild(std::string name)
         return nullptr;
         std::cout<<e<<std::endl;
     }
-
 }
+
 PFE::IComponent* PFE::GameObject::getComponent(std::string name)
 {
     try
@@ -64,23 +64,26 @@ PFE::IComponent* PFE::GameObject::getComponent(std::string name)
         return nullptr;
         std::cout << e << std::endl;
     }
-
 }
+
 bool PFE::GameObject::isChildExist(std::string name)
 {
     it = childrens.find(name);
     return it != childrens.end();
 }
+
 bool PFE::GameObject::isComponentExist(std::string name)
 {
     componentsIterator = components.find(name);
     return componentsIterator != components.end();
 }
+
 void PFE::GameObject::addRenderObject(RenderObject *renderObject)
 {
     this->renderObject = renderObject;
     this->renderObject->setTransform(transform);
 }
+
 void PFE::GameObject::load()
 {
     for(it = childrens.begin();it!=childrens.end();it++)
@@ -90,6 +93,7 @@ void PFE::GameObject::load()
     startComponents();
     start();
 }
+
 void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize, Time& timer)
 {
     if(renderObject != nullptr)
@@ -104,6 +108,7 @@ void PFE::GameObject::render(glm::mat4 view, glm::vec2 viewportSize, Time& timer
     updateComponents(timer);
     update(timer);
 }
+
 void PFE::GameObject::setPosition(glm::vec3 position)
 {
     transform.setPosition(position);
@@ -112,6 +117,7 @@ void PFE::GameObject::setPosition(glm::vec3 position)
         renderObject->setTransform(transform);
     }
 }
+
 void PFE::GameObject::setSize(glm::vec3 size)
 {
     transform.setSize(size);
@@ -120,6 +126,7 @@ void PFE::GameObject::setSize(glm::vec3 size)
         renderObject->setTransform(transform);
     }
 }
+
 void PFE::GameObject::setRotate(float angle, glm::vec3 axis)
 {
     transform.setRotate(angle,axis);
@@ -128,18 +135,22 @@ void PFE::GameObject::setRotate(float angle, glm::vec3 axis)
         renderObject->setTransform(transform);
     }
 }
+
 glm::vec3 PFE::GameObject::getPosition()
 {
     return transform.getPosition();
 }
+
 glm::vec3 PFE::GameObject::getSize()
 {
     return transform.getSize();
 }
+
 glm::mat4 PFE::GameObject::getView()
 {
     return view;
 }
+
 void PFE::GameObject::startComponents()
 {
     for (auto& component : components)
@@ -147,6 +158,7 @@ void PFE::GameObject::startComponents()
         component.second->start();
     }
 }
+
 void PFE::GameObject::updateComponents(Time& timer)
 {
     for (auto& component : components)

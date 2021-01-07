@@ -73,15 +73,15 @@ void PFE::SceneCreator::create(std::string mapName)
         }
     }
     scene->load();
-
 }
+
 PFE::GameObject *PFE::SceneCreator::getSceneGraph()
 {
     return scene;
 }
+
 void PFE::SceneCreator::ceiling(int size,string texture)
 {
-
       Cube *ceiling = new Cube;
       Wall *wall = new Wall();
       ceiling->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
@@ -92,11 +92,10 @@ void PFE::SceneCreator::ceiling(int size,string texture)
       wall->setSize(glm::vec3(size,1.0,size));
       wall->setPosition(glm::vec3(1.0f,2.0f,1.0f)); 
       scene->getChild("CeilingAndFloor")->addChild("ceiling",wall);
-
 }
+
 void PFE::SceneCreator::floor(int size, string texture)
 {
-
       Cube *floor = new Cube;
       Wall *wall = new Wall();
 
@@ -109,6 +108,7 @@ void PFE::SceneCreator::floor(int size, string texture)
       wall->setPosition(glm::vec3(1.0f,0.0f,1.0f));
       scene->getChild("CeilingAndFloor")->addChild("floor",wall);
 }
+
 glm::mat4 PFE::SceneCreator::getCameraView()
 {
     return scene->getChild("CeilingAndFloor")->getChild("floor")->getChild("player")->getView();

@@ -1,4 +1,5 @@
 #include "texture.h"
+
 glm::vec2 PFE::Texture::getTextureSize()
 {
     glm::vec2 size;
@@ -6,6 +7,7 @@ glm::vec2 PFE::Texture::getTextureSize()
     size.y = imageHeight;
     return size;
 }
+
 void PFE::Texture::loadImageFile(std::string file)
 {
     try
@@ -16,13 +18,13 @@ void PFE::Texture::loadImageFile(std::string file)
        {
            throw "ERROR::Image file not found.";
        }
-       
     }
     catch (const char* e)
     {
         std::cout<<e<<std::endl;
     }
 }
+
 void PFE::Texture::create()
 {
     if(image)
@@ -43,8 +45,8 @@ void PFE::Texture::create()
     {
         std::cout<<"ERROR::Image not created!"<<std::endl;
     }
-
 }
+
 void PFE::Texture::draw(int id)
 {
     glActiveTexture(GL_TEXTURE0+id);

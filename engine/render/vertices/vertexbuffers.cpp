@@ -1,4 +1,5 @@
 #include "vertexbuffers.h"
+
 void PFE::VertexBuffers::create(IVertices *vertices)
 {
     glGenBuffers(1,&VBO);
@@ -11,8 +12,8 @@ void PFE::VertexBuffers::create(IVertices *vertices)
     vertices->createVertices();
     glBindBuffer(GL_ARRAY_BUFFER,VBO);
     glBufferData(GL_ARRAY_BUFFER,vertices->getArraySizeInBytes(),vertices->getVertices(),GL_STATIC_DRAW);
-
 }
+
 void PFE::VertexBuffers::addAttribute(int size,int attribStride)
 {
     if(vertexAttributes.empty())
@@ -30,13 +31,14 @@ void PFE::VertexBuffers::addAttribute(int size,int attribStride)
     lastAttribId = vertexAttributes.back()->getId();
     lastAttribPointer = vertexAttributes.back()->getPointer();
 }
+
 void PFE::VertexBuffers::drawVertices(int count)
 {
-
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES,0,count);
     glBindVertexArray(0);
 }
+
 void PFE::VertexBuffers::clear()
 {
     for(auto &attr:vertexAttributes)

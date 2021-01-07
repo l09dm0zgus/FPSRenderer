@@ -1,5 +1,6 @@
 #include "spritevertices.h"
 #include <iostream>
+
 /**
  * @brief SpriteVertices::createVertices
  * Allocate memory for array with vertices.
@@ -18,8 +19,8 @@ void PFE::SpriteVertices::createVertices()
         1.0f, 1.0f, 1.0f,  1.0f, 1.0f,
         1.0f, 0.0f, 1.0f,  1.0f, 0.0f
     };
-
 }
+
 /**
  * @brief SpriteVertices::deleteVertices
  * Delete array with vertices coordinates.
@@ -33,6 +34,7 @@ void PFE::SpriteVertices::deleteVertices()
         vertices = nullptr;
     }
 }
+
 /**
  * @brief SpriteVertices::getArraySizeInBytes
  *  Return array with vertices coordinates size in bytes.
@@ -42,14 +44,13 @@ int PFE::SpriteVertices::getArraySizeInBytes()
 {
     return sizeof(GLfloat[30]);
 }
+
 /**
  * @brief SpriteVertices::getVertices
  * @return Pointer to begin array with vertices.
  */
 GLfloat *PFE::SpriteVertices::getVertices()
 {
-
-
     if(vertices != nullptr)
     {
          return  vertices;

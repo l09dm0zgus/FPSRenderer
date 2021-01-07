@@ -13,5 +13,4 @@ void PFE::Keyboard::keyboardCallback(GLFWwindow *window, int key, int scancode, 
         keys[key]=true;
     else if(action == GLFW_RELEASE)
         keys[key]=false;
-
 }

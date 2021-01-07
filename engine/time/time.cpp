@@ -4,6 +4,7 @@ void PFE::Time::start()
 {
     lastTime = glfwGetTime();
 }
+
 void PFE::Time::showFPS()
 {
     currentTime = glfwGetTime();
@@ -15,6 +16,7 @@ void PFE::Time::showFPS()
         lastTime = currentTime ;
     }
 }
+
 long double PFE::Time::getDeltaTime()
 {
     currentTime = glfwGetTime();
@@ -23,6 +25,7 @@ long double PFE::Time::getDeltaTime()
     accumulator += deltaTime;
     return deltaTime;
 }
+
 void PFE::Time::updatePhysicsWorld(rp3d::PhysicsWorld *world)
 {
     getDeltaTime();

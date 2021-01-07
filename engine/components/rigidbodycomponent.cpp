@@ -36,8 +36,7 @@ void PFE::RigidBodyComponent::addBoxShape(rp3d::BoxShape* boxShape)
 	{
 		Collider *collider = body->addCollider(boxShape, rp3d::Transform::identity());
 		colliders.push_back(collider);
-	}
-		
+	}	
 }
 
 void PFE::RigidBodyComponent::addCapsuleShape(rp3d::CapsuleShape* capsuleShape)
@@ -47,7 +46,6 @@ void PFE::RigidBodyComponent::addCapsuleShape(rp3d::CapsuleShape* capsuleShape)
 		Collider* collider = body->addCollider(capsuleShape, rp3d::Transform::identity());
 		colliders.push_back(collider);
 	}
-
 }
 
 void PFE::RigidBodyComponent::update(Time& timer)
@@ -58,9 +56,7 @@ void PFE::RigidBodyComponent::update(Time& timer)
 	previusTransform = currentTransform;
 }
 
-void PFE::RigidBodyComponent::addProppertyFile()
-{
-}
+void PFE::RigidBodyComponent::addProppertyFile() {}
 
 glm::vec3 PFE::RigidBodyComponent::getInterpolarePosition()
 {

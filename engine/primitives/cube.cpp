@@ -11,7 +11,6 @@ void PFE::Cube::addTexture(string textureFile)
 
 void PFE::Cube::loadTextures()
 {
-
     //create vertices and buffers
     vertices = new BlockVertices();
     vertices->createVertices();
@@ -22,9 +21,9 @@ void PFE::Cube::loadTextures()
     buffers.addAttribute(2,7);
     buffers.addAttribute(2,7);
 }
+
 void PFE::Cube::render()
 {
-
     shaderPrograms->use();
     shaderPrograms->setUniformVariable(textureIds,"textures");
 
@@ -36,6 +35,7 @@ void PFE::Cube::render()
 
     buffers.drawVertices(36);
 }
+
 void PFE::Cube::destroy()
 {
     delete  shaderPrograms;

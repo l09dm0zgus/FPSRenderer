@@ -5,27 +5,23 @@ void PFE::Player::setCamera(Camera *camera)
 {
     this->camera = camera;
 }
-void PFE::Player::start()
-{
 
-}
+void PFE::Player::start() {}
+
 void PFE::Player::update(Time& timer)
 {
     deltaTime = timer.getDeltaTime();
     updatePhysics();
-
 }
 
 void PFE::Player::move(float speed, glm::vec3 direction)
 {
-
-    
-    
     if(camera != nullptr)
     {
         transform.position += (speed * deltaTime * direction);
     }
 }
+
 void PFE::Player::updatePlayerPosition()
 {
     CharacterCommand* action = inputHandler.handleInput();
@@ -36,6 +32,7 @@ void PFE::Player::updatePlayerPosition()
     }
     view = camera->getView();
 }
+
 void PFE::Player::updatePhysics()
 {
     RigidBodyComponent* rigidBody = dynamic_cast<RigidBodyComponent*>(getComponent("RigidBody"));
@@ -72,9 +69,9 @@ void PFE::Player::updatePhysics()
         rigidBody->moveBody(transform.position);
         glm::vec3 rigidBodyPosition = rigidBody->getBodyPosition();
         setPosition(rigidBodyPosition);
-
     }
 }
+
 void PFE::Player::moveBackward()
 {
     if(camera != nullptr)
@@ -83,6 +80,7 @@ void PFE::Player::moveBackward()
         move(100.0f,cameraDirection);
     }
 }
+
 void PFE::Player::moveForward()
 {
     if(camera != nullptr)
@@ -91,6 +89,7 @@ void PFE::Player::moveForward()
         move(100.0f,cameraDirection);
     }
 }
+
 void PFE::Player::moveLeft()
 {
     if(camera != nullptr)
@@ -99,6 +98,7 @@ void PFE::Player::moveLeft()
         move(100.0f,cameraDirection);
     }
 }
+
 void PFE::Player::moveRight()
 {
     if(camera != nullptr)
@@ -107,6 +107,7 @@ void PFE::Player::moveRight()
         move(100.0f,cameraDirection);
     }
 }
+
 PFE::CharacterCommand *PFE::InputHandler::handleInput()
 {
     if(PFE::Keyboard::isKeyPressed(GLFW_KEY_W)) return moveForward;
@@ -115,6 +116,7 @@ PFE::CharacterCommand *PFE::InputHandler::handleInput()
     if(PFE::Keyboard::isKeyPressed(GLFW_KEY_A)) return moveLeft;
     return nullptr;
 }
+
 PFE::InputHandler::InputHandler()
 {
     moveForward = new PlayerMoveForward();
@@ -122,6 +124,7 @@ PFE::InputHandler::InputHandler()
     moveLeft = new PlayerMoveLeft();
     moveRight = new PlayerMoveRight();
 }
+
 PFE::InputHandler::~InputHandler()
 {
     delete moveForward;

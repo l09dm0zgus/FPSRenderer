@@ -1,4 +1,5 @@
 #include "physicsworldcomponent.h"
+
 PFE::PhysicsWorldComponent::PhysicsWorldComponent()
 {
     rp3d::PhysicsWorld::WorldSettings settings;
@@ -6,8 +7,8 @@ PFE::PhysicsWorldComponent::PhysicsWorldComponent()
     settings.isSleepingEnabled = true;
     settings.gravity = rp3d::Vector3(0, -9.81, 0);
     world = physicsCommon.createPhysicsWorld(settings);
-  
 }
+
 void  PFE::PhysicsWorldComponent::start()
 {
     if (world != nullptr)
@@ -17,18 +18,16 @@ void  PFE::PhysicsWorldComponent::start()
         world->setEventListener(&listener);
     }
 }
+
 void PFE::PhysicsWorldComponent::update(Time& timer)
 {
     if (world != nullptr)
     {
         timer.updatePhysicsWorld(world);
     }
-    
 }
-void  PFE::PhysicsWorldComponent::addProppertyFile()
-{
 
-}
+void  PFE::PhysicsWorldComponent::addProppertyFile() {}
 
 rp3d::RigidBody* PFE::PhysicsWorldComponent::createRigidbody(rp3d::Vector3 position, rp3d::Quaternion quaternion)
 {
@@ -44,7 +43,6 @@ rp3d::RigidBody* PFE::PhysicsWorldComponent::createRigidbody(rp3d::Vector3 posit
         std::cout << e << std::endl;
         exit(-1);
     }
-    
 }
 
 rp3d::CapsuleShape* PFE::PhysicsWorldComponent::createCapsuleShape(float radius, float height)
