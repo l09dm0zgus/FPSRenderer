@@ -1,4 +1,6 @@
 #include "time.h"
+#include <chrono>
+#include <thread>
 
 void PFE::Time::start()
 {
@@ -15,6 +17,11 @@ void PFE::Time::showFPS()
         frames = 0;
         lastTime = currentTime ;
     }
+}
+
+void PFE::Time::sleep(int ms)
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 }
 
 long double PFE::Time::getDeltaTime()

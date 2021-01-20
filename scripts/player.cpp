@@ -16,7 +16,7 @@ void PFE::Player::update(Time& timer)
 
 void PFE::Player::move(float speed, glm::vec3 direction)
 {
-    if(camera != nullptr)
+    if (camera != nullptr)
     {
         transform.position += (speed * deltaTime * direction);
     }
@@ -42,16 +42,16 @@ void PFE::Player::updatePhysics()
         CollisionEvent* event = physicsWorld->getCollisionEvent();
         if (event->isCollision)
         {
-            transform.position += 0;
+            transform.position = kostil;
+        }
+        else if (!event->isCollision)
+        {
+            kostil = transform.position;
         }
         if (event->isStay)
         {
             transform.position += (-100 * deltaTime * cameraDirection);
-            //TODO add sleep function from Timer class
-            for (int i = 0; i < 100; i++)
-            {
-                1 + 1;
-            }
+            Timer.sleep(1);
             event->isStay = false;
         }
         if (!event->isCollision && !event->isStay)
@@ -86,7 +86,7 @@ void PFE::Player::moveForward()
     if(camera != nullptr)
     {
         cameraDirection = camera->getForwardVector();
-        move(100.0f,cameraDirection);
+        move(100.0f, cameraDirection);
     }
 }
 

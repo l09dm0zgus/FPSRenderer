@@ -3,6 +3,7 @@
 #include <engine/gameobject/gameobject.h>
 #include <engine/camera/camera.h>
 #include "engine/components/rigidbodycomponent.h"
+#include "engine/time/time.h"
 #include "character.h"
 namespace PFE
 {
@@ -53,6 +54,8 @@ namespace PFE
     class Player : public GameObject,public Character
     {
         public:
+            glm::vec3 kostil;
+            Time Timer;
             void start() override;
             void update(Time& timer) override;
             void setCamera(Camera *camera);

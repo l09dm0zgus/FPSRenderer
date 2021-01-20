@@ -9,6 +9,7 @@ namespace PFE
     {
         public:
             void showFPS();
+            void sleep(int ms);
             void start();
             long double getDeltaTime();
             void updatePhysicsWorld(rp3d::PhysicsWorld *world);
