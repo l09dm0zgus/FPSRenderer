@@ -14,6 +14,7 @@ namespace PFE
             Camera(float x,float y,float z,GLfloat sensitivity);
             glm::mat4 getView();
             void updatePosition(glm::vec3 position);
+            glm::vec3 getPosition();
             glm::vec3 getRightVector();
             glm::vec3 getForwardVector();
             void rotateCamera(glm::vec2 mousePosition);

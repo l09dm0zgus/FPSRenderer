@@ -20,20 +20,28 @@ namespace PFE
             void setShaderFile(string vertexShader, string fragmentShader);
             Transform getTransform();
             void setTransform(Transform &transform);
-            
+            void setLightColor(glm::vec3 lightColor);
+            void setCameraPosition(glm::vec3 cameraPosition);
+            void setLightPosition(glm::vec3 lightPosition);
+
         protected:
             void updatePerspective();
             void drawTextures();
             glm::mat4 projectionMatrix;
             glm::mat4 viewMatrix;
             glm::vec2 viewportSize;
+            glm::vec3 lightColor;
+            glm::vec3 lightPosition;
+            glm::vec3 cameraPosition;
             vector<int> textureIds;
             vector<Texture*> textures;
             Transform transform;
             IVertices *vertices;
             ShaderProgram *shaderPrograms;
             VertexBuffers buffers;
-    };
+            
+
+};
 }
 
 

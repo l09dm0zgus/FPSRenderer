@@ -18,6 +18,7 @@ namespace PFE
             void setUniformVariable(glm::mat4 value, std::string uniformName);
             void setUniformVariable(float value,std::string uniformName);
             void setUniformVariable(std::vector<int>value,std::string uniformName);
+            void setUniformVariable(glm::vec3 value, std::string uniformName);
         private:
             GLuint program;
             std::string vertexCode;

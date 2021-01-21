@@ -15,8 +15,9 @@ void PFE::Sprite::loadTextures()
     buffers.create(vertices);
 
     //create arrtibutes for vertex
-    buffers.addAttribute(3,5);
-    buffers.addAttribute(2,5);
+    buffers.addAttribute(3,8);
+    buffers.addAttribute(3,8);
+    buffers.addAttribute(2,8);
     shaderPrograms->setUniformVariable(0,"image");
     Animation2D *anim = new Animation2D;
     anim->setTilesheet(tile,false,6,4);

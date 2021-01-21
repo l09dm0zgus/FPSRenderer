@@ -170,6 +170,7 @@
     <ClCompile Include="engine\components\physicsworldcomponent.cpp" />
     <ClCompile Include="engine\components\rigidbodycomponent.cpp" />
     <ClCompile Include="engine\render\animation\animation2d.cpp" />
+    <ClCompile Include="engine\render\light\light.cpp" />
     <ClCompile Include="engine\render\vertices\blockvertices.cpp" />
     <ClCompile Include="engine\camera\camera.cpp" />
     <ClCompile Include="engine\primitives\cube.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="engine\input\mouse.cpp" />
     <ClCompile Include="engine\file\path.cpp" />
+    <ClCompile Include="scripts\lightsource.cpp" />
     <ClCompile Include="scripts\player.cpp" />
     <ClCompile Include="engine\render\render.cpp" />
     <ClCompile Include="engine\render\renderobject.cpp" />
@@ -201,6 +203,7 @@
     <ClInclude Include="engine\components\IComponent.h" />
     <ClInclude Include="engine\components\physicsworldcomponent.h" />
     <ClInclude Include="engine\components\rigidbodycomponent.h" />
+    <ClInclude Include="engine\render\light\light.h" />
     <ClInclude Include="engine\render\vertices\IVertices.h" />
     <ClInclude Include="engine\render\animation\animation2d.h" />
     <ClInclude Include="engine\render\animation\animator.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="engine\input\keyboard.h" />
     <ClInclude Include="engine\input\mouse.h" />
     <ClInclude Include="engine\file\path.h" />
+    <ClInclude Include="scripts\lightsource.h" />
     <ClInclude Include="scripts\player.h" />
     <ClInclude Include="engine\render\render.h" />
     <ClInclude Include="engine\render\renderobject.h" />

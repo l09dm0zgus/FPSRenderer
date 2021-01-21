@@ -3,7 +3,11 @@
 void PFE::SceneCreator::create(std::string mapName)
 {
     scene = new SceneFolder();
+    
     PhysicsWorldComponent* physicsWorld = new PhysicsWorldComponent();
+    sceneLight = new LightSource();
+    sceneLight->setPosition(glm::vec3(3.5f, 1.0f, 4.0f));
+    sceneLight->setSize(glm::vec3(0.5f, 0.5f, 0.5f));
     scene->addChild("Walls",new SceneFolder());
     scene->addChild("CeilingAndFloor",new SceneFolder());
     mINI::INIFile file(mapName);
@@ -24,10 +28,17 @@ void PFE::SceneCreator::create(std::string mapName)
     spr->setShaderFile(Path::getShaderFilePath("SpriteVS.glsl"), Path::getShaderFilePath("SpriteFS.glsl"));
     spr->addTexture(Path::getImageFilePath("spr.png"));
     spr->loadTextures();
+   
     enemy->addRenderObject(spr);
+    RenderObjectComponent* renderEnemyComponent = new RenderObjectComponent();
+    renderEnemyComponent->setRenderObject(spr);
+    renderEnemyComponent->setLightSource(sceneLight);
+    renderEnemyComponent->setCamera(camera);
+    enemy->addComponent("RenderComponent", renderEnemyComponent);
     enemy->setSize(glm::vec3(1.0f,1.0f,1.0f));
     enemy->setPosition(glm::vec3(2.0f,0.5f,4.0f));
     scene->addChild("enemy",enemy);
+    scene->addChild("light", sceneLight);
     for(int i = 1;i<size+1;i++)
     {
         if(ini.get(to_string(i)).get("type") == "wall")
@@ -46,6 +57,11 @@ void PFE::SceneCreator::create(std::string mapName)
             wall->addRenderObject(block);
             wall->setSize(glm::vec3(1.0f,1.0f,1.0f));
             wall->setPosition(pos);
+            RenderObjectComponent* renderWallComponent = new RenderObjectComponent();
+            renderWallComponent->setRenderObject(block);
+            renderWallComponent->setLightSource(sceneLight);
+            renderWallComponent->setCamera(camera);
+            wall->addComponent("RenderComponent", renderWallComponent);
             wall->addComponent("PhysicsWorld", physicsWorld);
             rigidBodyComponent->setBody(physicsWorld->createRigidbody(glmVectorToReactPhysicsVector(pos), rp3d::Quaternion::identity()));
             rigidBodyComponent->addBoxShape(physicsWorld->createBoxShape(rp3d::Vector3(0.5f,0.5f,0.5f)));
@@ -60,7 +76,7 @@ void PFE::SceneCreator::create(std::string mapName)
             pos.x = stoi(ini.get(to_string(i)).get("x"));
             pos.y = stoi(ini.get(to_string(i)).get("y"));
             pos.z = stoi(ini.get(to_string(i)).get("z"));
-            Camera *camera = new Camera(pos.x,pos.y,pos.z,0.5);
+            camera = new Camera(pos.x, pos.y, pos.z, 0.5);
             player->addComponent("PhysicsWorld", physicsWorld);
             player->setCamera(camera);
             player->setPosition(pos);
@@ -72,6 +88,7 @@ void PFE::SceneCreator::create(std::string mapName)
             scene->getChild("CeilingAndFloor")->getChild("floor")->addChild("player",player);
         }
     }
+    
     scene->load();
 }
 
@@ -89,6 +106,11 @@ void PFE::SceneCreator::ceiling(int size,string texture)
       ceiling->addTexture(texture);
       ceiling->loadTextures();
       wall->addRenderObject(ceiling);
+      RenderObjectComponent* renderComponent = new RenderObjectComponent();
+      renderComponent->setRenderObject(ceiling);
+      renderComponent->setLightSource(sceneLight);
+      renderComponent->setCamera(camera);
+      wall->addComponent("RenderComponent", renderComponent);
       wall->setSize(glm::vec3(size,1.0,size));
       wall->setPosition(glm::vec3(1.0f,2.0f,1.0f)); 
       scene->getChild("CeilingAndFloor")->addChild("ceiling",wall);
@@ -104,6 +126,11 @@ void PFE::SceneCreator::floor(int size, string texture)
       floor->addTexture(texture);
       floor->loadTextures();
       wall->addRenderObject(floor);
+      RenderObjectComponent* renderComponent = new RenderObjectComponent();
+      renderComponent->setRenderObject(floor);
+      renderComponent->setLightSource(sceneLight);
+      renderComponent->setCamera(camera);
+      wall->addComponent("RenderComponent", renderComponent);
       wall->setSize(glm::vec3(size,1.0,size));
       wall->setPosition(glm::vec3(1.0f,0.0f,1.0f));
       scene->getChild("CeilingAndFloor")->addChild("floor",wall);

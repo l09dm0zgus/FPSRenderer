@@ -18,7 +18,7 @@ namespace PFE
      
         private:
             GLfloat *vertices = 0;
-            const int arraySize = 252;
+            const int arraySize = 360;
       
     };
 }

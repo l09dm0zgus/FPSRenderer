@@ -11,13 +11,13 @@ void PFE::SpriteVertices::createVertices()
     // first 3 colums is x ,y ,z coordinates for vertex position
     // second 2 colums is UV coordinates for texture
     vertices = new GLfloat[arraySize]{
-        0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
-        1.0f, 0.0f, 1.0f,  1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
+        0.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f  ,0.0f, 1.0f,
+        1.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f  ,1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f  ,0.0f, 0.0f,
 
-        0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,  1.0f, 1.0f,
-        1.0f, 0.0f, 1.0f,  1.0f, 0.0f
+        0.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f  ,0.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f  ,1.0f, 1.0f,
+        1.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f  ,1.0f, 0.0f
     };
 }
 
@@ -42,7 +42,7 @@ void PFE::SpriteVertices::deleteVertices()
  */
 int PFE::SpriteVertices::getArraySizeInBytes()
 {
-    return sizeof(GLfloat[30]);
+    return sizeof(GLfloat[48]);
 }
 
 /**
