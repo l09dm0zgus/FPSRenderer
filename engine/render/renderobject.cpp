@@ -29,10 +29,13 @@ void PFE::RenderObject::updatePerspective()
     shaderPrograms->setUniformVariable(projectionMatrix,"projection");
     shaderPrograms->setUniformVariable(viewMatrix,"view");
     shaderPrograms->setUniformVariable(transform.getTransformMatrix(),"model");
-    shaderPrograms->setUniformVariable(lightColor, "lightColor");
-    shaderPrograms->setUniformVariable(lightPosition, "lightPosition");
+    shaderPrograms->setUniformVariable(lightColor,"light.ambient");
+    shaderPrograms->setUniformVariable(glm::vec3(0.5f, 0.5f, 0.5f), "light.diffuse");
+    shaderPrograms->setUniformVariable(glm::vec3(1.0f, 1.0f, 1.0f), "light.specular");
+    shaderPrograms->setUniformVariable(lightPosition, "light.position");
     shaderPrograms->setUniformVariable(cameraPosition, "cameraPosition");
-    
+    shaderPrograms->setUniformVariable(glm::vec3(0.5f, 0.5f, 0.5f), "material.specular");
+    shaderPrograms->setUniformVariable(32.0f, "material.shininess");
     
     
 }

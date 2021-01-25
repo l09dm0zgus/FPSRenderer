@@ -27,7 +27,7 @@ void PFE::Cube::render()
 {
     shaderPrograms->use();
     shaderPrograms->setUniformVariable(textureIds,"textures");
-
+    shaderPrograms->setUniformVariable((int)textureIds.size(), "texturesCount");
     drawTextures();
     updatePerspective();
 

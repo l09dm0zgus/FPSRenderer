@@ -6,8 +6,8 @@ void PFE::SceneCreator::create(std::string mapName)
     
     PhysicsWorldComponent* physicsWorld = new PhysicsWorldComponent();
     sceneLight = new LightSource();
-    sceneLight->setPosition(glm::vec3(3.5f, 1.0f, 4.0f));
-    sceneLight->setSize(glm::vec3(0.5f, 0.5f, 0.5f));
+    sceneLight->setPosition(glm::vec3(2.0f, 1.6f, 3.0f));
+    sceneLight->setSize(glm::vec3(0.1f, 0.1f, 0.1f));
     scene->addChild("Walls",new SceneFolder());
     scene->addChild("CeilingAndFloor",new SceneFolder());
     mINI::INIFile file(mapName);
@@ -47,8 +47,9 @@ void PFE::SceneCreator::create(std::string mapName)
             Wall *wall = new Wall();
             RigidBodyComponent* rigidBodyComponent = new RigidBodyComponent();
             block->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
-            block->addTexture(blockTexture);
-            block->addTexture(blockTexture);
+            block->addTexture(Path::getImageFilePath("container2.png"));
+            block->addTexture(Path::getImageFilePath("container2diffuse.png"));
+            block->addTexture(Path::getImageFilePath("container2neon.png"));
             block->loadTextures();
             glm::vec3 pos ;
             pos.x = stoi(ini.get(to_string(i)).get("x"));
