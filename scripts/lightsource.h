@@ -1,20 +1,25 @@
 #ifndef LIGHTSOURCE_H
 #define LIGHTSOURCE_H
-#include "engine/gameobject/gameobject.h"
-#include "engine/render/light/light.h"
-#include "engine/file/path.h"
+#include <glm/glm.hpp>
 namespace PFE
 {
-	class LightSource : public GameObject
+	class LightSource
 	{
 		private:
-			Light* light;
+			glm::vec3 ambient;
+			glm::vec3 diffuse;
+			glm::vec3 specular;
+			glm::vec3 position;
 		public:
-			void start() override;
-			void update(Time &timer) override;
-			glm::vec3 getLightColor();
-			glm::vec3 test;
-	};
+			glm::vec3 getPosition();
+			void setPosition(glm::vec3 position);
+			glm::vec3 getAmbient();
+			void setAmbient(glm::vec3 ambient);
+			glm::vec3 getDiffuse();
+			void setDiffuse(glm::vec3 diffuse);
+			glm::vec3 getSpecular();
+			void setSpecular(glm::vec3 specular);
+};
 }
 
 #endif // LIGHTSOURCE_H

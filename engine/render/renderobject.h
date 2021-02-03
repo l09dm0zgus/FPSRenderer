@@ -6,12 +6,13 @@
 #include "engine/render/vertices/IVertices.h"
 #include "engine/camera/camera.h"
 #include "engine/render/texture/texture.h"
+#include "engine/render/light/lightdata.h"
 namespace PFE
 {
     class RenderObject
     {
         public:
-            virtual~RenderObject(){}
+            virtual~RenderObject() { delete shaderPrograms; shaderPrograms = nullptr; }
             virtual void render()=0;
             virtual void destroy()=0;
             virtual void loadTextures()=0;
@@ -20,18 +21,15 @@ namespace PFE
             void setShaderFile(string vertexShader, string fragmentShader);
             Transform getTransform();
             void setTransform(Transform &transform);
-            void setLightColor(glm::vec3 lightColor);
             void setCameraPosition(glm::vec3 cameraPosition);
-            void setLightPosition(glm::vec3 lightPosition);
-
+            void setLightData(LightData* lightData);
         protected:
             void updatePerspective();
             void drawTextures();
+            LightData* lightData;
             glm::mat4 projectionMatrix;
             glm::mat4 viewMatrix;
             glm::vec2 viewportSize;
-            glm::vec3 lightColor;
-            glm::vec3 lightPosition;
             glm::vec3 cameraPosition;
             vector<int> textureIds;
             vector<Texture*> textures;
@@ -41,7 +39,7 @@ namespace PFE
             VertexBuffers buffers;
             
 
-};
+    };
 }
 
 

@@ -5,16 +5,21 @@ void PFE::SceneCreator::create(std::string mapName)
     scene = new SceneFolder();
     
     PhysicsWorldComponent* physicsWorld = new PhysicsWorldComponent();
-    sceneLight = new LightSource();
-    sceneLight->setPosition(glm::vec3(2.0f, 1.6f, 3.0f));
-    sceneLight->setSize(glm::vec3(0.1f, 0.1f, 0.1f));
+    lightData = new LightData();
+    LightSource* directionalLight = new LightSource();
+    directionalLight->setPosition(glm::vec3(3.0f, 1.0f, 3.0f));
+    directionalLight->setAmbient(glm::vec3(0.01f,0.01f,0.01f));
+    directionalLight->setDiffuse(glm::vec3(0.3f, 0.6f, 0.05f));
+    directionalLight->setSpecular(glm::vec3(0.0f, 0.0f, 0.0f));
+    lightData->addDirectLight(directionalLight);
     scene->addChild("Walls",new SceneFolder());
     scene->addChild("CeilingAndFloor",new SceneFolder());
     mINI::INIFile file(mapName);
     mINI::INIStructure ini;
     if (!file.read(ini))
     {
-        cout << "File not found!!!" << endl;
+        cout << "ERROR:"<<mapName<< " not found.Please reinstall program!!!" << endl;
+        exit(-1);
     }
         
     int size = stoi(ini.get("SystemInfo").get("mapObjects"));
@@ -32,13 +37,13 @@ void PFE::SceneCreator::create(std::string mapName)
     enemy->addRenderObject(spr);
     RenderObjectComponent* renderEnemyComponent = new RenderObjectComponent();
     renderEnemyComponent->setRenderObject(spr);
-    renderEnemyComponent->setLightSource(sceneLight);
+    renderEnemyComponent->setLightData(lightData);
     renderEnemyComponent->setCamera(camera);
     enemy->addComponent("RenderComponent", renderEnemyComponent);
     enemy->setSize(glm::vec3(1.0f,1.0f,1.0f));
     enemy->setPosition(glm::vec3(2.0f,0.5f,4.0f));
     scene->addChild("enemy",enemy);
-    scene->addChild("light", sceneLight);
+   
     for(int i = 1;i<size+1;i++)
     {
         if(ini.get(to_string(i)).get("type") == "wall")
@@ -49,7 +54,8 @@ void PFE::SceneCreator::create(std::string mapName)
             block->setShaderFile(Path::getShaderFilePath("BlockVS.glsl"), Path::getShaderFilePath("BlockFS.glsl"));
             block->addTexture(Path::getImageFilePath("container2.png"));
             block->addTexture(Path::getImageFilePath("container2diffuse.png"));
-            block->addTexture(Path::getImageFilePath("container2neon.png"));
+            //not working on my pc
+           // block->addTexture(Path::getImageFilePath("container2neon.png"));
             block->loadTextures();
             glm::vec3 pos ;
             pos.x = stoi(ini.get(to_string(i)).get("x"));
@@ -60,7 +66,7 @@ void PFE::SceneCreator::create(std::string mapName)
             wall->setPosition(pos);
             RenderObjectComponent* renderWallComponent = new RenderObjectComponent();
             renderWallComponent->setRenderObject(block);
-            renderWallComponent->setLightSource(sceneLight);
+            renderWallComponent->setLightData(lightData);
             renderWallComponent->setCamera(camera);
             wall->addComponent("RenderComponent", renderWallComponent);
             wall->addComponent("PhysicsWorld", physicsWorld);
@@ -109,7 +115,7 @@ void PFE::SceneCreator::ceiling(int size,string texture)
       wall->addRenderObject(ceiling);
       RenderObjectComponent* renderComponent = new RenderObjectComponent();
       renderComponent->setRenderObject(ceiling);
-      renderComponent->setLightSource(sceneLight);
+      renderComponent->setLightData(lightData);
       renderComponent->setCamera(camera);
       wall->addComponent("RenderComponent", renderComponent);
       wall->setSize(glm::vec3(size,1.0,size));
@@ -129,7 +135,7 @@ void PFE::SceneCreator::floor(int size, string texture)
       wall->addRenderObject(floor);
       RenderObjectComponent* renderComponent = new RenderObjectComponent();
       renderComponent->setRenderObject(floor);
-      renderComponent->setLightSource(sceneLight);
+      renderComponent->setLightData(lightData);
       renderComponent->setCamera(camera);
       wall->addComponent("RenderComponent", renderComponent);
       wall->setSize(glm::vec3(size,1.0,size));

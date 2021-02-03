@@ -108,3 +108,9 @@ void PFE::ShaderProgram::setUniformVariable(glm::vec3 value, std::string uniform
 {
     glUniform3f(glGetUniformLocation(program, uniformName.c_str()), value.x, value.y, value.z);
 }
+
+void PFE::ShaderProgram::setUniformVariable(glm::vec4 value, std::string uniformName)
+{
+    glUniform4f(glGetUniformLocation(program, uniformName.c_str()), value.x, value.y, value.z,value.w);
+}
+

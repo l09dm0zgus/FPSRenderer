@@ -17,8 +17,7 @@ void PFE::RenderObjectComponent::start()
 
 void PFE::RenderObjectComponent::update(Time& timer)
 {
-    renderObject->setLightColor(lightSource->getLightColor());
-    renderObject->setLightPosition(lightSource->getPosition());
+   
     if (camera != nullptr)
     {
         renderObject->setCameraPosition(camera->getPosition());
@@ -30,10 +29,11 @@ void PFE::RenderObjectComponent::addProppertyFile()
 {
 }
 
-void PFE::RenderObjectComponent::setLightSource(LightSource* lightSource)
+void PFE::RenderObjectComponent::setLightData(LightData* lightData)
 {
-    this->lightSource = lightSource;
+    renderObject->setLightData(lightData);
 }
+
 
 void PFE::RenderObjectComponent::setCamera(Camera* camera)
 {

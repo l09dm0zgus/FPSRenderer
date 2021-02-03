@@ -2,7 +2,8 @@
 #define RENDEROBJECTCOMPONENT_H
 #include <GL/glew.h>
 #include "IComponent.h"
-#include "scripts/lightsource.h"
+#include "engine/render/light/lightdata.h"
+#include "engine/render/renderobject.h"
 #include "engine/camera/camera.h"
 namespace PFE
 {
@@ -15,13 +16,12 @@ namespace PFE
         */
         private:
             RenderObject* renderObject;
-            LightSource* lightSource;
             Camera* camera;
         public:
             void start() override;
             void update(Time &timer) override;
             void addProppertyFile() override;
-            void setLightSource(LightSource* lightSource);
+            void setLightData(LightData* lightData);
             void setCamera(Camera* camera);
             RenderObject* getRenderObject();
             void setRenderObject(RenderObject* renderObject);

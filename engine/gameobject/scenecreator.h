@@ -9,11 +9,11 @@
 #include "scripts/scenefolder.h"
 #include "scripts/enemy.h"
 #include "scripts/player.h"
-#include "scripts/lightsource.h"
 #include "gameobject.h"
 #include "engine/components/physicsworldcomponent.h"
 #include "engine/components/rigidbodycomponent.h"
 #include "engine/components/renderobjectcomponent.h"
+#include "engine/render/light/lightdata.h"
 #include "libs/vectorsconventers.h"
 namespace PFE
 {
@@ -27,8 +27,8 @@ namespace PFE
             void ceiling(int size,std::string texture);
             void floor(int size,std::string texture);
             GameObject *scene;
-            LightSource *sceneLight;
             Camera* camera;
+            LightData* lightData;
     };
 }
 
