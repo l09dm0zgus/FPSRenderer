@@ -5,6 +5,8 @@ void PFE::Sprite::addTexture(string textureFile)
     tile = new TilesetTexture();
     tile->loadImageFile(textureFile);
     tile->create();
+    textures.push_back(tile);
+    textureIds.push_back(textures.size() - 1);
 }
 
 void PFE::Sprite::loadTextures()
@@ -18,7 +20,6 @@ void PFE::Sprite::loadTextures()
     buffers.addAttribute(3,8);
     buffers.addAttribute(3,8);
     buffers.addAttribute(2,8);
-    shaderPrograms->setUniformVariable(0,"image");
     Animation2D *anim = new Animation2D;
     anim->setTilesheet(tile,false,6,4);
     anim->setStartTilesetCell(1,1);
@@ -28,7 +29,9 @@ void PFE::Sprite::loadTextures()
 
 void PFE::Sprite::render()
 {
-    tile->draw(0);
+    shaderPrograms->setUniformVariable(textureIds, "textures");
+    shaderPrograms->setUniformVariable((int)textureIds.size(), "texturesCount");
+    drawTextures();
     shaderPrograms->use();
 
     animator.playAnimation("front",shaderPrograms,0.1);

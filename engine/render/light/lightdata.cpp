@@ -8,10 +8,13 @@ void PFE::LightData::updateSpotLight(ShaderProgram* shaderProgram)
 		shaderProgram->setUniformVariable(spotLights[i]->getAmbient(), "spotLight[" + std::to_string(i) + "].ambient");
 		shaderProgram->setUniformVariable(spotLights[i]->getDiffuse(), "spotLight[" + std::to_string(i) + "].diffuse");
 		shaderProgram->setUniformVariable(spotLights[i]->getSpecular(), "spotLight[" + std::to_string(i) + "].specular");
-		shaderProgram->setUniformVariable(glm::vec4(spotLights[i]->getPosition(), 0.0f), "spotLight[" + std::to_string(i) + "].position");
+		shaderProgram->setUniformVariable(glm::vec4(spotLights[i]->getPosition(),0.0f), "spotLight[" + std::to_string(i) + "].position");
 		shaderProgram->setUniformVariable(spotLights[i]->getDirection(), "spotLight[" + std::to_string(i) + "].direction");
 		shaderProgram->setUniformVariable(spotLights[i]->getCutOff(), "spotLight[" + std::to_string(i) + "].cutOff");
 		shaderProgram->setUniformVariable(spotLights[i]->getOuterCutOff(), "spotLight[" + std::to_string(i) + "].outerCutOff");
+		shaderProgram->setUniformVariable(spotLights[i]->getConstant(), "spotLight[" + std::to_string(i) + "].constant");
+		shaderProgram->setUniformVariable(spotLights[i]->getLinear(), "spotLight[" + std::to_string(i) + "].linear");
+		shaderProgram->setUniformVariable(spotLights[i]->getQuadratic(), "spotLight[" + std::to_string(i) + "].quadratic");
 	}
 }
 

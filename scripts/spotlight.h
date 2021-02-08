@@ -1,9 +1,9 @@
 #ifndef SPOTLIGHT_H
 #define SPOTLIGHT_H
-#include "lightsource.h"
+#include "pointlight.h"
 namespace PFE
 {
-	class SpotLight :public LightSource
+	class SpotLight :public PointLight
 	{
 		private:
 			glm::vec3 direction;
