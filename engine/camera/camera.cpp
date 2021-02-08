@@ -19,6 +19,11 @@ void PFE::Camera::updatePosition(glm::vec3 position)
     this->position = position;
 }
 
+glm::vec3 PFE::Camera::getPosition()
+{
+    return position;
+}
+
 glm::vec3 PFE::Camera::getRightVector()
 {
     updateVectors();

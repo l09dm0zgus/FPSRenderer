@@ -21,7 +21,6 @@ void PFE::Render::setViewportSize(glm::vec2 viewportSize)
 void PFE::Render::render()
 {
     timer.showFPS();
-    ///timer.updatePhysicsWorld(world)
     scene->render(sceneCreator.getCameraView(),viewportSize,timer);
 }
 

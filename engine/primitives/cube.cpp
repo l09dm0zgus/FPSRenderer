@@ -17,16 +17,17 @@ void PFE::Cube::loadTextures()
     buffers.create(vertices);
 
     //create arrtibutes for vertex
-    buffers.addAttribute(3,7);
-    buffers.addAttribute(2,7);
-    buffers.addAttribute(2,7);
+    buffers.addAttribute(3,10);
+    buffers.addAttribute(3,10);
+    buffers.addAttribute(2,10);
+    buffers.addAttribute(2,10);
 }
 
 void PFE::Cube::render()
 {
     shaderPrograms->use();
     shaderPrograms->setUniformVariable(textureIds,"textures");
-
+    shaderPrograms->setUniformVariable((int)textureIds.size(), "texturesCount");
     drawTextures();
     updatePerspective();
 

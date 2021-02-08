@@ -50,5 +50,6 @@ void PFE::Texture::create()
 void PFE::Texture::draw(int id)
 {
     glActiveTexture(GL_TEXTURE0+id);
+  //  std::cout <<std::hex<< GL_TEXTURE0 + id << std::endl;
     glBindTexture(GL_TEXTURE_2D,imageProgram);
 }

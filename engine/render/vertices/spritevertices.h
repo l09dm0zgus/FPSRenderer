@@ -17,7 +17,7 @@ namespace PFE
             int getArraySizeInBytes() override;
         private:
             GLfloat *vertices = 0;
-            const int arraySize = 30;
+            const int arraySize = 48;
     };
 
 }

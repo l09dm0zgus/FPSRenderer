@@ -116,6 +116,18 @@
     <ClCompile Include="engine\components\rigidbodycomponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\lightsource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\pointlight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\spotlight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render\light\lightdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\components\IComponent.h">
@@ -221,6 +233,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\components\rigidbodycomponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\lightsource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\pointlight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\spotlight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\lightdata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

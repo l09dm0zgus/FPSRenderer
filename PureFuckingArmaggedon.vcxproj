@@ -170,6 +170,7 @@
     <ClCompile Include="engine\components\physicsworldcomponent.cpp" />
     <ClCompile Include="engine\components\rigidbodycomponent.cpp" />
     <ClCompile Include="engine\render\animation\animation2d.cpp" />
+    <ClCompile Include="engine\render\light\lightdata.cpp" />
     <ClCompile Include="engine\render\vertices\blockvertices.cpp" />
     <ClCompile Include="engine\camera\camera.cpp" />
     <ClCompile Include="engine\primitives\cube.cpp" />
@@ -179,11 +180,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="engine\input\mouse.cpp" />
     <ClCompile Include="engine\file\path.cpp" />
+    <ClCompile Include="scripts\lightsource.cpp" />
     <ClCompile Include="scripts\player.cpp" />
     <ClCompile Include="engine\render\render.cpp" />
     <ClCompile Include="engine\render\renderobject.cpp" />
     <ClCompile Include="engine\components\renderobjectcomponent.cpp" />
     <ClCompile Include="engine\gameobject\scenecreator.cpp" />
+    <ClCompile Include="scripts\pointlight.cpp" />
     <ClCompile Include="scripts\scenefolder.cpp" />
     <ClCompile Include="engine\render\shader\shader.cpp" />
     <ClCompile Include="engine\primitives\sprite.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="engine\transform\transform.cpp" />
     <ClCompile Include="engine\render\vertices\vertexatrribute.cpp" />
     <ClCompile Include="engine\render\vertices\vertexbuffers.cpp" />
+    <ClCompile Include="scripts\spotlight.cpp" />
     <ClCompile Include="scripts\wall.cpp" />
     <ClCompile Include="engine\render\window.cpp" />
   </ItemGroup>
@@ -214,11 +218,14 @@
     <ClInclude Include="engine\input\keyboard.h" />
     <ClInclude Include="engine\input\mouse.h" />
     <ClInclude Include="engine\file\path.h" />
+    <ClInclude Include="scripts\lightdata.h" />
+    <ClInclude Include="scripts\lightsource.h" />
     <ClInclude Include="scripts\player.h" />
     <ClInclude Include="engine\render\render.h" />
     <ClInclude Include="engine\render\renderobject.h" />
     <ClInclude Include="engine\components\renderobjectcomponent.h" />
     <ClInclude Include="engine\gameobject\scenecreator.h" />
+    <ClInclude Include="scripts\pointlight.h" />
     <ClInclude Include="scripts\scenefolder.h" />
     <ClInclude Include="engine\render\shader\shader.h" />
     <ClInclude Include="engine\primitives\sprite.h" />
@@ -231,6 +238,7 @@
     <ClInclude Include="libs\vectorsconventers.h" />
     <ClInclude Include="engine\render\vertices\vertexatrribute.h" />
     <ClInclude Include="engine\render\vertices\vertexbuffers.h" />
+    <ClInclude Include="scripts\spotlight.h" />
     <ClInclude Include="scripts\wall.h" />
     <ClInclude Include="engine\render\window.h" />
   </ItemGroup>

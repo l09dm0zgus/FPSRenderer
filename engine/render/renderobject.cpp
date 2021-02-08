@@ -29,6 +29,11 @@ void PFE::RenderObject::updatePerspective()
     shaderPrograms->setUniformVariable(projectionMatrix,"projection");
     shaderPrograms->setUniformVariable(viewMatrix,"view");
     shaderPrograms->setUniformVariable(transform.getTransformMatrix(),"model");
+    shaderPrograms->setUniformVariable(cameraPosition, "cameraPosition");
+    shaderPrograms->setUniformVariable(glm::vec3(0.5f, 0.5f, 0.5f), "material.specular");
+    shaderPrograms->setUniformVariable(32.0f, "material.shininess");
+    lightData->updateLight(shaderPrograms);
+    
 }
 
 void PFE::RenderObject::setViewportProperties(glm::mat4 view, glm::vec2 viewportSize)
@@ -36,3 +41,17 @@ void PFE::RenderObject::setViewportProperties(glm::mat4 view, glm::vec2 viewport
     this->viewMatrix = view;
     this->viewportSize = viewportSize;
 }
+
+
+void PFE::RenderObject::setCameraPosition(glm::vec3 cameraPosition)
+{
+    this->cameraPosition = cameraPosition;
+}
+
+void PFE::RenderObject::setLightData(LightData* lightData)
+{
+    this->lightData = lightData;
+}
+
+
+
