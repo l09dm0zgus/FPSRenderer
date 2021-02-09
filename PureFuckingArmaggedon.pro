@@ -32,7 +32,7 @@ SOURCES += \
         engine/primitives/cube.cpp \
         engine/primitives/sprite.cpp \
         engine/render/animation/animation2d.cpp \
-        engine/render/light/light.cpp \
+        engine/render/light/lightdata.cpp \
         engine/render/render.cpp \
         engine/render/renderobject.cpp \
         engine/render/shader/shader.cpp \
@@ -50,7 +50,9 @@ SOURCES += \
         scripts/enemy.cpp \
         scripts/lightsource.cpp \
         scripts/player.cpp \
+        scripts/pointlight.cpp \
         scripts/scenefolder.cpp \
+        scripts/spotlight.cpp \
         scripts/wall.cpp
 
 
@@ -69,7 +71,7 @@ HEADERS += \
     engine/primitives/sprite.h \
     engine/render/animation/animation2d.h \
     engine/render/animation/animator.h \
-    engine/render/light/light.h \
+    engine/render/light/lightdata.h \
     engine/render/render.h \
     engine/render/renderobject.h \
     engine/render/shader/shader.h \
@@ -91,8 +93,17 @@ HEADERS += \
     scripts/enemy.h \
     scripts/lightsource.h \
     scripts/player.h \
+    scripts/pointlight.h \
     scripts/scenefolder.h \
+    scripts/spotlight.h \
     scripts/wall.h
 
 #unix|win32: LIBS += -lreactphysics3d
 unix|win32: INCLUDEPATH += $$PWD/libs/glm
+
+DISTFILES += \
+    PureFuckingArmaggedon.sln \
+    PureFuckingArmaggedon.vcxproj \
+    PureFuckingArmaggedon.vcxproj.filters \
+    README.md \
+    libs/LICENSE

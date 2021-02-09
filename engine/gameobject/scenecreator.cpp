@@ -9,8 +9,8 @@ void PFE::SceneCreator::create(std::string mapName)
     LightSource* directionalLight = new LightSource();
     SpotLight* spotLight = new SpotLight();
     directionalLight->setPosition(glm::vec3(3.0f, 1.0f, 3.0f));
-    directionalLight->setAmbient(glm::vec3(0.1f,0.1f,0.1f));
-    directionalLight->setDiffuse(glm::vec3(0.1f, 0.1f, 0.1f));
+    directionalLight->setAmbient(glm::vec3(0.05f,0.04f,0.07f));
+    directionalLight->setDiffuse(glm::vec3(0.01f, 0.01f, 0.01f));
     directionalLight->setSpecular(glm::vec3(0.0f, 0.0f, 0.0f));
     lightData->addDirectLight(directionalLight);
     scene->addChild("Walls",new SceneFolder());

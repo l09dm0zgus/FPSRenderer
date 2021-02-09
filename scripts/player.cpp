@@ -10,6 +10,7 @@ void PFE::Player::start() {}
 
 void PFE::Player::update(Time& timer)
 {
+    this->timer = &timer;
     deltaTime = timer.getDeltaTime();
     updatePhysics();
 }
@@ -40,31 +41,22 @@ void PFE::Player::updatePhysics()
     if (physicsWorld != nullptr && rigidBody != nullptr)
     {
         CollisionEvent* event = physicsWorld->getCollisionEvent();
-        if (event->isCollision)
-        {
-            transform.position = kostil;
-        }
-        else if (!event->isCollision)
-        {
-            kostil = transform.position;
-        }
+        float push = speed;
         if (event->isStay)
         {
-            transform.position += (-100 * deltaTime * cameraDirection);
-            Timer.sleep(1);
+            transform.position += ((-push - accumulatePush) * deltaTime * cameraDirection);
+            accumulatePush +=100;
             event->isStay = false;
         }
         if (!event->isCollision && !event->isStay)
         {
-            //TODO add sleep function from Timer class
-            for (int i = 0; i < 20; i++)
-            {
-                1 + 1;
-            }
+
             updatePlayerPosition();
+            speed = 1000.0f;
         }
         //disable flying camera
         transform.position.y = 1;
+        accumulatePush = 0;
         camera->updatePosition(transform.position);
         rigidBody->moveBody(transform.position);
         glm::vec3 rigidBodyPosition = rigidBody->getBodyPosition();
@@ -77,7 +69,7 @@ void PFE::Player::moveBackward()
     if(camera != nullptr)
     {
         cameraDirection = -1.0f * camera->getForwardVector();
-        move(100.0f,cameraDirection);
+        move(1000.0f,cameraDirection);
     }
 }
 
@@ -86,7 +78,7 @@ void PFE::Player::moveForward()
     if(camera != nullptr)
     {
         cameraDirection = camera->getForwardVector();
-        move(100.0f, cameraDirection);
+        move(speed, cameraDirection);
     }
 }
 
@@ -95,7 +87,7 @@ void PFE::Player::moveLeft()
     if(camera != nullptr)
     {
         cameraDirection = -1.0f * camera->getRightVector();
-        move(100.0f,cameraDirection);
+        move(speed,cameraDirection);
     }
 }
 
@@ -104,7 +96,7 @@ void PFE::Player::moveRight()
     if(camera != nullptr)
     {
         cameraDirection = camera->getRightVector();
-        move(100.0f,cameraDirection);
+        move(speed,cameraDirection);
     }
 }
 

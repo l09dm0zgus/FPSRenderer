@@ -55,7 +55,7 @@ namespace PFE
     {
         public:
             glm::vec3 kostil;
-            Time Timer;
+            Time *timer;
             void start() override;
             void update(Time& timer) override;
             void setCamera(Camera *camera);
@@ -64,11 +64,12 @@ namespace PFE
             void moveLeft() override;
             void moveRight() override;
         private:
+            float accumulatePush=0;
+            float speed = 1000.0f;
             void move(float speed,glm::vec3 direction) override;
             void updatePlayerPosition();
             void updatePhysics();
             glm::vec3 cameraDirection;
-            int coll=0;
             float deltaTime = 0;
             Camera *camera;
             InputHandler inputHandler;

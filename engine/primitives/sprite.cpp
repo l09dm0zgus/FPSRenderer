@@ -33,10 +33,7 @@ void PFE::Sprite::render()
     shaderPrograms->setUniformVariable((int)textureIds.size(), "texturesCount");
     drawTextures();
     shaderPrograms->use();
-
     animator.playAnimation("front",shaderPrograms,0.1);
-    //animator.playAnimation("test",shaderPrograms,0.1);
-
     updatePerspective();
     buffers.drawVertices(6);
 }
@@ -45,8 +42,6 @@ void PFE::Sprite::destroy()
 {
     delete  shaderPrograms;
     shaderPrograms = nullptr;
-   // delete  tile;
-   // tile = nullptr;
     buffers.clear();
     vertices->deleteVertices();
 }
